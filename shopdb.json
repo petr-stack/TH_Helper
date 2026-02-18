@@ -1,0 +1,296 @@
+{
+  "version": "th-0.9",
+  "materials": [
+    {
+      "name": "6061 aluminum",
+      "aliases": ["6061", "al 6061", "aluminum 6061-t6"],
+      "tags": ["Aluminum", "Ductile"],
+      "summary": "Sharp HSS/cobalt; mid RPM; WD-40/Tap Magic Alu. Make curls, not dust.",
+      "drilling": [
+        "Medium speed (250–400 SFM press; mid RPM hand drill).",
+        "Sharp HSS/cobalt; split-point; stub length.",
+        "WD-40 / Tap Magic Alu; air blast."
+      ],
+      "tapping": [
+        "Spiral-point (through) / spiral-flute (blind).",
+        "Form taps OK with proper drill."
+      ],
+      "holesaw": [
+        "Bi-metal 10–14 TPI or carbide; WD-40; peck; backer for thin sheet."
+      ],
+      "notes": ["If it squeals, you’re rubbing—slow RPM or add feed."],
+      "fit": "standard",
+      "tapPercent": "75%",
+      "tapType": "spiral-point (gun) or form tap",
+      "lube": "WD-40 / Tap Magic Alu",
+      "sfmCategory": "aluminum"
+    },
+    {
+      "name": "7075 aluminum",
+      "aliases": ["7075", "al 7075", "aluminum 7075-t6"],
+      "tags": ["Aluminum", "High strength"],
+      "summary": "Cooler & sharper than 6061; step-up sizing; lube helps.",
+      "drilling": ["Slightly slower vs 6061; avoid galling.", "Sharp tools; step up for accuracy; lube helps."],
+      "tapping": ["Spiral-point (through) / spiral-flute (blind). Form taps OK."],
+      "holesaw": ["Run cooler than 6061; lube generously; carbide hole saw preferred for repeat work."],
+      "fit": "standard",
+      "tapPercent": "75%",
+      "tapType": "spiral-point (gun)",
+      "lube": "WD-40 / Tap Magic Alu",
+      "sfmCategory": "aluminum"
+    },
+    {
+      "name": "mild steel",
+      "aliases": ["a36", "1018", "mild steel (0.0625–0.375 in)"],
+      "tags": ["Steel"],
+      "summary": "HSS/cobalt; low RPM; steady feed; cutting oil. Break chips on deep holes.",
+      "drilling": ["Low speed (70–100 SFM), firm feed.", "135° split-point HSS/cobalt.", "Cutting oil; break chips on deep holes."],
+      "tapping": ["Spiral-point (through) / spiral-flute (blind); oil.", "Back tap to break chips."],
+      "holesaw": ["Carbide or fresh bi-metal; LOW RPM; steady feed; flood oil. >2 in: consider annular cutter."],
+      "fit": "close",
+      "tapPercent": "50%",
+      "tapType": "spiral-point / spiral-flute",
+      "lube": "cutting oil",
+      "sfmCategory": "steel"
+    },
+    {
+      "name": "4130 chromoly",
+      "aliases": ["chromoly", "4130"],
+      "tags": ["Steel", "Alloy"],
+      "summary": "Treat like tough mild steel; low speed; good oil.",
+      "drilling": ["Low speed; firm feed; cobalt helpful for repeat ops."],
+      "tapping": ["Generous oil; don’t bottom with chips packed in flutes."],
+      "holesaw": ["Carbide hole saw; oil; low RPM; firm feed; spot/pilot first."],
+      "fit": "close",
+      "tapPercent": "50%",
+      "tapType": "spiral-point / spiral-flute",
+      "lube": "cutting oil",
+      "sfmCategory": "steel"
+    },
+    {
+      "name": "300 stainless",
+      "aliases": ["304 stainless", "300 series stainless", "stainless"],
+      "tags": ["Stainless", "Work-hardening"],
+      "summary": "Very low RPM, firm feed; no dwell. Cobalt/carbide; sulfurized oil.",
+      "drilling": ["Very low speed (25–40 SFM). Keep feed on—no hovering.", "Cobalt or carbide; stub preferred.", "Coolant/oil. Never dwell."],
+      "tapping": ["Sharp taps, sulfurized oil, short bursts.", "If it squeaks, you work-hardened—re-spot."],
+      "holesaw": ["Prefer carbide; very low RPM; sulfurized oil; keep cutting—don’t rub."],
+      "fit": "standard",
+      "tapPercent": "50%",
+      "tapType": "sharp spiral-point/spiral-flute",
+      "lube": "sulfurized oil",
+      "sfmCategory": "stainless"
+    },
+    {
+      "name": "g10 hardpoint (helicoil)",
+      "aliases": ["g10 hardpoint", "hardpoint", "g10 | fr4"],
+      "tags": ["Laminate hardpoint", "STI threads"],
+      "summary": "Use STI taps + coils (M4–M10 typical). Drill clean, tap square, install to depth.",
+      "drilling": ["Spot, pilot, then STI tap drill; perpendicular; deburr lightly."],
+      "tapping": ["Use STI taps; install Helicoil 0–0.5 pitch below surface."],
+      "holesaw": ["Carbide-grit or sharp carbide; moderate RPM; dust extraction."],
+      "fit": "close",
+      "tapPercent": "STI",
+      "tapType": "STI tap",
+      "lube": "dry",
+      "sfmCategory": "composite"
+    },
+    {
+      "name": "richlite",
+      "aliases": ["Richlite", "paper composite"],
+      "tags": ["Paper composite", "Dense"],
+      "summary": "Low–med RPM; pilot then final; back exit. Treat like dense hardwood.",
+      "drilling": ["Low–med RPM; sharp bits; pilot then final; back exit to avoid chipping."],
+      "tapping": ["Cut tap with light oil or use inserts; test first."],
+      "holesaw": ["Treat like dense hardwood: sharp, moderate RPM; backer; vacuum dust."],
+      "notes": ["Smells like toasted shop class. Vent!"],
+      "fit": "standard",
+      "tapPercent": "75%",
+      "tapType": "cut tap (light oil) or insert",
+      "lube": "light oil",
+      "sfmCategory": "wood_dense"
+    },
+    {
+      "name": "plywood (baltic birch)",
+      "aliases": ["birch", "baltic birch", "plywood"],
+      "tags": ["Wood"],
+      "summary": "High RPM; brad-point; back the exit. Consider shank clearance.",
+      "drilling": ["High RPM; brad-point; clamp/backer; avoid veneer blow-out."],
+      "tapping": ["Use inserts; tapping wood is last resort."],
+      "holesaw": ["Sharp teeth; backer; drill until pilot breaks through, flip, finish from other side."],
+      "fit": "loose",
+      "tapPercent": "N/A",
+      "tapType": "wood screws or inserts",
+      "lube": "—",
+      "sfmCategory": "wood"
+    },
+    {
+     "name": "cfrp laminate",
+     "aliases": ["carbon fiber", "cfrp", "carbon laminate", "carbon plate", "prepreg carbon"],
+     "tags": ["Composite", "Carbon"],
+     "summary": "Low RPM, carbide composite/brad/step drills; back both sides; tape face; vacuum; feather exit. Avoid heat and dwell.",
+     "drilling": [
+        "Use sharp carbide composite/brad-point or step drills; minimal pilot to avoid wandering.",
+        "Clamp with sacrificial backer (top & bottom if possible); tape the face; support exit.",
+        "Low RPM, steady feed; light peck only to clear chips; vacuum extraction (P100).",
+        "For pristine holes: pilot undersize and finish with diamond reamer or countersink to break fibers."
+        ],
+     "tapping": [
+        "Avoid tapping laminate; use hardpoints/inserts (G10 or metal) or STI + Helicoil.",
+        "If forced to tap thick quasi-isotropic plate: use composite taps, very low RPM, short advances, expect limited strength."
+        ],
+     "holesaw": [
+        "Diamond-grit or fine-tooth carbide hole saw; composite SFM ~40–80; low RPM, steady feed.",
+        "Tape both sides; sandwich between backers; drill from each face to avoid blow-out; vacuum dust."
+        ],
+     "notes": [
+        "Carbon dust is conductive—keep it away from electronics and harnesses.",
+        "Seal exposed edges if needed (thin epoxy wick) to prevent moisture ingress and fraying.",
+        "Avoid oily coolants before bonding; keep surfaces clean (IPA) if parts will be bonded."
+        ],
+     "fit": "standard",
+     "tapPercent": "—",
+     "tapType": "inserts/hardpoints; STI for Helicoil",
+     "lube": "dry (no oil—can contaminate bond surfaces)",
+     "sfmCategory": "composite"
+    },
+    {
+  "name": "foam core carbon panel",
+  "aliases": ["foam-core carbon", "carbon foam core", "CFRP foam core", "carbon sandwich panel", "foam core CFRP"],
+  "tags": ["Sandwich panel", "Composite"],
+  "summary": "Light pressure, sharp bits, solid backer. Tape faces, support exit, and seal any exposed core. Pot hardpoints for structural fasteners.",
+  "drilling": [
+    "Pilot minimal, then final size with carbide composite/brad/step drill.",
+    "Use backers on both sides; tape faces; feather the exit to prevent delam.",
+    "Low RPM, steady feed; vacuum extraction (P100)."
+  ],
+  "tapping": [
+    "Do not tap skins/core for structure—use G10/metal hardpoints and STI/Helicoil after cure.",
+    "If a light-duty thread is unavoidable: composite tap, very low RPM, short advances; treat as non-structural."
+  ],
+  "holesaw": [
+    "Diamond-grit or fine-tooth carbide; composite SFM ~40–80 → low RPM.",
+    "Sandwich between backers; tape both sides; drill partway, flip, finish from opposite face.",
+    "Seal exposed core with thin epoxy."
+  ],
+  "notes": [
+    "Keep carbon dust away from electronics—it’s conductive.",
+    "Avoid oily coolants prior to bonding; clean with IPA if bonding is planned."
+  ],
+  "fit": "standard",
+  "tapPercent": "—",
+  "tapType": "Inserts/hardpoints; STI for Helicoil",
+  "lube": "dry",
+  "sfmCategory": "composite"
+},
+{
+  "name": "foam core fiberglass panel",
+  "aliases": ["foam-core fiberglass laminate", "GFRP foam core", "fiberglass sandwich panel", "foam core GFRP"],
+  "tags": ["Sandwich panel", "Composite"],
+  "summary": "Treat like a delicate sandwich: sharp tool, low RPM, full support, and edge sealing. Use potting or hardpoints for fasteners.",
+  "drilling": [
+    "Slow RPM, sharp composite/brad/step drills; minimal pecking.",
+    "Backer board under work; tape faces; ease the exit to prevent chipping.",
+    "Vacuum dust; PPE (P100)."
+  ],
+  "tapping": [
+    "Avoid tapping laminate or core; use bonded inserts or potted hardpoints for load-bearing hardware."
+  ],
+  "holesaw": [
+    "Carbide-grit or fine-tooth; low RPM; steady feed.",
+    "Tape both sides; backer; drill from both faces to reduce blow-out.",
+    "Seal exposed foam with epoxy."
+  ],
+  "notes": [
+    "Keep heat down—resin softens and smears when overheated.",
+    "If the hole edges fuzz, kiss with a countersink just enough to break fibers."
+  ],
+  "fit": "standard",
+  "tapPercent": "—",
+  "tapType": "Inserts/hardpoints",
+  "lube": "dry",
+  "sfmCategory": "composite"
+},
+{
+  "name": "PETG",
+  "aliases": ["copolyester", "PET-G", "glycol-modified PET", "Vivak"],
+  "tags": ["Plastic", "Thermoplastic"],
+  "summary": "More ductile than acrylic, less notch-sensitive than PC. Cut it—don’t melt it. Keep chips moving.",
+  "drilling": [
+    "Medium RPM, sharp plastic-geometry or step bits; light–moderate feed.",
+    "Clear chips often to avoid heat buildup; short pecks only.",
+    "Support exit side; masking tape on face helps reduce scuffing."
+  ],
+  "tapping": [
+    "Thread-forming taps work well (no chips).",
+    "If cutting taps are used: very low RPM, minimal torque, consider inserts for durability."
+  ],
+  "holesaw": [
+    "Fine-tooth or plastic-rated hole saw; low–moderate RPM; gentle feed.",
+    "Pause to cool if chips smear; use air blast—avoid oils that can affect bonding/finishing."
+  ],
+  "notes": [
+    "Avoid solvent exposure near edges you plan to bond or finish.",
+    "If the hole looks glossy and smeared, you’re melting—slow RPM and increase chipload slightly."
+  ],
+  "fit": "standard",
+  "tapPercent": "75%",
+  "tapType": "Form tap preferred; inserts for repeated service",
+  "lube": "dry or plastic-safe",
+  "sfmCategory": "plastic"
+},
+{
+  "name": "wood-laminated foam core fiberglass panel",
+  "aliases": ["wood laminated foam core fiberglass", "wood/fiberglass sandwich", "cabinet door panel", "wood veneer over GFRP foam core"],
+  "tags": ["Sandwich panel", "Composite", "Wood veneer"],
+  "summary": "Veneer + fiberglass over foam: protect the veneer face, support both sides, and pot or use hardpoints where hardware lands.",
+  "drilling": [
+    "Pilot through the veneer with a sharp brad-point, then open to size with a composite/step bit to avoid tearing fibers.",
+    "Clamp with sacrificial backers; tape faces; finish from both sides for clean edges.",
+    "Keep RPM modest to limit heat in resin layers."
+  ],
+  "tapping": [
+    "Do not tap into veneer/foam skins; use potted inserts (epoxy) or embedded G10/wood hardpoints.",
+    "For hinges/handles: over-bore the core locally and pot a dense insert before final drilling."
+  ],
+  "holesaw": [
+    "Fine-tooth for the wood face; carbide-grit/fine-tooth through fiberglass.",
+    "Tape both faces; drill until pilot breaks through, flip, and complete from the opposite side.",
+    "Seal any exposed core and veneer edges."
+  ],
+  "notes": [
+    "Pre-drill for screws in the veneer to prevent splitting; consider shank clearance.",
+    "Use structural epoxy for potting; scuff/clean bond areas."
+  ],
+  "fit": "standard",
+  "tapPercent": "—",
+  "tapType": "Inserts/hardpoints; potted blocks",
+  "lube": "dry",
+  "sfmCategory": "composite"
+}
+
+  ],
+  "fasteners": [
+    { "size": "#4-40",  "system":"inch",  "tpi":40, "tap75":"0.0890", "tap50":"0.0935", "clearClose":"0.112", "clearStandard":"0.125" },
+    { "size": "#6-32",  "system":"inch",  "tpi":32, "tap75":"0.1065", "tap50":"0.1100", "clearClose":"0.140", "clearStandard":"0.1495" },
+    { "size": "#8-32",  "system":"inch",  "tpi":32, "tap75":"0.1360", "tap50":"0.1405", "clearClose":"0.164", "clearStandard":"0.173", "stiTapToken":"H" },
+    { "size": "#10-24", "system":"inch",  "tpi":24, "tap75":"0.1495", "tap50":"0.1520", "clearClose":"0.190", "clearStandard":"0.201", "stiTapToken":"#7" },
+    { "size": "1/4-20", "system":"inch",  "tpi":20, "tap75":"0.2010", "tap50":"0.2040", "clearClose":"0.257", "clearStandard":"0.266", "stiTapToken":"17/64" },
+    { "size": "5/16-18","system":"inch",  "tpi":18, "tap75":"0.2570", "tap50":"0.2610", "clearClose":"0.323", "clearStandard":"0.332", "stiTapToken":"U" },
+    { "size": "3/8-16", "system":"inch",  "tpi":16, "tap75":"0.3125", "tap50":"0.3160", "clearClose":"0.386", "clearStandard":"0.397", "stiTapToken":"25/64" },
+
+    { "size": "M4x0.7",   "system":"metric", "pitch":0.7,  "tap75":"3.3", "tap50":"3.5", "clearClose":"4.3", "clearStandard":"4.5", "stiTap":"4.2" },
+    { "size": "M5x0.8",   "system":"metric", "pitch":0.8,  "tap75":"4.2", "tap50":"4.4", "clearClose":"5.5", "clearStandard":"6.0", "stiTap":"5.2" },
+    { "size": "M6x1.0",   "system":"metric", "pitch":1.0,  "tap75":"5.0", "tap50":"5.2", "clearClose":"6.6", "clearStandard":"7.0", "stiTap":"6.3" },
+    { "size": "M8x1.25",  "system":"metric", "pitch":1.25, "tap75":"6.8", "tap50":"7.0", "clearClose":"8.4", "clearStandard":"9.0", "stiTap":"8.3" },
+    { "size": "M10x1.5",  "system":"metric", "pitch":1.5,  "tap75":"8.5", "tap50":"8.8", "clearClose":"10.5","clearStandard":"11.0", "stiTap":"10.5" }
+  ],
+  "sheetMetalPilots": { "#6":"0.106–0.110 in", "#8":"0.136–0.140 in", "#10":"0.159–0.166 in", "#12":"0.189–0.196 in" },
+  "woodPilots": {
+    "#6":  {"softwood":"3/32 in (0.094)","hardwood":"7/64 in (0.109)"},
+    "#8":  {"softwood":"7/64 in (0.109)","hardwood":"1/8 in (0.125)"},
+    "#10": {"softwood":"1/8 in (0.125)","hardwood":"9/64 in (0.141)"},
+    "#12": {"softwood":"9/64 in (0.141)","hardwood":"5/32 in (0.156)"}
+  },
+  "drillTokens": { "letters": true, "numbers": true, "fractions": true }
+}
