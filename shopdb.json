@@ -1,13 +1,20 @@
 {
-  "version": "th-0.9",
+  "version": "th-1.1",
   "materials": [
     {
       "name": "6061 aluminum",
-      "aliases": ["6061", "al 6061", "aluminum 6061-t6"],
-      "tags": ["Aluminum", "Ductile"],
+      "aliases": [
+        "6061",
+        "al 6061",
+        "aluminum 6061-t6"
+      ],
+      "tags": [
+        "Aluminum",
+        "Ductile"
+      ],
       "summary": "Sharp HSS/cobalt; mid RPM; WD-40/Tap Magic Alu. Make curls, not dust.",
       "drilling": [
-        "Medium speed (250–400 SFM press; mid RPM hand drill).",
+        "Medium speed (250\u00e2\u20ac\u201c400 SFM press; mid RPM hand drill).",
         "Sharp HSS/cobalt; split-point; stub length.",
         "WD-40 / Tap Magic Alu; air blast."
       ],
@@ -16,9 +23,11 @@
         "Form taps OK with proper drill."
       ],
       "holesaw": [
-        "Bi-metal 10–14 TPI or carbide; WD-40; peck; backer for thin sheet."
+        "Bi-metal 10\u00e2\u20ac\u201c14 TPI or carbide; WD-40; peck; backer for thin sheet."
       ],
-      "notes": ["If it squeals, you’re rubbing—slow RPM or add feed."],
+      "notes": [
+        "If it squeals, you\u00e2\u20ac\u2122re rubbing\u00e2\u20ac\u201dslow RPM or add feed."
+      ],
       "fit": "standard",
       "tapPercent": "75%",
       "tapType": "spiral-point (gun) or form tap",
@@ -27,12 +36,26 @@
     },
     {
       "name": "7075 aluminum",
-      "aliases": ["7075", "al 7075", "aluminum 7075-t6"],
-      "tags": ["Aluminum", "High strength"],
+      "aliases": [
+        "7075",
+        "al 7075",
+        "aluminum 7075-t6"
+      ],
+      "tags": [
+        "Aluminum",
+        "High strength"
+      ],
       "summary": "Cooler & sharper than 6061; step-up sizing; lube helps.",
-      "drilling": ["Slightly slower vs 6061; avoid galling.", "Sharp tools; step up for accuracy; lube helps."],
-      "tapping": ["Spiral-point (through) / spiral-flute (blind). Form taps OK."],
-      "holesaw": ["Run cooler than 6061; lube generously; carbide hole saw preferred for repeat work."],
+      "drilling": [
+        "Slightly slower vs 6061; avoid galling.",
+        "Sharp tools; step up for accuracy; lube helps."
+      ],
+      "tapping": [
+        "Spiral-point (through) / spiral-flute (blind). Form taps OK."
+      ],
+      "holesaw": [
+        "Run cooler than 6061; lube generously; carbide hole saw preferred for repeat work."
+      ],
       "fit": "standard",
       "tapPercent": "75%",
       "tapType": "spiral-point (gun)",
@@ -41,12 +64,27 @@
     },
     {
       "name": "mild steel",
-      "aliases": ["a36", "1018", "mild steel (0.0625–0.375 in)"],
-      "tags": ["Steel"],
+      "aliases": [
+        "a36",
+        "1018",
+        "mild steel (0.0625\u00e2\u20ac\u201c0.375 in)"
+      ],
+      "tags": [
+        "Steel"
+      ],
       "summary": "HSS/cobalt; low RPM; steady feed; cutting oil. Break chips on deep holes.",
-      "drilling": ["Low speed (70–100 SFM), firm feed.", "135° split-point HSS/cobalt.", "Cutting oil; break chips on deep holes."],
-      "tapping": ["Spiral-point (through) / spiral-flute (blind); oil.", "Back tap to break chips."],
-      "holesaw": ["Carbide or fresh bi-metal; LOW RPM; steady feed; flood oil. >2 in: consider annular cutter."],
+      "drilling": [
+        "Low speed (70\u00e2\u20ac\u201c100 SFM), firm feed.",
+        "135\u00c2\u00b0 split-point HSS/cobalt.",
+        "Cutting oil; break chips on deep holes."
+      ],
+      "tapping": [
+        "Spiral-point (through) / spiral-flute (blind); oil.",
+        "Back tap to break chips."
+      ],
+      "holesaw": [
+        "Carbide or fresh bi-metal; LOW RPM; steady feed; flood oil. >2 in: consider annular cutter."
+      ],
       "fit": "close",
       "tapPercent": "50%",
       "tapType": "spiral-point / spiral-flute",
@@ -55,12 +93,24 @@
     },
     {
       "name": "4130 chromoly",
-      "aliases": ["chromoly", "4130"],
-      "tags": ["Steel", "Alloy"],
+      "aliases": [
+        "chromoly",
+        "4130"
+      ],
+      "tags": [
+        "Steel",
+        "Alloy"
+      ],
       "summary": "Treat like tough mild steel; low speed; good oil.",
-      "drilling": ["Low speed; firm feed; cobalt helpful for repeat ops."],
-      "tapping": ["Generous oil; don’t bottom with chips packed in flutes."],
-      "holesaw": ["Carbide hole saw; oil; low RPM; firm feed; spot/pilot first."],
+      "drilling": [
+        "Low speed; firm feed; cobalt helpful for repeat ops."
+      ],
+      "tapping": [
+        "Generous oil; don\u00e2\u20ac\u2122t bottom with chips packed in flutes."
+      ],
+      "holesaw": [
+        "Carbide hole saw; oil; low RPM; firm feed; spot/pilot first."
+      ],
       "fit": "close",
       "tapPercent": "50%",
       "tapType": "spiral-point / spiral-flute",
@@ -69,12 +119,28 @@
     },
     {
       "name": "300 stainless",
-      "aliases": ["304 stainless", "300 series stainless", "stainless"],
-      "tags": ["Stainless", "Work-hardening"],
+      "aliases": [
+        "304 stainless",
+        "300 series stainless",
+        "stainless"
+      ],
+      "tags": [
+        "Stainless",
+        "Work-hardening"
+      ],
       "summary": "Very low RPM, firm feed; no dwell. Cobalt/carbide; sulfurized oil.",
-      "drilling": ["Very low speed (25–40 SFM). Keep feed on—no hovering.", "Cobalt or carbide; stub preferred.", "Coolant/oil. Never dwell."],
-      "tapping": ["Sharp taps, sulfurized oil, short bursts.", "If it squeaks, you work-hardened—re-spot."],
-      "holesaw": ["Prefer carbide; very low RPM; sulfurized oil; keep cutting—don’t rub."],
+      "drilling": [
+        "Very low speed (25\u00e2\u20ac\u201c40 SFM). Keep feed on\u00e2\u20ac\u201dno hovering.",
+        "Cobalt or carbide; stub preferred.",
+        "Coolant/oil. Never dwell."
+      ],
+      "tapping": [
+        "Sharp taps, sulfurized oil, short bursts.",
+        "If it squeaks, you work-hardened\u00e2\u20ac\u201dre-spot."
+      ],
+      "holesaw": [
+        "Prefer carbide; very low RPM; sulfurized oil; keep cutting\u00e2\u20ac\u201ddon\u00e2\u20ac\u2122t rub."
+      ],
       "fit": "standard",
       "tapPercent": "50%",
       "tapType": "sharp spiral-point/spiral-flute",
@@ -83,12 +149,25 @@
     },
     {
       "name": "g10 hardpoint (helicoil)",
-      "aliases": ["g10 hardpoint", "hardpoint", "g10 | fr4"],
-      "tags": ["Laminate hardpoint", "STI threads"],
-      "summary": "Use STI taps + coils (M4–M10 typical). Drill clean, tap square, install to depth.",
-      "drilling": ["Spot, pilot, then STI tap drill; perpendicular; deburr lightly."],
-      "tapping": ["Use STI taps; install Helicoil 0–0.5 pitch below surface."],
-      "holesaw": ["Carbide-grit or sharp carbide; moderate RPM; dust extraction."],
+      "aliases": [
+        "g10 hardpoint",
+        "hardpoint",
+        "g10 | fr4"
+      ],
+      "tags": [
+        "Laminate hardpoint",
+        "STI threads"
+      ],
+      "summary": "Use STI taps + coils (M4\u00e2\u20ac\u201cM10 typical). Drill clean, tap square, install to depth.",
+      "drilling": [
+        "Spot, pilot, then STI tap drill; perpendicular; deburr lightly."
+      ],
+      "tapping": [
+        "Use STI taps; install Helicoil 0\u00e2\u20ac\u201c0.5 pitch below surface."
+      ],
+      "holesaw": [
+        "Carbide-grit or sharp carbide; moderate RPM; dust extraction."
+      ],
       "fit": "close",
       "tapPercent": "STI",
       "tapType": "STI tap",
@@ -97,13 +176,27 @@
     },
     {
       "name": "richlite",
-      "aliases": ["Richlite", "paper composite"],
-      "tags": ["Paper composite", "Dense"],
-      "summary": "Low–med RPM; pilot then final; back exit. Treat like dense hardwood.",
-      "drilling": ["Low–med RPM; sharp bits; pilot then final; back exit to avoid chipping."],
-      "tapping": ["Cut tap with light oil or use inserts; test first."],
-      "holesaw": ["Treat like dense hardwood: sharp, moderate RPM; backer; vacuum dust."],
-      "notes": ["Smells like toasted shop class. Vent!"],
+      "aliases": [
+        "Richlite",
+        "paper composite"
+      ],
+      "tags": [
+        "Paper composite",
+        "Dense"
+      ],
+      "summary": "Low\u00e2\u20ac\u201cmed RPM; pilot then final; back exit. Treat like dense hardwood.",
+      "drilling": [
+        "Low\u00e2\u20ac\u201cmed RPM; sharp bits; pilot then final; back exit to avoid chipping."
+      ],
+      "tapping": [
+        "Cut tap with light oil or use inserts; test first."
+      ],
+      "holesaw": [
+        "Treat like dense hardwood: sharp, moderate RPM; backer; vacuum dust."
+      ],
+      "notes": [
+        "Smells like toasted shop class. Vent!"
+      ],
       "fit": "standard",
       "tapPercent": "75%",
       "tapType": "cut tap (light oil) or insert",
@@ -112,185 +205,2345 @@
     },
     {
       "name": "plywood (baltic birch)",
-      "aliases": ["birch", "baltic birch", "plywood"],
-      "tags": ["Wood"],
+      "aliases": [
+        "birch",
+        "baltic birch",
+        "plywood"
+      ],
+      "tags": [
+        "Wood"
+      ],
       "summary": "High RPM; brad-point; back the exit. Consider shank clearance.",
-      "drilling": ["High RPM; brad-point; clamp/backer; avoid veneer blow-out."],
-      "tapping": ["Use inserts; tapping wood is last resort."],
-      "holesaw": ["Sharp teeth; backer; drill until pilot breaks through, flip, finish from other side."],
+      "drilling": [
+        "High RPM; brad-point; clamp/backer; avoid veneer blow-out."
+      ],
+      "tapping": [
+        "Use inserts; tapping wood is last resort."
+      ],
+      "holesaw": [
+        "Sharp teeth; backer; drill until pilot breaks through, flip, finish from other side."
+      ],
       "fit": "loose",
       "tapPercent": "N/A",
       "tapType": "wood screws or inserts",
-      "lube": "—",
+      "lube": "\u00e2\u20ac\u201d",
       "sfmCategory": "wood"
     },
     {
-     "name": "cfrp laminate",
-     "aliases": ["carbon fiber", "cfrp", "carbon laminate", "carbon plate", "prepreg carbon"],
-     "tags": ["Composite", "Carbon"],
-     "summary": "Low RPM, carbide composite/brad/step drills; back both sides; tape face; vacuum; feather exit. Avoid heat and dwell.",
-     "drilling": [
+      "name": "cfrp laminate",
+      "aliases": [
+        "carbon fiber",
+        "cfrp",
+        "carbon laminate",
+        "carbon plate",
+        "prepreg carbon"
+      ],
+      "tags": [
+        "Composite",
+        "Carbon"
+      ],
+      "summary": "Low RPM, carbide composite/brad/step drills; back both sides; tape face; vacuum; feather exit. Avoid heat and dwell.",
+      "drilling": [
         "Use sharp carbide composite/brad-point or step drills; minimal pilot to avoid wandering.",
         "Clamp with sacrificial backer (top & bottom if possible); tape the face; support exit.",
         "Low RPM, steady feed; light peck only to clear chips; vacuum extraction (P100).",
         "For pristine holes: pilot undersize and finish with diamond reamer or countersink to break fibers."
-        ],
-     "tapping": [
+      ],
+      "tapping": [
         "Avoid tapping laminate; use hardpoints/inserts (G10 or metal) or STI + Helicoil.",
         "If forced to tap thick quasi-isotropic plate: use composite taps, very low RPM, short advances, expect limited strength."
-        ],
-     "holesaw": [
-        "Diamond-grit or fine-tooth carbide hole saw; composite SFM ~40–80; low RPM, steady feed.",
+      ],
+      "holesaw": [
+        "Diamond-grit or fine-tooth carbide hole saw; composite SFM ~40\u00e2\u20ac\u201c80; low RPM, steady feed.",
         "Tape both sides; sandwich between backers; drill from each face to avoid blow-out; vacuum dust."
-        ],
-     "notes": [
-        "Carbon dust is conductive—keep it away from electronics and harnesses.",
+      ],
+      "notes": [
+        "Carbon dust is conductive\u00e2\u20ac\u201dkeep it away from electronics and harnesses.",
         "Seal exposed edges if needed (thin epoxy wick) to prevent moisture ingress and fraying.",
         "Avoid oily coolants before bonding; keep surfaces clean (IPA) if parts will be bonded."
-        ],
-     "fit": "standard",
-     "tapPercent": "—",
-     "tapType": "inserts/hardpoints; STI for Helicoil",
-     "lube": "dry (no oil—can contaminate bond surfaces)",
-     "sfmCategory": "composite"
+      ],
+      "fit": "standard",
+      "tapPercent": "\u00e2\u20ac\u201d",
+      "tapType": "inserts/hardpoints; STI for Helicoil",
+      "lube": "dry (no oil\u00e2\u20ac\u201dcan contaminate bond surfaces)",
+      "sfmCategory": "composite"
     },
     {
-  "name": "foam core carbon panel",
-  "aliases": ["foam-core carbon", "carbon foam core", "CFRP foam core", "carbon sandwich panel", "foam core CFRP"],
-  "tags": ["Sandwich panel", "Composite"],
-  "summary": "Light pressure, sharp bits, solid backer. Tape faces, support exit, and seal any exposed core. Pot hardpoints for structural fasteners.",
-  "drilling": [
-    "Pilot minimal, then final size with carbide composite/brad/step drill.",
-    "Use backers on both sides; tape faces; feather the exit to prevent delam.",
-    "Low RPM, steady feed; vacuum extraction (P100)."
-  ],
-  "tapping": [
-    "Do not tap skins/core for structure—use G10/metal hardpoints and STI/Helicoil after cure.",
-    "If a light-duty thread is unavoidable: composite tap, very low RPM, short advances; treat as non-structural."
-  ],
-  "holesaw": [
-    "Diamond-grit or fine-tooth carbide; composite SFM ~40–80 → low RPM.",
-    "Sandwich between backers; tape both sides; drill partway, flip, finish from opposite face.",
-    "Seal exposed core with thin epoxy."
-  ],
-  "notes": [
-    "Keep carbon dust away from electronics—it’s conductive.",
-    "Avoid oily coolants prior to bonding; clean with IPA if bonding is planned."
-  ],
-  "fit": "standard",
-  "tapPercent": "—",
-  "tapType": "Inserts/hardpoints; STI for Helicoil",
-  "lube": "dry",
-  "sfmCategory": "composite"
-},
-{
-  "name": "foam core fiberglass panel",
-  "aliases": ["foam-core fiberglass laminate", "GFRP foam core", "fiberglass sandwich panel", "foam core GFRP"],
-  "tags": ["Sandwich panel", "Composite"],
-  "summary": "Treat like a delicate sandwich: sharp tool, low RPM, full support, and edge sealing. Use potting or hardpoints for fasteners.",
-  "drilling": [
-    "Slow RPM, sharp composite/brad/step drills; minimal pecking.",
-    "Backer board under work; tape faces; ease the exit to prevent chipping.",
-    "Vacuum dust; PPE (P100)."
-  ],
-  "tapping": [
-    "Avoid tapping laminate or core; use bonded inserts or potted hardpoints for load-bearing hardware."
-  ],
-  "holesaw": [
-    "Carbide-grit or fine-tooth; low RPM; steady feed.",
-    "Tape both sides; backer; drill from both faces to reduce blow-out.",
-    "Seal exposed foam with epoxy."
-  ],
-  "notes": [
-    "Keep heat down—resin softens and smears when overheated.",
-    "If the hole edges fuzz, kiss with a countersink just enough to break fibers."
-  ],
-  "fit": "standard",
-  "tapPercent": "—",
-  "tapType": "Inserts/hardpoints",
-  "lube": "dry",
-  "sfmCategory": "composite"
-},
-{
-  "name": "PETG",
-  "aliases": ["copolyester", "PET-G", "glycol-modified PET", "Vivak"],
-  "tags": ["Plastic", "Thermoplastic"],
-  "summary": "More ductile than acrylic, less notch-sensitive than PC. Cut it—don’t melt it. Keep chips moving.",
-  "drilling": [
-    "Medium RPM, sharp plastic-geometry or step bits; light–moderate feed.",
-    "Clear chips often to avoid heat buildup; short pecks only.",
-    "Support exit side; masking tape on face helps reduce scuffing."
-  ],
-  "tapping": [
-    "Thread-forming taps work well (no chips).",
-    "If cutting taps are used: very low RPM, minimal torque, consider inserts for durability."
-  ],
-  "holesaw": [
-    "Fine-tooth or plastic-rated hole saw; low–moderate RPM; gentle feed.",
-    "Pause to cool if chips smear; use air blast—avoid oils that can affect bonding/finishing."
-  ],
-  "notes": [
-    "Avoid solvent exposure near edges you plan to bond or finish.",
-    "If the hole looks glossy and smeared, you’re melting—slow RPM and increase chipload slightly."
-  ],
-  "fit": "standard",
-  "tapPercent": "75%",
-  "tapType": "Form tap preferred; inserts for repeated service",
-  "lube": "dry or plastic-safe",
-  "sfmCategory": "plastic"
-},
-{
-  "name": "wood-laminated foam core fiberglass panel",
-  "aliases": ["wood laminated foam core fiberglass", "wood/fiberglass sandwich", "cabinet door panel", "wood veneer over GFRP foam core"],
-  "tags": ["Sandwich panel", "Composite", "Wood veneer"],
-  "summary": "Veneer + fiberglass over foam: protect the veneer face, support both sides, and pot or use hardpoints where hardware lands.",
-  "drilling": [
-    "Pilot through the veneer with a sharp brad-point, then open to size with a composite/step bit to avoid tearing fibers.",
-    "Clamp with sacrificial backers; tape faces; finish from both sides for clean edges.",
-    "Keep RPM modest to limit heat in resin layers."
-  ],
-  "tapping": [
-    "Do not tap into veneer/foam skins; use potted inserts (epoxy) or embedded G10/wood hardpoints.",
-    "For hinges/handles: over-bore the core locally and pot a dense insert before final drilling."
-  ],
-  "holesaw": [
-    "Fine-tooth for the wood face; carbide-grit/fine-tooth through fiberglass.",
-    "Tape both faces; drill until pilot breaks through, flip, and complete from the opposite side.",
-    "Seal any exposed core and veneer edges."
-  ],
-  "notes": [
-    "Pre-drill for screws in the veneer to prevent splitting; consider shank clearance.",
-    "Use structural epoxy for potting; scuff/clean bond areas."
-  ],
-  "fit": "standard",
-  "tapPercent": "—",
-  "tapType": "Inserts/hardpoints; potted blocks",
-  "lube": "dry",
-  "sfmCategory": "composite"
-}
-
+      "name": "foam core carbon panel",
+      "aliases": [
+        "foam-core carbon",
+        "carbon foam core",
+        "CFRP foam core",
+        "carbon sandwich panel",
+        "foam core CFRP"
+      ],
+      "tags": [
+        "Sandwich panel",
+        "Composite"
+      ],
+      "summary": "Light pressure, sharp bits, solid backer. Tape faces, support exit, and seal any exposed core. Pot hardpoints for structural fasteners.",
+      "drilling": [
+        "Pilot minimal, then final size with carbide composite/brad/step drill.",
+        "Use backers on both sides; tape faces; feather the exit to prevent delam.",
+        "Low RPM, steady feed; vacuum extraction (P100)."
+      ],
+      "tapping": [
+        "Do not tap skins/core for structure\u00e2\u20ac\u201duse G10/metal hardpoints and STI/Helicoil after cure.",
+        "If a light-duty thread is unavoidable: composite tap, very low RPM, short advances; treat as non-structural."
+      ],
+      "holesaw": [
+        "Diamond-grit or fine-tooth carbide; composite SFM ~40\u00e2\u20ac\u201c80 \u00e2\u2020\u2019 low RPM.",
+        "Sandwich between backers; tape both sides; drill partway, flip, finish from opposite face.",
+        "Seal exposed core with thin epoxy."
+      ],
+      "notes": [
+        "Keep carbon dust away from electronics\u00e2\u20ac\u201dit\u00e2\u20ac\u2122s conductive.",
+        "Avoid oily coolants prior to bonding; clean with IPA if bonding is planned."
+      ],
+      "fit": "standard",
+      "tapPercent": "\u00e2\u20ac\u201d",
+      "tapType": "Inserts/hardpoints; STI for Helicoil",
+      "lube": "dry",
+      "sfmCategory": "composite"
+    },
+    {
+      "name": "foam core fiberglass panel",
+      "aliases": [
+        "foam-core fiberglass laminate",
+        "GFRP foam core",
+        "fiberglass sandwich panel",
+        "foam core GFRP"
+      ],
+      "tags": [
+        "Sandwich panel",
+        "Composite"
+      ],
+      "summary": "Treat like a delicate sandwich: sharp tool, low RPM, full support, and edge sealing. Use potting or hardpoints for fasteners.",
+      "drilling": [
+        "Slow RPM, sharp composite/brad/step drills; minimal pecking.",
+        "Backer board under work; tape faces; ease the exit to prevent chipping.",
+        "Vacuum dust; PPE (P100)."
+      ],
+      "tapping": [
+        "Avoid tapping laminate or core; use bonded inserts or potted hardpoints for load-bearing hardware."
+      ],
+      "holesaw": [
+        "Carbide-grit or fine-tooth; low RPM; steady feed.",
+        "Tape both sides; backer; drill from both faces to reduce blow-out.",
+        "Seal exposed foam with epoxy."
+      ],
+      "notes": [
+        "Keep heat down\u00e2\u20ac\u201dresin softens and smears when overheated.",
+        "If the hole edges fuzz, kiss with a countersink just enough to break fibers."
+      ],
+      "fit": "standard",
+      "tapPercent": "\u00e2\u20ac\u201d",
+      "tapType": "Inserts/hardpoints",
+      "lube": "dry",
+      "sfmCategory": "composite"
+    },
+    {
+      "name": "PETG",
+      "aliases": [
+        "copolyester",
+        "PET-G",
+        "glycol-modified PET",
+        "Vivak"
+      ],
+      "tags": [
+        "Plastic",
+        "Thermoplastic"
+      ],
+      "summary": "More ductile than acrylic, less notch-sensitive than PC. Cut it\u00e2\u20ac\u201ddon\u00e2\u20ac\u2122t melt it. Keep chips moving.",
+      "drilling": [
+        "Medium RPM, sharp plastic-geometry or step bits; light\u00e2\u20ac\u201cmoderate feed.",
+        "Clear chips often to avoid heat buildup; short pecks only.",
+        "Support exit side; masking tape on face helps reduce scuffing."
+      ],
+      "tapping": [
+        "Thread-forming taps work well (no chips).",
+        "If cutting taps are used: very low RPM, minimal torque, consider inserts for durability."
+      ],
+      "holesaw": [
+        "Fine-tooth or plastic-rated hole saw; low\u00e2\u20ac\u201cmoderate RPM; gentle feed.",
+        "Pause to cool if chips smear; use air blast\u00e2\u20ac\u201davoid oils that can affect bonding/finishing."
+      ],
+      "notes": [
+        "Avoid solvent exposure near edges you plan to bond or finish.",
+        "If the hole looks glossy and smeared, you\u00e2\u20ac\u2122re melting\u00e2\u20ac\u201dslow RPM and increase chipload slightly."
+      ],
+      "fit": "standard",
+      "tapPercent": "75%",
+      "tapType": "Form tap preferred; inserts for repeated service",
+      "lube": "dry or plastic-safe",
+      "sfmCategory": "plastic"
+    },
+    {
+      "name": "wood-laminated foam core fiberglass panel",
+      "aliases": [
+        "wood laminated foam core fiberglass",
+        "wood/fiberglass sandwich",
+        "cabinet door panel",
+        "wood veneer over GFRP foam core"
+      ],
+      "tags": [
+        "Sandwich panel",
+        "Composite",
+        "Wood veneer"
+      ],
+      "summary": "Veneer + fiberglass over foam: protect the veneer face, support both sides, and pot or use hardpoints where hardware lands.",
+      "drilling": [
+        "Pilot through the veneer with a sharp brad-point, then open to size with a composite/step bit to avoid tearing fibers.",
+        "Clamp with sacrificial backers; tape faces; finish from both sides for clean edges.",
+        "Keep RPM modest to limit heat in resin layers."
+      ],
+      "tapping": [
+        "Do not tap into veneer/foam skins; use potted inserts (epoxy) or embedded G10/wood hardpoints.",
+        "For hinges/handles: over-bore the core locally and pot a dense insert before final drilling."
+      ],
+      "holesaw": [
+        "Fine-tooth for the wood face; carbide-grit/fine-tooth through fiberglass.",
+        "Tape both faces; drill until pilot breaks through, flip, and complete from the opposite side.",
+        "Seal any exposed core and veneer edges."
+      ],
+      "notes": [
+        "Pre-drill for screws in the veneer to prevent splitting; consider shank clearance.",
+        "Use structural epoxy for potting; scuff/clean bond areas."
+      ],
+      "fit": "standard",
+      "tapPercent": "\u00e2\u20ac\u201d",
+      "tapType": "Inserts/hardpoints; potted blocks",
+      "lube": "dry",
+      "sfmCategory": "composite"
+    }
   ],
   "fasteners": [
-    { "size": "#4-40",  "system":"inch",  "tpi":40, "tap75":"0.0890", "tap50":"0.0935", "clearClose":"0.112", "clearStandard":"0.125" },
-    { "size": "#6-32",  "system":"inch",  "tpi":32, "tap75":"0.1065", "tap50":"0.1100", "clearClose":"0.140", "clearStandard":"0.1495" },
-    { "size": "#8-32",  "system":"inch",  "tpi":32, "tap75":"0.1360", "tap50":"0.1405", "clearClose":"0.164", "clearStandard":"0.173", "stiTapToken":"H" },
-    { "size": "#10-24", "system":"inch",  "tpi":24, "tap75":"0.1495", "tap50":"0.1520", "clearClose":"0.190", "clearStandard":"0.201", "stiTapToken":"#7" },
-    { "size": "1/4-20", "system":"inch",  "tpi":20, "tap75":"0.2010", "tap50":"0.2040", "clearClose":"0.257", "clearStandard":"0.266", "stiTapToken":"17/64" },
-    { "size": "5/16-18","system":"inch",  "tpi":18, "tap75":"0.2570", "tap50":"0.2610", "clearClose":"0.323", "clearStandard":"0.332", "stiTapToken":"U" },
-    { "size": "3/8-16", "system":"inch",  "tpi":16, "tap75":"0.3125", "tap50":"0.3160", "clearClose":"0.386", "clearStandard":"0.397", "stiTapToken":"25/64" },
-
-    { "size": "M4x0.7",   "system":"metric", "pitch":0.7,  "tap75":"3.3", "tap50":"3.5", "clearClose":"4.3", "clearStandard":"4.5", "stiTap":"4.2" },
-    { "size": "M5x0.8",   "system":"metric", "pitch":0.8,  "tap75":"4.2", "tap50":"4.4", "clearClose":"5.5", "clearStandard":"6.0", "stiTap":"5.2" },
-    { "size": "M6x1.0",   "system":"metric", "pitch":1.0,  "tap75":"5.0", "tap50":"5.2", "clearClose":"6.6", "clearStandard":"7.0", "stiTap":"6.3" },
-    { "size": "M8x1.25",  "system":"metric", "pitch":1.25, "tap75":"6.8", "tap50":"7.0", "clearClose":"8.4", "clearStandard":"9.0", "stiTap":"8.3" },
-    { "size": "M10x1.5",  "system":"metric", "pitch":1.5,  "tap75":"8.5", "tap50":"8.8", "clearClose":"10.5","clearStandard":"11.0", "stiTap":"10.5" }
+    {
+      "size": "#4-40",
+      "system": "inch",
+      "tpi": 40,
+      "tap75": "0.0890",
+      "tap50": "0.0935",
+      "clearClose": "0.112",
+      "clearStandard": "0.125"
+    },
+    {
+      "size": "#6-32",
+      "system": "inch",
+      "tpi": 32,
+      "tap75": "0.1065",
+      "tap50": "0.1100",
+      "clearClose": "0.140",
+      "clearStandard": "0.1495"
+    },
+    {
+      "size": "#8-32",
+      "system": "inch",
+      "tpi": 32,
+      "tap75": "0.1360",
+      "tap50": "0.1405",
+      "clearClose": "0.164",
+      "clearStandard": "0.173",
+      "stiTapToken": "H"
+    },
+    {
+      "size": "#10-24",
+      "system": "inch",
+      "tpi": 24,
+      "tap75": "0.1495",
+      "tap50": "0.1520",
+      "clearClose": "0.190",
+      "clearStandard": "0.201",
+      "stiTapToken": "#7"
+    },
+    {
+      "size": "1/4-20",
+      "system": "inch",
+      "tpi": 20,
+      "tap75": "0.2010",
+      "tap50": "0.2040",
+      "clearClose": "0.257",
+      "clearStandard": "0.266",
+      "stiTapToken": "17/64"
+    },
+    {
+      "size": "5/16-18",
+      "system": "inch",
+      "tpi": 18,
+      "tap75": "0.2570",
+      "tap50": "0.2610",
+      "clearClose": "0.323",
+      "clearStandard": "0.332",
+      "stiTapToken": "U"
+    },
+    {
+      "size": "3/8-16",
+      "system": "inch",
+      "tpi": 16,
+      "tap75": "0.3125",
+      "tap50": "0.3160",
+      "clearClose": "0.386",
+      "clearStandard": "0.397",
+      "stiTapToken": "25/64"
+    },
+    {
+      "size": "M4x0.7",
+      "system": "metric",
+      "pitch": 0.7,
+      "tap75": "3.3",
+      "tap50": "3.5",
+      "clearClose": "4.3",
+      "clearStandard": "4.5",
+      "stiTap": "4.2"
+    },
+    {
+      "size": "M5x0.8",
+      "system": "metric",
+      "pitch": 0.8,
+      "tap75": "4.2",
+      "tap50": "4.4",
+      "clearClose": "5.5",
+      "clearStandard": "6.0",
+      "stiTap": "5.2"
+    },
+    {
+      "size": "M6x1.0",
+      "system": "metric",
+      "pitch": 1.0,
+      "tap75": "5.0",
+      "tap50": "5.2",
+      "clearClose": "6.6",
+      "clearStandard": "7.0",
+      "stiTap": "6.3"
+    },
+    {
+      "size": "M8x1.25",
+      "system": "metric",
+      "pitch": 1.25,
+      "tap75": "6.8",
+      "tap50": "7.0",
+      "clearClose": "8.4",
+      "clearStandard": "9.0",
+      "stiTap": "8.3"
+    },
+    {
+      "size": "M10x1.5",
+      "system": "metric",
+      "pitch": 1.5,
+      "tap75": "8.5",
+      "tap50": "8.8",
+      "clearClose": "10.5",
+      "clearStandard": "11.0",
+      "stiTap": "10.5"
+    }
   ],
-  "sheetMetalPilots": { "#6":"0.106–0.110 in", "#8":"0.136–0.140 in", "#10":"0.159–0.166 in", "#12":"0.189–0.196 in" },
-  "woodPilots": {
-    "#6":  {"softwood":"3/32 in (0.094)","hardwood":"7/64 in (0.109)"},
-    "#8":  {"softwood":"7/64 in (0.109)","hardwood":"1/8 in (0.125)"},
-    "#10": {"softwood":"1/8 in (0.125)","hardwood":"9/64 in (0.141)"},
-    "#12": {"softwood":"9/64 in (0.141)","hardwood":"5/32 in (0.156)"}
+  "sheetMetalPilots": {
+    "#6": "0.106\u00e2\u20ac\u201c0.110 in",
+    "#8": "0.136\u00e2\u20ac\u201c0.140 in",
+    "#10": "0.159\u00e2\u20ac\u201c0.166 in",
+    "#12": "0.189\u00e2\u20ac\u201c0.196 in"
   },
-  "drillTokens": { "letters": true, "numbers": true, "fractions": true }
+  "woodPilots": {
+    "#6": {
+      "softwood": "3/32 in (0.094)",
+      "hardwood": "7/64 in (0.109)"
+    },
+    "#8": {
+      "softwood": "7/64 in (0.109)",
+      "hardwood": "1/8 in (0.125)"
+    },
+    "#10": {
+      "softwood": "1/8 in (0.125)",
+      "hardwood": "9/64 in (0.141)"
+    },
+    "#12": {
+      "softwood": "9/64 in (0.141)",
+      "hardwood": "5/32 in (0.156)"
+    }
+  },
+  "drillTokens": {
+    "letters": true,
+    "numbers": true,
+    "fractions": true
+  },
+  "sheetMetal": {
+    "gaugeCharts": {
+      "mildSteel": [
+        {
+          "gauge": 7,
+          "in": 0.1793,
+          "mm": 4.554
+        },
+        {
+          "gauge": 8,
+          "in": 0.1644,
+          "mm": 4.176
+        },
+        {
+          "gauge": 10,
+          "in": 0.1345,
+          "mm": 3.416
+        },
+        {
+          "gauge": 11,
+          "in": 0.1196,
+          "mm": 3.038
+        },
+        {
+          "gauge": 12,
+          "in": 0.1046,
+          "mm": 2.657
+        },
+        {
+          "gauge": 14,
+          "in": 0.0747,
+          "mm": 1.897
+        },
+        {
+          "gauge": 16,
+          "in": 0.0598,
+          "mm": 1.519
+        },
+        {
+          "gauge": 18,
+          "in": 0.0478,
+          "mm": 1.214
+        },
+        {
+          "gauge": 20,
+          "in": 0.0359,
+          "mm": 0.912
+        },
+        {
+          "gauge": 22,
+          "in": 0.0299,
+          "mm": 0.759
+        },
+        {
+          "gauge": 24,
+          "in": 0.0239,
+          "mm": 0.607
+        },
+        {
+          "gauge": 26,
+          "in": 0.0179,
+          "mm": 0.455
+        }
+      ],
+      "stainless": [
+        {
+          "gauge": 7,
+          "in": 0.1875,
+          "mm": 4.763
+        },
+        {
+          "gauge": 8,
+          "in": 0.1719,
+          "mm": 4.366
+        },
+        {
+          "gauge": 10,
+          "in": 0.1406,
+          "mm": 3.571
+        },
+        {
+          "gauge": 11,
+          "in": 0.125,
+          "mm": 3.175
+        },
+        {
+          "gauge": 12,
+          "in": 0.1094,
+          "mm": 2.779
+        },
+        {
+          "gauge": 14,
+          "in": 0.0781,
+          "mm": 1.984
+        },
+        {
+          "gauge": 16,
+          "in": 0.0625,
+          "mm": 1.588
+        },
+        {
+          "gauge": 18,
+          "in": 0.05,
+          "mm": 1.27
+        },
+        {
+          "gauge": 20,
+          "in": 0.0375,
+          "mm": 0.953
+        },
+        {
+          "gauge": 22,
+          "in": 0.0313,
+          "mm": 0.794
+        },
+        {
+          "gauge": 24,
+          "in": 0.025,
+          "mm": 0.635
+        },
+        {
+          "gauge": 26,
+          "in": 0.0188,
+          "mm": 0.478
+        }
+      ],
+      "aluminum5052": [
+        {
+          "gauge": 8,
+          "in": 0.1285,
+          "mm": 3.264
+        },
+        {
+          "gauge": 10,
+          "in": 0.1019,
+          "mm": 2.588
+        },
+        {
+          "gauge": 11,
+          "in": 0.0907,
+          "mm": 2.304
+        },
+        {
+          "gauge": 12,
+          "in": 0.0808,
+          "mm": 2.052
+        },
+        {
+          "gauge": 14,
+          "in": 0.0641,
+          "mm": 1.628
+        },
+        {
+          "gauge": 16,
+          "in": 0.0508,
+          "mm": 1.29
+        },
+        {
+          "gauge": 18,
+          "in": 0.0403,
+          "mm": 1.024
+        },
+        {
+          "gauge": 20,
+          "in": 0.032,
+          "mm": 0.813
+        },
+        {
+          "gauge": 22,
+          "in": 0.0253,
+          "mm": 0.643
+        },
+        {
+          "gauge": 24,
+          "in": 0.0201,
+          "mm": 0.511
+        },
+        {
+          "gauge": 26,
+          "in": 0.0159,
+          "mm": 0.404
+        }
+      ]
+    },
+    "sendCutSendBendSpecs": {
+      "_note": "SCS air-bend specs. Bend radius is inside radius. Min flange = minimum leg after bend (outside dim from apex). Source: sendcutsend.com/bending-calculator",
+      "_solidworks": "SCS SolidWorks gauge tables available at sendcutsend.com/blog/how-to-import-and-use-sheet-metal-gauge-tables-in-solidworks/",
+      "mildSteel": [
+        {
+          "thickness": 0.03,
+          "gauge": 22,
+          "bendRadius": 0.03,
+          "kFactor": 0.44,
+          "bendDeduction": 0.046,
+          "minFlange": 0.375,
+          "note": ""
+        },
+        {
+          "thickness": 0.036,
+          "gauge": 20,
+          "bendRadius": 0.036,
+          "kFactor": 0.44,
+          "bendDeduction": 0.055,
+          "minFlange": 0.375,
+          "note": ""
+        },
+        {
+          "thickness": 0.048,
+          "gauge": 18,
+          "bendRadius": 0.048,
+          "kFactor": 0.44,
+          "bendDeduction": 0.074,
+          "minFlange": 0.5,
+          "note": ""
+        },
+        {
+          "thickness": 0.06,
+          "gauge": 16,
+          "bendRadius": 0.06,
+          "kFactor": 0.44,
+          "bendDeduction": 0.092,
+          "minFlange": 0.5,
+          "note": ""
+        },
+        {
+          "thickness": 0.075,
+          "gauge": 14,
+          "bendRadius": 0.075,
+          "kFactor": 0.44,
+          "bendDeduction": 0.115,
+          "minFlange": 0.625,
+          "note": ""
+        },
+        {
+          "thickness": 0.105,
+          "gauge": 12,
+          "bendRadius": 0.105,
+          "kFactor": 0.44,
+          "bendDeduction": 0.161,
+          "minFlange": 0.75,
+          "note": ""
+        },
+        {
+          "thickness": 0.119,
+          "gauge": 11,
+          "bendRadius": 0.119,
+          "kFactor": 0.44,
+          "bendDeduction": 0.182,
+          "minFlange": 0.75,
+          "note": ""
+        },
+        {
+          "thickness": 0.135,
+          "gauge": 10,
+          "bendRadius": 0.135,
+          "kFactor": 0.44,
+          "bendDeduction": 0.207,
+          "minFlange": 0.875,
+          "note": ""
+        },
+        {
+          "thickness": 0.187,
+          "gauge": 7,
+          "bendRadius": 0.187,
+          "kFactor": 0.44,
+          "bendDeduction": 0.286,
+          "minFlange": 1.125,
+          "note": ""
+        },
+        {
+          "thickness": 0.25,
+          "gauge": "plate",
+          "bendRadius": 0.375,
+          "kFactor": 0.44,
+          "bendDeduction": 0.574,
+          "minFlange": 1.5,
+          "note": "Large radius; verify with SCS calculator"
+        }
+      ],
+      "stainless304": [
+        {
+          "thickness": 0.03,
+          "gauge": 22,
+          "bendRadius": 0.036,
+          "kFactor": 0.44,
+          "bendDeduction": 0.055,
+          "minFlange": 0.375,
+          "note": "Springs back more than mild steel"
+        },
+        {
+          "thickness": 0.048,
+          "gauge": 18,
+          "bendRadius": 0.06,
+          "kFactor": 0.44,
+          "bendDeduction": 0.092,
+          "minFlange": 0.5,
+          "note": ""
+        },
+        {
+          "thickness": 0.06,
+          "gauge": 16,
+          "bendRadius": 0.075,
+          "kFactor": 0.44,
+          "bendDeduction": 0.115,
+          "minFlange": 0.5,
+          "note": ""
+        },
+        {
+          "thickness": 0.075,
+          "gauge": 14,
+          "bendRadius": 0.094,
+          "kFactor": 0.44,
+          "bendDeduction": 0.144,
+          "minFlange": 0.625,
+          "note": ""
+        },
+        {
+          "thickness": 0.105,
+          "gauge": 12,
+          "bendRadius": 0.13,
+          "kFactor": 0.44,
+          "bendDeduction": 0.199,
+          "minFlange": 0.875,
+          "note": ""
+        },
+        {
+          "thickness": 0.135,
+          "gauge": 10,
+          "bendRadius": 0.187,
+          "kFactor": 0.44,
+          "bendDeduction": 0.286,
+          "minFlange": 1.0,
+          "note": ""
+        },
+        {
+          "thickness": 0.25,
+          "gauge": "plate",
+          "bendRadius": 0.375,
+          "kFactor": 0.44,
+          "bendDeduction": 0.574,
+          "minFlange": 1.75,
+          "note": "Verify with SCS calculator"
+        }
+      ],
+      "aluminum5052": [
+        {
+          "thickness": 0.04,
+          "gauge": 18,
+          "bendRadius": 0.04,
+          "kFactor": 0.44,
+          "bendDeduction": 0.061,
+          "minFlange": 0.375,
+          "note": ""
+        },
+        {
+          "thickness": 0.05,
+          "gauge": 16,
+          "bendRadius": 0.05,
+          "kFactor": 0.44,
+          "bendDeduction": 0.077,
+          "minFlange": 0.375,
+          "note": ""
+        },
+        {
+          "thickness": 0.063,
+          "gauge": 14,
+          "bendRadius": 0.063,
+          "kFactor": 0.44,
+          "bendDeduction": 0.096,
+          "minFlange": 0.5,
+          "note": ""
+        },
+        {
+          "thickness": 0.08,
+          "gauge": 12,
+          "bendRadius": 0.08,
+          "kFactor": 0.44,
+          "bendDeduction": 0.123,
+          "minFlange": 0.5,
+          "note": ""
+        },
+        {
+          "thickness": 0.09,
+          "gauge": 11,
+          "bendRadius": 0.09,
+          "kFactor": 0.44,
+          "bendDeduction": 0.138,
+          "minFlange": 0.625,
+          "note": ""
+        },
+        {
+          "thickness": 0.1,
+          "gauge": 10,
+          "bendRadius": 0.1,
+          "kFactor": 0.44,
+          "bendDeduction": 0.153,
+          "minFlange": 0.625,
+          "note": ""
+        },
+        {
+          "thickness": 0.125,
+          "gauge": "1/8\"",
+          "bendRadius": 0.125,
+          "kFactor": 0.44,
+          "bendDeduction": 0.191,
+          "minFlange": 0.75,
+          "note": ""
+        },
+        {
+          "thickness": 0.16,
+          "gauge": "5/32\"",
+          "bendRadius": 0.16,
+          "kFactor": 0.44,
+          "bendDeduction": 0.245,
+          "minFlange": 0.875,
+          "note": ""
+        },
+        {
+          "thickness": 0.19,
+          "gauge": "3/16\"",
+          "bendRadius": 0.19,
+          "kFactor": 0.44,
+          "bendDeduction": 0.291,
+          "minFlange": 1.0,
+          "note": ""
+        },
+        {
+          "thickness": 0.25,
+          "gauge": "1/4\"",
+          "bendRadius": 0.375,
+          "kFactor": 0.44,
+          "bendDeduction": 0.574,
+          "minFlange": 1.5,
+          "note": "Larger radius; verify with SCS calculator"
+        }
+      ]
+    },
+    "materials": [
+      {
+        "id": "mild-steel",
+        "name": "Mild Steel (A36 / 1008)",
+        "aliases": [
+          "mild steel",
+          "a36",
+          "1008",
+          "hot roll",
+          "hr steel",
+          "cold roll",
+          "cr steel"
+        ],
+        "tags": [
+          "Steel",
+          "Weldable",
+          "Paintable"
+        ],
+        "summary": "The workhorse. Cheap, strong, welds beautifully, machines well. Goes rusty fast \u2014 plan your finish early.",
+        "gaugeSystem": "mildSteel",
+        "scsThicknessRange": "0.030\" \u2013 0.250\"",
+        "scsBendable": true,
+        "commonGauges": [
+          "18ga (0.048\")",
+          "16ga (0.060\")",
+          "14ga (0.075\")",
+          "12ga (0.105\")",
+          "11ga (0.119\")"
+        ],
+        "bendingNotes": [
+          "Radius \u2248 1\u00d7 material thickness for soft bends; SCS uses fixed radii \u2014 always design to their spec.",
+          "Springback is modest \u2014 easier to hit angle than stainless.",
+          "Grain direction matters on tight bends: bend perpendicular to rolling direction if possible.",
+          "Min hole-to-bend distance: 2\u00d7 material thickness + bend radius."
+        ],
+        "fabricationTips": [
+          "Deburr cut edges before bending \u2014 sharp edges crack under forming pressure.",
+          "Weld distortion: tack sequence matters, weld from center out, use backstep on long seams.",
+          "Prime cut edges immediately if part will see any moisture.",
+          "For slotted/tabbed assemblies: design slots 0.005\"\u20130.010\" wider than tab for laser kerf."
+        ],
+        "weldingNotes": [
+          "MIG: ER70S-6 wire, 75/25 Ar/CO2. Best all-around for A36/1008.",
+          "TIG: ER70S-2 filler. Cleaner welds, better for thin gauge (< 16ga).",
+          "Stick: E6013 for general, E7018 for structural.",
+          "Thin gauge (20ga\u201318ga): reduce heat, stitch weld, use backing bar to prevent burn-through."
+        ],
+        "finishOptions": [
+          "Primer + rattle can",
+          "Powder coat (best)",
+          "Zinc plate",
+          "Cold blue (cosmetic only)",
+          "Bare (inside/protected use only)"
+        ],
+        "weightLbsPerSqFtByGauge": {
+          "18ga": 1.875,
+          "16ga": 2.5,
+          "14ga": 3.125,
+          "12ga": 4.375,
+          "11ga": 5.0,
+          "10ga": 5.625
+        },
+        "scsLink": "https://sendcutsend.com/materials/mild-steel/"
+      },
+      {
+        "id": "stainless-304",
+        "name": "304 Stainless Steel",
+        "aliases": [
+          "304",
+          "stainless 304",
+          "304ss",
+          "18-8 stainless"
+        ],
+        "tags": [
+          "Stainless",
+          "Corrosion Resistant",
+          "Work-Hardening"
+        ],
+        "summary": "Corrosion resistant, work-hardens fast, costs more, harder to weld. Don't use where mild steel + paint works fine.",
+        "gaugeSystem": "stainless",
+        "scsThicknessRange": "0.030\" \u2013 0.250\"",
+        "scsBendable": true,
+        "commonGauges": [
+          "18ga (0.048\")",
+          "16ga (0.060\")",
+          "14ga (0.075\")",
+          "12ga (0.105\")",
+          "11ga (0.120\")"
+        ],
+        "bendingNotes": [
+          "Springback is significant \u2014 SCS accounts for this in their tooling, but in-shop forming needs over-bend.",
+          "Bend radius must be LARGER than mild steel at same gauge \u2014 stainless cracks on tight radii.",
+          "Never bend across heavy mill scratches \u2014 they become cracks.",
+          "Work-hardens quickly: don't make multiple corrective bends in same area."
+        ],
+        "fabricationTips": [
+          "Use stainless-only tooling and wire brushes \u2014 carbon steel contamination causes rust spots.",
+          "Protect finish during fab: leave plastic film on, use masking tape on contact surfaces.",
+          "Tabs and slots: design same 0.005\"\u20130.010\" clearance as mild steel \u2014 laser kerf is similar.",
+          "Passivate welded assemblies (citric acid bath) if corrosion resistance is critical."
+        ],
+        "weldingNotes": [
+          "TIG preferred: ER308L filler for 304-to-304. Low heat input, back purge on critical joints.",
+          "MIG: ER308L, 98/2 Ar/O2. Less ideal than TIG but faster for thicker sections.",
+          "No galvanic mixing: don't use carbon steel wire on stainless.",
+          "Heat discoloration (sugaring) on back side = loss of corrosion resistance \u2014 back purge matters."
+        ],
+        "finishOptions": [
+          "Brushed (leave as-cut or orbital sand)",
+          "Electropolish",
+          "Passivation",
+          "Powder coat (prep carefully)",
+          "Bare \u2014 self-protecting in most environments"
+        ],
+        "weightLbsPerSqFtByGauge": {
+          "18ga": 2.0,
+          "16ga": 2.5,
+          "14ga": 3.125,
+          "12ga": 4.375,
+          "11ga": 5.0,
+          "10ga": 5.625
+        },
+        "scsLink": "https://sendcutsend.com/materials/stainless-steel/"
+      },
+      {
+        "id": "aluminum-5052",
+        "name": "5052-H32 Aluminum",
+        "aliases": [
+          "5052",
+          "5052 aluminum",
+          "5052-h32",
+          "sheet aluminum"
+        ],
+        "tags": [
+          "Aluminum",
+          "Formable",
+          "Weldable",
+          "Marine Grade"
+        ],
+        "summary": "Best aluminum for sheet metal work. More formable than 6061, excellent corrosion resistance, welds well. SCS's go-to bending aluminum.",
+        "gaugeSystem": "aluminum5052",
+        "scsThicknessRange": "0.040\" \u2013 0.250\"",
+        "scsBendable": true,
+        "commonGauges": [
+          "0.063\" (\u224814ga)",
+          "0.080\" (\u224812ga)",
+          "0.100\" (\u224810ga)",
+          "0.125\"",
+          "0.160\""
+        ],
+        "bendingNotes": [
+          "DO NOT design 6061 for bending \u2014 it cracks. Use 5052 for any bent aluminum.",
+          "Bend across grain where possible (perpendicular to rolling direction) to reduce cracking risk.",
+          "Springback less than stainless but more than mild steel.",
+          "Min bend radius \u2248 1\u00d7 material thickness for H32 temper."
+        ],
+        "fabricationTips": [
+          "Slots and tabs: add 0.005\"\u20130.010\" clearance for laser kerf, same as steel.",
+          "Avoid iron contamination \u2014 use aluminum-only files and wire brushes.",
+          "Anodizing hides most surface scratches; powder coat requires proper etch and prime.",
+          "Self-tapping screws work well; for thread strength use Helicoil/STI inserts or rivet nuts."
+        ],
+        "weldingNotes": [
+          "TIG: ER5356 filler (stronger) or ER4043 (flows better, less crack-prone). AC, 100% Argon.",
+          "MIG: ER5356 with spool gun. Push angle only, no pull.",
+          "Clean aggressively: IPA wipe then stainless brush, weld within minutes.",
+          "No hydrogen \u2014 no oil, no water, no paint near the joint."
+        ],
+        "finishOptions": [
+          "Anodize (type II or III)",
+          "Powder coat (etch + prime)",
+          "Alodine/Chem-film (for bonding prep)",
+          "Bare (excellent corrosion resistance as-is)"
+        ],
+        "weightLbsPerSqFtByGauge": {
+          "0.063\"": 0.882,
+          "0.080\"": 1.12,
+          "0.100\"": 1.4,
+          "0.125\"": 1.75,
+          "0.160\"": 2.24
+        },
+        "scsLink": "https://sendcutsend.com/materials/5052-aluminum/"
+      },
+      {
+        "id": "aluminum-6061",
+        "name": "6061-T6 Aluminum",
+        "aliases": [
+          "6061",
+          "6061 aluminum",
+          "6061-t6"
+        ],
+        "tags": [
+          "Aluminum",
+          "Structural",
+          "Machinable"
+        ],
+        "summary": "Strong and machinable but DO NOT BEND \u2014 it cracks. Use for flat plate, machined parts, extrusions. Use 5052 for anything that bends.",
+        "gaugeSystem": "aluminum5052",
+        "scsThicknessRange": "0.040\" \u2013 0.500\"",
+        "scsBendable": false,
+        "bendingNotes": [
+          "\u26a0\ufe0f DO NOT BEND 6061-T6 \u2014 it will crack on any meaningful bend.",
+          "If you need a bent part in 6061, use 5052 instead.",
+          "Flat plate, gussets, tabs, machined brackets: 6061 is excellent.",
+          "Can be bent in annealed (O) temper but loses most of its strength."
+        ],
+        "fabricationTips": [
+          "Machines beautifully \u2014 fast, clean chips, great surface finish.",
+          "Holes and counterbores: sharp HSS/cobalt bits, WD-40, mid RPM.",
+          "Tap with spiral-point (gun) taps. Always use Helicoil in structural tapped holes.",
+          "Avoid long thin features with laser cut \u2014 6061 can warp from heat input."
+        ],
+        "weldingNotes": [
+          "Weldable with TIG (ER4043 or ER5356) but heat-affected zone loses T6 strength.",
+          "Welded 6061 is effectively annealed at the joint \u2014 re-heat treat or redesign around it.",
+          "For structural joints, prefer bolted or bonded over welded."
+        ],
+        "finishOptions": [
+          "Anodize",
+          "Powder coat",
+          "Bare",
+          "Alodine"
+        ],
+        "scsLink": "https://sendcutsend.com/materials/6061-aluminum/"
+      },
+      {
+        "id": "chromoly-4130",
+        "name": "4130 Chromoly Steel",
+        "aliases": [
+          "4130",
+          "chromoly",
+          "chrome-moly",
+          "4130 steel"
+        ],
+        "tags": [
+          "Steel",
+          "Alloy",
+          "High Strength",
+          "Weldable"
+        ],
+        "summary": "High strength-to-weight. Used in roll cages, tubing, structural brackets. Needs post-weld stress relief or normalize for critical applications.",
+        "gaugeSystem": "mildSteel",
+        "scsThicknessRange": "0.050\" \u2013 0.250\"",
+        "scsBendable": true,
+        "bendingNotes": [
+          "More springback than mild steel \u2014 overbend slightly when forming in-shop.",
+          "Bend radius: min 3\u00d7 material thickness for sheet to avoid work-hardening cracks.",
+          "SCS bend radii are conservatively sized for 4130 \u2014 follow their spec table."
+        ],
+        "fabricationTips": [
+          "Normalize or stress-relieve after welding for fatigue-critical parts (heat to 1600\u00b0F, air cool).",
+          "Slots and tabs: same 0.005\"\u20130.010\" clearance as mild steel.",
+          "Cold working increases hardness \u2014 don't try to straighten bent tubing repeatedly."
+        ],
+        "weldingNotes": [
+          "TIG preferred: ER80S-D2 or ER70S-2 filler. Preheat > 0.120\" thick (200\u2013300\u00b0F).",
+          "MIG: ER80S-D2. Less ideal due to heat input.",
+          "Normalize after welding for fatigue-critical or roll cage applications.",
+          "Thin wall tubing: low amperage, no gaps, purge ID on closed sections."
+        ],
+        "finishOptions": [
+          "Primer + paint",
+          "Powder coat",
+          "Zinc plate",
+          "Bare (inside/dry use only)"
+        ],
+        "scsLink": "https://sendcutsend.com/materials/4130-chromoly/"
+      }
+    ],
+    "designRules": {
+      "slotsAndTabs": {
+        "title": "Slots & Tabs (Laser-Cut Fit-Up)",
+        "rules": [
+          {
+            "label": "Slot width for free fit",
+            "value": "Tab thickness + 0.010\"",
+            "note": "Accounts for laser kerf (~0.005\") and gives assembly clearance"
+          },
+          {
+            "label": "Slot width for snug fit",
+            "value": "Tab thickness + 0.005\"",
+            "note": "Tight but hand-pressable \u2014 good for tacked assemblies"
+          },
+          {
+            "label": "Slot width for interference/press",
+            "value": "Tab thickness + 0.000\"",
+            "note": "Laser kerf gives slight interference \u2014 test first"
+          },
+          {
+            "label": "Tab width tolerance (SCS)",
+            "value": "\u00b10.005\" on laser cut dims",
+            "note": "Always add clearance in the slot, not the tab"
+          },
+          {
+            "label": "Min slot width",
+            "value": "1\u00d7 material thickness or 0.040\", whichever is greater",
+            "note": "Narrower than this and laser can't cleanly cut"
+          },
+          {
+            "label": "Tab length (into slot)",
+            "value": "Min 2\u00d7 material thickness",
+            "note": "Less than this and tab pulls out under load"
+          },
+          {
+            "label": "Corner relief on slots",
+            "value": "0.030\"\u20130.060\" radius or dog-bone",
+            "note": "Prevents stress concentration at slot corners"
+          }
+        ]
+      },
+      "holeDesign": {
+        "title": "Hole Design Rules",
+        "rules": [
+          {
+            "label": "Min hole diameter (laser)",
+            "value": "\u2265 material thickness",
+            "note": "SCS minimum: whichever is larger"
+          },
+          {
+            "label": "Hole-to-edge distance",
+            "value": "\u2265 1.5\u00d7 hole diameter",
+            "note": "Closer than this and edge may distort"
+          },
+          {
+            "label": "Hole-to-bend distance",
+            "value": "\u2265 2\u00d7 material thickness + bend radius",
+            "note": "Holes too close to bends distort during forming"
+          },
+          {
+            "label": "Hole-to-hole spacing",
+            "value": "\u2265 2\u00d7 material thickness between edges",
+            "note": "Less than this risks tearing the web"
+          },
+          {
+            "label": "Countersink max depth",
+            "value": "70% of material thickness",
+            "note": "Deeper risks breaking through on thin stock"
+          },
+          {
+            "label": "Tapped hole min thickness for SCS",
+            "value": "0.060\" (16ga steel or equivalent)",
+            "note": "Thinner than this, use PEM nut or rivet nut instead"
+          }
+        ]
+      },
+      "bendReliefs": {
+        "title": "Bend Reliefs",
+        "rules": [
+          {
+            "label": "When required",
+            "value": "Any time a bend runs to or near a cut edge or another feature",
+            "note": "Prevents tearing at the end of the bend"
+          },
+          {
+            "label": "Relief width",
+            "value": "\u2265 material thickness",
+            "note": "Width of the relief slot/notch"
+          },
+          {
+            "label": "Relief depth",
+            "value": "\u2265 bend radius + material thickness",
+            "note": "Must extend past the bend tangent line"
+          },
+          {
+            "label": "Relief shape",
+            "value": "Square notch or radius end",
+            "note": "Radiused end reduces stress concentration \u2014 preferred"
+          }
+        ]
+      },
+      "flangeMinimums": {
+        "title": "Flange Length Minimums (SCS Air Bend)",
+        "note": "These are the minimum formed flange lengths SCS can hold. Shorter flanges slip in the tooling. Always check SCS material page for exact values.",
+        "rules": [
+          {
+            "gauge": "22ga\u201320ga (0.030\"\u20130.036\")",
+            "minFlange": "0.375\""
+          },
+          {
+            "gauge": "18ga\u201316ga (0.048\"\u20130.060\")",
+            "minFlange": "0.500\""
+          },
+          {
+            "gauge": "14ga (0.075\")",
+            "minFlange": "0.625\""
+          },
+          {
+            "gauge": "12ga\u201311ga (0.105\"\u20130.119\")",
+            "minFlange": "0.750\"\u20130.875\""
+          },
+          {
+            "gauge": "10ga (0.135\")",
+            "minFlange": "0.875\""
+          },
+          {
+            "gauge": "7ga / 3/16\" (0.187\")",
+            "minFlange": "1.125\""
+          },
+          {
+            "gauge": "1/4\" (0.250\")",
+            "minFlange": "1.500\""
+          }
+        ]
+      }
+    },
+    "fabricationTipsGeneral": [
+      {
+        "category": "Grain Direction",
+        "tip": "Sheet metal has a rolling grain direction. Bending perpendicular to grain = less cracking risk. Bending parallel to grain = more crack risk on tight radii. Mark grain direction on your flat patterns for shop reference."
+      },
+      {
+        "category": "Distortion Control",
+        "tip": "Weld distortion is a force of nature \u2014 plan for it, don't fight it. Tack sequence: start from center, work outward. For long seams, backstep or skip-weld. Fixture critical geometry before welding."
+      },
+      {
+        "category": "Order of Operations",
+        "tip": "Bend before you drill holes near bends. Weld before you drill for hardware that goes into welded features. Machine last wherever possible. Finish last \u2014 don't powder coat then drill."
+      },
+      {
+        "category": "Material Callouts",
+        "tip": "Always spec material AND temper AND finish: '5052-H32 aluminum, 0.080\" sheet' \u2014 not just 'aluminum.' Different tempers have completely different forming behavior."
+      },
+      {
+        "category": "SCS Design Tips",
+        "tip": "Download SCS's SolidWorks gauge tables \u2014 they encode the exact bend radius and K-factor so your flat patterns match what they actually produce. Link: sendcutsend.com/blog/how-to-import-and-use-sheet-metal-gauge-tables-in-solidworks/"
+      },
+      {
+        "category": "Fit-Up Strategy",
+        "tip": "Tabbed assemblies are faster to fixture than fully open assemblies. Design tab-and-slot wherever you need parts to self-locate before tacking. Saves jig time and improves repeatability."
+      },
+      {
+        "category": "Kerf Compensation",
+        "tip": "SCS laser kerf is approximately 0.005\"\u20130.008\" depending on material and thickness. For precise fits, design to your nominal dims and add clearance in mating features (slots, pockets), not in the part itself."
+      },
+      {
+        "category": "Springback",
+        "tip": "Springback order (most to least): Stainless > 6061 (don't bend) > 4130 > 5052 aluminum > Mild Steel. In-shop forming on a press brake: over-bend 2\u20135\u00b0 and test a sample before running a batch."
+      }
+    ]
+  },
+  "pemHardware": {
+    "_note": "Penn Engineering self-clinching hardware. Hole sizes per PEM catalog. Always check PEM IFI/EPS spec sheet for your exact sheet material and thickness.",
+    "nuts": [
+      {
+        "size": "#4-40",
+        "holeIn": 0.193,
+        "holeNote": "0.193\"",
+        "minThkIn": 0.04,
+        "series": "S/SS",
+        "note": "Install into punched or drilled hole; do not use with thin soft alum <0.040\""
+      },
+      {
+        "size": "#6-32",
+        "holeIn": 0.213,
+        "holeNote": "0.213\"",
+        "minThkIn": 0.04,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "#8-32",
+        "holeIn": 0.255,
+        "holeNote": "0.255\"",
+        "minThkIn": 0.048,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "#10-24",
+        "holeIn": 0.272,
+        "holeNote": "0.272\"",
+        "minThkIn": 0.048,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "#10-32",
+        "holeIn": 0.272,
+        "holeNote": "0.272\"",
+        "minThkIn": 0.048,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "1/4-20",
+        "holeIn": 0.325,
+        "holeNote": "0.325\"",
+        "minThkIn": 0.06,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "5/16-18",
+        "holeIn": 0.384,
+        "holeNote": "0.384\"",
+        "minThkIn": 0.075,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "3/8-16",
+        "holeIn": 0.451,
+        "holeNote": "0.451\"",
+        "minThkIn": 0.105,
+        "series": "S/SS",
+        "note": ""
+      },
+      {
+        "size": "M3",
+        "holeMm": 4.2,
+        "holeNote": "4.2 mm",
+        "minThkMm": 0.9,
+        "series": "SO",
+        "note": "Metric self-clinching"
+      },
+      {
+        "size": "M4",
+        "holeMm": 5.4,
+        "holeNote": "5.4 mm",
+        "minThkMm": 1.0,
+        "series": "SO",
+        "note": ""
+      },
+      {
+        "size": "M5",
+        "holeMm": 6.4,
+        "holeNote": "6.4 mm",
+        "minThkMm": 1.2,
+        "series": "SO",
+        "note": ""
+      },
+      {
+        "size": "M6",
+        "holeMm": 7.4,
+        "holeNote": "7.4 mm",
+        "minThkMm": 1.5,
+        "series": "SO",
+        "note": ""
+      },
+      {
+        "size": "M8",
+        "holeMm": 9.4,
+        "holeNote": "9.4 mm",
+        "minThkMm": 1.8,
+        "series": "SO",
+        "note": ""
+      },
+      {
+        "size": "M10",
+        "holeMm": 11.4,
+        "holeNote": "11.4 mm",
+        "minThkMm": 2.3,
+        "series": "SO",
+        "note": ""
+      }
+    ],
+    "flushStuds": [
+      {
+        "size": "#4-40",
+        "L": "varies",
+        "holeIn": 0.166,
+        "holeNote": "0.166\"",
+        "minThkIn": 0.04,
+        "series": "FH/FHS",
+        "note": "Hole must be clean \u2014 burr causes mis-clinch"
+      },
+      {
+        "size": "#6-32",
+        "L": "varies",
+        "holeIn": 0.193,
+        "holeNote": "0.193\"",
+        "minThkIn": 0.04,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "#8-32",
+        "L": "varies",
+        "holeIn": 0.213,
+        "holeNote": "0.213\"",
+        "minThkIn": 0.048,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "#10-24",
+        "L": "varies",
+        "holeIn": 0.228,
+        "holeNote": "0.228\"",
+        "minThkIn": 0.048,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "#10-32",
+        "L": "varies",
+        "holeIn": 0.228,
+        "holeNote": "0.228\"",
+        "minThkIn": 0.048,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "1/4-20",
+        "L": "varies",
+        "holeIn": 0.281,
+        "holeNote": "0.281\"",
+        "minThkIn": 0.06,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "5/16-18",
+        "L": "varies",
+        "holeIn": 0.344,
+        "holeNote": "0.344\"",
+        "minThkIn": 0.075,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "3/8-16",
+        "L": "varies",
+        "holeIn": 0.406,
+        "holeNote": "0.406\"",
+        "minThkIn": 0.105,
+        "series": "FH/FHS",
+        "note": ""
+      },
+      {
+        "size": "M3",
+        "L": "varies",
+        "holeMm": 3.6,
+        "holeNote": "3.6 mm",
+        "minThkMm": 0.9,
+        "series": "FHM",
+        "note": "Metric flush stud"
+      },
+      {
+        "size": "M4",
+        "L": "varies",
+        "holeMm": 4.6,
+        "holeNote": "4.6 mm",
+        "minThkMm": 1.0,
+        "series": "FHM",
+        "note": ""
+      },
+      {
+        "size": "M5",
+        "L": "varies",
+        "holeMm": 5.6,
+        "holeNote": "5.6 mm",
+        "minThkMm": 1.2,
+        "series": "FHM",
+        "note": ""
+      },
+      {
+        "size": "M6",
+        "L": "varies",
+        "holeMm": 6.6,
+        "holeNote": "6.6 mm",
+        "minThkMm": 1.5,
+        "series": "FHM",
+        "note": ""
+      },
+      {
+        "size": "M8",
+        "L": "varies",
+        "holeMm": 9.0,
+        "holeNote": "9.0 mm",
+        "minThkMm": 1.8,
+        "series": "FHM",
+        "note": ""
+      }
+    ],
+    "generalNotes": [
+      "Always verify hole size against the exact PEM part number callout \u2014 length variants sometimes have different requirements.",
+      "Sheet must meet minimum thickness for proper clinch engagement; too thin = spin-out.",
+      "Install with flat punch on head side, anvil on opposite; do NOT weld after installation.",
+      "For aluminum sheet use SS (stainless) series PEM; standard carbon steel PEM can gall in soft alum.",
+      "Deburr holes before installation \u2014 burrs prevent flush seating."
+    ]
+  },
+  "heatSetInserts": {
+    "_note": "Heat-set brass inserts for FDM 3D-printed parts. Hole sizes are for printed or drilled holes. Always test on a sample \u2014 optimal hole size varies slightly by printer, material, and insert brand.",
+    "inserts": [
+      {
+        "size": "M2",
+        "holeForPrintMm": 2.9,
+        "holeForDrillMm": 2.9,
+        "outerMm": 3.5,
+        "note": "Small \u2014 easy to strip; use sparingly"
+      },
+      {
+        "size": "M2.5",
+        "holeForPrintMm": 3.2,
+        "holeForDrillMm": 3.2,
+        "outerMm": 3.8,
+        "note": ""
+      },
+      {
+        "size": "M3",
+        "holeForPrintMm": 4.0,
+        "holeForDrillMm": 4.0,
+        "outerMm": 4.5,
+        "note": "Most common; Voron standard"
+      },
+      {
+        "size": "M4",
+        "holeForPrintMm": 5.1,
+        "holeForDrillMm": 5.1,
+        "outerMm": 5.6,
+        "note": ""
+      },
+      {
+        "size": "M5",
+        "holeForPrintMm": 6.4,
+        "holeForDrillMm": 6.4,
+        "outerMm": 7.0,
+        "note": ""
+      },
+      {
+        "size": "M6",
+        "holeForPrintMm": 8.0,
+        "holeForDrillMm": 8.0,
+        "outerMm": 8.8,
+        "note": "For structural brackets"
+      },
+      {
+        "size": "#4-40",
+        "holeForPrintMm": 4.0,
+        "holeForDrillMm": 4.0,
+        "outerMm": 4.5,
+        "note": "Approx \u2014 verify with your insert supplier"
+      },
+      {
+        "size": "#6-32",
+        "holeForPrintMm": 5.1,
+        "holeForDrillMm": 5.1,
+        "outerMm": 5.6,
+        "note": ""
+      },
+      {
+        "size": "#8-32",
+        "holeForPrintMm": 6.4,
+        "holeForDrillMm": 6.4,
+        "outerMm": 7.0,
+        "note": ""
+      },
+      {
+        "size": "#10-24",
+        "holeForPrintMm": 7.9,
+        "holeForDrillMm": 7.9,
+        "outerMm": 8.7,
+        "note": ""
+      },
+      {
+        "size": "1/4-20",
+        "holeForPrintMm": 9.5,
+        "holeForDrillMm": 9.5,
+        "outerMm": 10.5,
+        "note": "Use structural insert for loads"
+      }
+    ],
+    "materialNotes": {
+      "PLA": "Iron ~180\u2013190\u00b0C. Heat slowly \u2014 PLA softens fast; easy to overshoot and deform.",
+      "PETG": "Iron ~200\u2013210\u00b0C. Most forgiving. Slight pull-out resistance better than PLA.",
+      "ABS": "Iron ~210\u2013220\u00b0C. Bonds well. Ensure ventilation.",
+      "ASA": "Iron ~220\u00b0C. Similar to ABS. Good UV/outdoor resistance.",
+      "PA/Nylon": "Iron ~230\u2013240\u00b0C. Excellent pull-out. Absorbs moisture \u2014 dry filament before printing.",
+      "PC": "Iron ~240\u2013260\u00b0C. Highest strength. Harder to insert without cracking part."
+    },
+    "generalNotes": [
+      "Print hole ~0.1\u20130.2 mm undersize vs. insert OD \u2014 tight enough to self-locate before heat.",
+      "Use a dedicated soldering iron tip or insert press for consistent depth and vertical alignment.",
+      "Insert should sit flush or 0.1\u20130.2 mm below surface; proud inserts cause assembly gaps.",
+      "Let cool fully before applying torque \u2014 30\u201360 seconds minimum.",
+      "For blind holes, leave \u22651\u00d7 insert length of solid material below the insert.",
+      "Torque limit: M3 \u2248 0.5\u20130.8 N\u00b7m in PETG; M4 \u2248 1.0\u20131.5 N\u00b7m. Never over-torque into plastic."
+    ]
+  },
+  "cncRouter": {
+    "_note": "CNC router feeds & speeds. Chipload is king \u2014 dial RPM and feed to hit chipload target. Always run a test cut and listen: singing=good, screaming=too fast, rubbing/burning=too slow or dull bit.",
+    "machines": {
+      "default": {
+        "name": "Shop Router",
+        "maxRpm": 24000,
+        "minRpm": 8000,
+        "notes": "Adjust to your machine. Most ShopBot/Avid-style routers run 10k\u201318k for most work."
+      }
+    },
+    "categories": {
+      "aluminum": {
+        "label": "Aluminum (6061 / 7075)",
+        "sfmRange": [
+          200,
+          400
+        ],
+        "bitTypes": [
+          {
+            "id": "single_o",
+            "label": "Single-flute O-flute (upcut)",
+            "flutes": 1,
+            "recommended": true
+          },
+          {
+            "id": "two_upcut",
+            "label": "2-flute upcut carbide",
+            "flutes": 2,
+            "recommended": false
+          }
+        ],
+        "chiploads": {
+          "single_o": {
+            "lo": 0.003,
+            "hi": 0.006,
+            "unit": "in/tooth"
+          },
+          "two_upcut": {
+            "lo": 0.002,
+            "hi": 0.004,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.5,
+          "note": "50% dia per pass rough; 25% finish"
+        },
+        "stepover": {
+          "roughPct": 0.4,
+          "finishPct": 0.1
+        },
+        "plungeRatePct": 0.25,
+        "climbFirst": true,
+        "lube": "Air blast mandatory; misting (WD-40 / Kool Mist) strongly recommended",
+        "notes": [
+          "O-flute (single-flute) is the go-to \u2014 large gullet clears chips before re-cut.",
+          "Chip evacuation is everything: re-cutting = heat = weld = snapped bit.",
+          "Ramp in at \u22642\u00b0 or helical entry \u2014 never straight plunge into aluminum.",
+          "Start at the low chipload end; increase until you hear clean chip formation.",
+          "7075 is harder \u2014 stay at the low chipload end, freshest bits only.",
+          "No coolant? Air blast at minimum. WD-40 mist ideal. Never dry cut aluminum."
+        ]
+      },
+      "composite": {
+        "label": "CFRP / Fiberglass / G10 Composite",
+        "sfmRange": [
+          300,
+          600
+        ],
+        "bitTypes": [
+          {
+            "id": "compression",
+            "label": "Compression (up+down) spiral",
+            "flutes": 2,
+            "recommended": true
+          },
+          {
+            "id": "upcut_carbide",
+            "label": "2-flute upcut solid carbide",
+            "flutes": 2,
+            "recommended": false
+          },
+          {
+            "id": "diamond",
+            "label": "Diamond-coated router bit",
+            "flutes": 2,
+            "recommended": false
+          }
+        ],
+        "chiploads": {
+          "compression": {
+            "lo": 0.004,
+            "hi": 0.008,
+            "unit": "in/tooth"
+          },
+          "upcut_carbide": {
+            "lo": 0.003,
+            "hi": 0.006,
+            "unit": "in/tooth"
+          },
+          "diamond": {
+            "lo": 0.003,
+            "hi": 0.005,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.5,
+          "note": "Full depth one pass only with compression bit + backer; 50% for upcut"
+        },
+        "stepover": {
+          "roughPct": 0.45,
+          "finishPct": 0.1
+        },
+        "plungeRatePct": 0.2,
+        "climbFirst": false,
+        "lube": "Dry \u2014 dust extraction ONLY. P100 respirator mandatory.",
+        "notes": [
+          "Carbon dust is conductive \u2014 keep away from electronics and spindle bearings.",
+          "Compression bit: downcut top + upcut bottom = clean face both sides. Use backer.",
+          "Sacrificial spoilboard or MDF backer required \u2014 prevents blowout on exit face.",
+          "Vacuum extraction at point of cut. P100 mask for anyone in the room.",
+          "Carbide wears fast in abrasive CFRP \u2014 inspect edge after every few parts.",
+          "Foam-core panels: reduce DOC to 40% dia \u2014 foam deflects under aggressive cuts.",
+          "G10/FR4 is extremely abrasive \u2014 diamond bits last 3\u20135\u00d7 longer than plain carbide.",
+          "Ramp or helical entry. Plunging through carbon creates dangerous heat spikes."
+        ]
+      },
+      "wood": {
+        "label": "Plywood / Baltic Birch",
+        "sfmRange": [
+          600,
+          1200
+        ],
+        "bitTypes": [
+          {
+            "id": "compression",
+            "label": "Compression (up+down) spiral",
+            "flutes": 2,
+            "recommended": true
+          },
+          {
+            "id": "upcut_spiral",
+            "label": "2-flute upcut spiral",
+            "flutes": 2,
+            "recommended": false
+          },
+          {
+            "id": "downcut_spiral",
+            "label": "2-flute downcut spiral",
+            "flutes": 2,
+            "recommended": false
+          }
+        ],
+        "chiploads": {
+          "compression": {
+            "lo": 0.008,
+            "hi": 0.016,
+            "unit": "in/tooth"
+          },
+          "upcut_spiral": {
+            "lo": 0.006,
+            "hi": 0.014,
+            "unit": "in/tooth"
+          },
+          "downcut_spiral": {
+            "lo": 0.006,
+            "hi": 0.012,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.5,
+          "note": "Up to 1\u00d7 dia in softer ply; 0.5\u00d7 in hard-face ply"
+        },
+        "stepover": {
+          "roughPct": 0.5,
+          "finishPct": 0.1
+        },
+        "plungeRatePct": 0.4,
+        "climbFirst": false,
+        "lube": "Dry \u2014 dust extraction",
+        "notes": [
+          "Compression bit = clean top AND bottom face \u2014 ideal for visible cabinet/panel parts.",
+          "Upcut: best chip clearing, fuzzy top face. Downcut: clean top, poor chip clearing.",
+          "Baltic birch is consistent \u2014 push the high chipload end for throughput.",
+          "Tabs or vacuum hold-down critical on thin parts \u2014 movement ruins finish pass.",
+          "Climb cut finish pass removes fuzz left from conventional roughing."
+        ]
+      },
+      "wood_dense": {
+        "label": "Richlite / Dense Paper Composite",
+        "sfmRange": [
+          400,
+          800
+        ],
+        "bitTypes": [
+          {
+            "id": "upcut_carbide",
+            "label": "2-flute upcut solid carbide",
+            "flutes": 2,
+            "recommended": true
+          },
+          {
+            "id": "compression",
+            "label": "Compression spiral",
+            "flutes": 2,
+            "recommended": false
+          }
+        ],
+        "chiploads": {
+          "upcut_carbide": {
+            "lo": 0.005,
+            "hi": 0.01,
+            "unit": "in/tooth"
+          },
+          "compression": {
+            "lo": 0.005,
+            "hi": 0.008,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.4,
+          "note": "Dense and hard \u2014 40% dia max, lighter passes than wood"
+        },
+        "stepover": {
+          "roughPct": 0.4,
+          "finishPct": 0.08
+        },
+        "plungeRatePct": 0.3,
+        "climbFirst": false,
+        "lube": "Dry \u2014 good dust extraction. Smells strong \u2014 ventilate the shop.",
+        "notes": [
+          "Treat like a very dense hardwood. More conservative than you'd expect.",
+          "Paper composite is abrasive \u2014 inspect bit edge frequently.",
+          "Fine pervasive dust \u2014 P100 mask and dust extraction.",
+          "Light climb cut finish pass gives a very clean edge.",
+          "Dull bit = rubbing = heat = glazed surface. No second chances \u2014 swap early."
+        ]
+      },
+      "plastic": {
+        "label": "PETG / ABS / Acrylic (General Thermoplastics)",
+        "sfmRange": [
+          300,
+          700
+        ],
+        "bitTypes": [
+          {
+            "id": "single_o",
+            "label": "Single-flute O-flute (upcut)",
+            "flutes": 1,
+            "recommended": true
+          },
+          {
+            "id": "two_upcut",
+            "label": "2-flute upcut carbide",
+            "flutes": 2,
+            "recommended": false
+          }
+        ],
+        "chiploads": {
+          "single_o": {
+            "lo": 0.004,
+            "hi": 0.008,
+            "unit": "in/tooth"
+          },
+          "two_upcut": {
+            "lo": 0.003,
+            "hi": 0.006,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.5,
+          "note": "0.5\u00d7 dia max \u2014 plastics melt if heat builds"
+        },
+        "stepover": {
+          "roughPct": 0.4,
+          "finishPct": 0.1
+        },
+        "plungeRatePct": 0.3,
+        "climbFirst": false,
+        "lube": "Air blast helps. No flood coolant on PETG \u2014 thermal shock can crack part.",
+        "notes": [
+          "Heat is the enemy \u2014 melted chips weld to the bit and part in seconds.",
+          "O-flute: big gullet clears chips before they re-melt. First choice for plastics.",
+          "Chips look melted/stringy? RPM too high or feed too slow \u2014 increase feed first.",
+          "PETG is gummier than ABS \u2014 push chipload high, keep RPM moderate.",
+          "Acrylic: slow RPM (12\u201316k), high feed, sharp bit only \u2014 brittle, chips at edges.",
+          "Ramp entry preferred \u2014 plunging generates a heat spike at entry."
+        ]
+      },
+      "foam_core": {
+        "label": "Foam Core Panels (light trimming / profiling)",
+        "sfmRange": [
+          400,
+          900
+        ],
+        "bitTypes": [
+          {
+            "id": "upcut_carbide",
+            "label": "2-flute upcut solid carbide",
+            "flutes": 2,
+            "recommended": true
+          },
+          {
+            "id": "compression",
+            "label": "Compression spiral",
+            "flutes": 2,
+            "recommended": false
+          }
+        ],
+        "chiploads": {
+          "upcut_carbide": {
+            "lo": 0.006,
+            "hi": 0.014,
+            "unit": "in/tooth"
+          },
+          "compression": {
+            "lo": 0.006,
+            "hi": 0.012,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.4,
+          "note": "Foam deflects \u2014 light passes; backer required"
+        },
+        "stepover": {
+          "roughPct": 0.4,
+          "finishPct": 0.1
+        },
+        "plungeRatePct": 0.35,
+        "climbFirst": false,
+        "lube": "Dry",
+        "notes": [
+          "Foam core deflects under load \u2014 vacuum hold-down and backer board are critical.",
+          "Compression bit minimizes delamination at the skin-foam interface.",
+          "Keep DOC shallow \u2014 aggressive cuts delaminate skins from core.",
+          "Carbon-skinned panels: treat dust as CFRP \u2014 conductive, use P100."
+        ]
+      },
+      "steel": {
+        "label": "Mild Steel / 4130 (light profiling only \u2014 use VMC if possible)",
+        "sfmRange": [
+          50,
+          120
+        ],
+        "bitTypes": [
+          {
+            "id": "carbide_4fl",
+            "label": "4-flute solid carbide upcut",
+            "flutes": 4,
+            "recommended": true
+          }
+        ],
+        "chiploads": {
+          "carbide_4fl": {
+            "lo": 0.001,
+            "hi": 0.003,
+            "unit": "in/tooth"
+          }
+        },
+        "doc": {
+          "pct": 0.15,
+          "note": "10\u201315% dia ONLY \u2014 routers lack rigidity for steel"
+        },
+        "stepover": {
+          "roughPct": 0.3,
+          "finishPct": 0.05
+        },
+        "plungeRatePct": 0.15,
+        "climbFirst": true,
+        "lube": "Cutting oil mandatory \u2014 flood preferred, mist minimum",
+        "notes": [
+          "\u26a0 CNC routers are NOT designed for steel. Only with rigid machine + short bit.",
+          "Very light passes only \u2014 deflection causes chatter and snapped bits instantly.",
+          "Flood coolant or cutting oil mist. Dry cut = immediate bit death.",
+          "4-flute carbide, shortest reach possible, max spindle RPM for rigidity.",
+          "Use a VMC or knee mill for anything beyond very light engraving/profiling.",
+          "Climb milling reduces cutting force \u2014 important given low machine rigidity."
+        ]
+      }
+    }
+  },
+  "fdm3dp": {
+    "_note": "FDM 3D printing fits, tolerances, design rules, and shop tips. Based on 0.4mm nozzle, 0.2mm layer height baseline. Adjust for your specific printer calibration.",
+    "fitTable": {
+      "_note": "Clearance PER SIDE (radial). Formula: baseMm + (nominalMm × scalePct/100). FDM baseline ±0.2mm absolute + ~0.1–0.2% of dimension. Press fits stay flat — interference already fights machine tolerance floor.",
+      "loose": {
+        "baseMm": 0.40, "scalePct": 0.20,
+        "label": "Loose / Free sliding",
+        "use": "Lids, covers, non-critical assembly. Easy hand assembly, slight wobble OK."
+      },
+      "sliding": {
+        "baseMm": 0.25, "scalePct": 0.15,
+        "label": "Sliding / Clearance",
+        "use": "Moving parts, hinges, drawer slides. Assembles by hand, moves freely."
+      },
+      "close": {
+        "baseMm": 0.15, "scalePct": 0.10,
+        "label": "Close / Normal assembly",
+        "use": "Snug assemblies, panel clips. Needs light pressure, no wobble."
+      },
+      "transition": {
+        "baseMm": 0.08, "scalePct": 0.05,
+        "label": "Transition fit",
+        "use": "Locating pins, alignment bosses. May be clearance or press depending on print variation."
+      },
+      "press": {
+        "baseMm": -0.05, "scalePct": 0.00,
+        "label": "Light press fit",
+        "use": "Press-in pins, light retention. Needs force to assemble — test first."
+      },
+      "hardPress": {
+        "baseMm": -0.15, "scalePct": 0.00,
+        "label": "Hard press fit",
+        "use": "Permanent retention. High risk of cracking FDM parts — use sparingly."
+      },
+      "snapFit": {
+        "baseMm": 0.50, "scalePct": 0.10,
+        "label": "Snap-fit gap (FDM)",
+        "use": "Cantilever snap clips. Gap scales slightly with size; tighter for rigid materials."
+      },
+      "bearingBore": {
+        "baseMm": -0.05, "scalePct": 0.00,
+        "label": "Bearing bore (into print)",
+        "use": "Press bearing into printed bore. Undersize by 0.05–0.1mm; test on scrap first."
+      },
+      "threadInsert": {
+        "baseMm": 0.0, "scalePct": 0.00,
+        "label": "Heat-set insert bore",
+        "use": "See Insert Hole Calculator tab for per-size values."
+      }
+    },
+    "holeCompensation": {
+      "_note": "FDM holes always print UNDERSIZED due to STL polygon approximation and bead width. Apply these to your nominal hole dimension in CAD.",
+      "vertical": {
+        "addMm": 0.2,
+        "note": "Hole axis along Z (vertical print). Add 0.2mm to nominal diameter in CAD."
+      },
+      "horizontal": {
+        "addMm": 0.4,
+        "note": "Hole axis horizontal (printed as bridge). Add 0.3\u20130.5mm; best to ream to final size."
+      },
+      "rule": "When in doubt: model slightly oversize and ream to final dimension with a drill bit. Fastest, most reliable path to a good fit."
+    },
+    "designRules": [
+      {
+        "id": "wall_thickness",
+        "title": "Wall Thickness",
+        "icon": "\u2590",
+        "values": {
+          "Unsupported wall (min)": "1.2 mm",
+          "Supported wall (min)": "1.0 mm",
+          "Functional / structural": "2.0\u20133.0 mm",
+          "Load-bearing bracket": "3.0\u20134.0 mm+"
+        },
+        "tips": [
+          "Minimum = 3\u00d7 nozzle diameter (0.4mm nozzle \u2192 1.2mm min).",
+          "Thin walls warp and may not slice correctly \u2014 always check in slicer preview.",
+          "Taper thick-to-thin transitions gradually; sudden steps create internal stress concentrations.",
+          "Ribs and gussets add stiffness without adding bulk \u2014 preferred over solid thick walls."
+        ]
+      },
+      {
+        "id": "overhangs",
+        "title": "Overhangs",
+        "icon": "\u25e3",
+        "values": {
+          "Self-supporting limit": "\u226445\u00b0 from vertical",
+          "Max without support": "45\u201350\u00b0 (material-dependent)",
+          "Overhang length (max)": "1.0\u20131.5 mm horizontal extension",
+          "Chamfer preferred angle": "45\u00b0"
+        },
+        "tips": [
+          "Design 45\u00b0 chamfers instead of 90\u00b0 overhangs \u2014 eliminates supports entirely.",
+          "Avoid supports on cosmetic surfaces; they leave witness marks.",
+          "PETG handles overhangs worse than PLA \u2014 needs slower outer wall speed and strong cooling.",
+          "For steeper angles: split the part, print separately, bond or snap together.",
+          "Teardrop hole profiles eliminate overhang issues on horizontal holes."
+        ]
+      },
+      {
+        "id": "bridging",
+        "title": "Bridging",
+        "icon": "\u2312",
+        "values": {
+          "Reliable unsupported bridge": "\u226410 mm",
+          "Possible with good cooling": "10\u201325 mm",
+          "Requires support": ">25 mm",
+          "Horizontal hole (max unsupported)": "6 mm diameter"
+        },
+        "tips": [
+          "Good cooling is the #1 factor \u2014 slow bridging speed + strong part fan.",
+          "Orient parts so spans run across X rather than Y if your machine has better X cooling.",
+          "Teardrop or pointed-top hole profiles let you bridge to a point instead of a flat top.",
+          "First bridge layer is always worst \u2014 it sags slightly, improving with each layer above."
+        ]
+      },
+      {
+        "id": "holes",
+        "title": "Holes & Bores",
+        "icon": "\u25cb",
+        "values": {
+          "Minimum vertical hole": "1.5 mm dia",
+          "Minimum horizontal hole": "2.5 mm dia",
+          "FDM undersize offset": "+0.2 mm (vertical), +0.4 mm (horizontal)",
+          "Min thread (modeled)": "M5 / #10 \u2014 smaller: use insert"
+        },
+        "tips": [
+          "FDM holes are ALWAYS undersized \u2014 STL tessellation creates a circumscribed polygon, not a true circle.",
+          "Best practice: model 0.2\u20130.4mm oversize, then ream to final diameter with a drill bit.",
+          "For precision bores (bearings, pins): print undersize, drill/ream to exact spec.",
+          "Avoid horizontal holes >6mm without supports \u2014 use teardrop geometry instead.",
+          "Don't model threads smaller than M5/#10; they won't work \u2014 use heat-set inserts."
+        ]
+      },
+      {
+        "id": "pins_bosses",
+        "title": "Pins, Bosses & Posts",
+        "icon": "\u2191",
+        "values": {
+          "Minimum pin diameter": "2.0 mm (print-in-place)",
+          "Preferred pin diameter": "\u22653.0 mm",
+          "Boss wall around insert": "= insert OD + 2\u00d7 wall (min 1.5mm wall)",
+          "Fillet at pin base": "0.5\u20131.0 mm radius"
+        },
+        "tips": [
+          "Pins under 2mm are fragile and may not resolve correctly \u2014 use off-shelf pins instead.",
+          "Add a fillet at the pin root: stress concentrator without it, especially in Z-direction.",
+          "Bosses should be reinforced with gussets or ribs on 3+ sides.",
+          "For critical alignment: print the bore, drill to size, press in a metal or drill-rod pin."
+        ]
+      },
+      {
+        "id": "orientation",
+        "title": "Print Orientation",
+        "icon": "\u27f3",
+        "values": {
+          "Weakest direction": "Z-axis (inter-layer)",
+          "Strongest direction": "XY (along layer)",
+          "Layer delamination": "Occurs at 1/10 to 1/3 bulk material strength"
+        },
+        "tips": [
+          "Orient so primary load runs along XY layers, NOT across layer lines (Z direction).",
+          "Snap hooks, cantilever clips: orient so bending stress runs across XY layers.",
+          "Thin vertical walls: print standing up for better layer adhesion. Lying flat \u2192 weak.",
+          "Mating parts should print in similar orientation so thermal warping affects both equally.",
+          "Vertical threads (M5+) print better than horizontal \u2014 full profile on every layer.",
+          "Tall thin features: print with brim or alongside other parts for stability."
+        ]
+      },
+      {
+        "id": "elephant_foot",
+        "title": "Elephant Foot & First Layer",
+        "icon": "\u25bd",
+        "values": {
+          "Elephant foot oversize": "0.1\u20130.5 mm on first 1\u20133 layers",
+          "Chamfer to fix": "0.3\u20130.5 mm \u00d7 45\u00b0 on bottom edge in CAD",
+          "Live Z offset": "Back off slightly if foot is pronounced"
+        },
+        "tips": [
+          "First layer squish causes bottom edges to flare outward \u2014 'elephant foot'.",
+          "For precision fits: add a 45\u00b0 chamfer to the bottom edge of the part in CAD.",
+          "Alternatively: slightly reduce first-layer flow or increase live Z offset.",
+          "Elephant foot is worse on heated beds with high first-layer temps \u2014 tune per material."
+        ]
+      },
+      {
+        "id": "snap_fits",
+        "title": "Snap Fits",
+        "icon": "\u2282",
+        "values": {
+          "FDM snap gap": "0.5 mm per side",
+          "Max beam deflection": "~2% strain at root (varies by material)",
+          "Min cantilever length": "~10\u00d7 beam thickness for gentle snap",
+          "Taper ratio": "Taper to 50\u201360% of root thickness at tip"
+        },
+        "tips": [
+          "FDM snap fits are weaker in Z direction \u2014 orient cantilever beams in XY plane.",
+          "Add a generous fillet at the beam root \u2014 this is where snap fits break.",
+          "Taper the beam toward the tip for more uniform stress distribution.",
+          "Use PETG or TPU for repeated-cycle snap fits \u2014 PLA fatigues and cracks.",
+          "Test-print the snap feature in isolation before committing to full part.",
+          "0.5mm clearance per side is the FDM starting point; tighten to 0.3mm for stiffer materials."
+        ]
+      },
+      {
+        "id": "warping",
+        "title": "Warping & Bed Adhesion",
+        "icon": "\u2307",
+        "values": {
+          "Corner radius to reduce warp": "\u22654 mm",
+          "Large flat part brim width": "5\u201310 mm",
+          "Risky materials": "ABS, ASA, Nylon, PC"
+        },
+        "tips": [
+          "Round sharp base corners \u2014 warp stress concentrates at sharp corners, rounds distribute it.",
+          "Brim is your best friend for flat parts: 5\u201310mm brim width dramatically reduces lifting.",
+          "ABS/ASA: use enclosure, glue stick on bed, and avoid drafts. Warp = heat differential.",
+          "PETG: less warp than ABS but first layer adhesion can be tricky \u2014 clean PEI bed, no spray.",
+          "Large flat parts: add mouse-ear brims at sharp corners for targeted help.",
+          "Hollow out thick flat sections to reduce thermal mass and differential cooling."
+        ]
+      },
+      {
+        "id": "text_logos",
+        "title": "Text & Logos",
+        "icon": "A",
+        "values": {
+          "Min embossed text height": "\u22651.5 mm",
+          "Min embossed text depth": "\u22650.5 mm",
+          "Min engraved text width": "\u22651.0 mm",
+          "Readable font min size": "~14pt equivalent"
+        },
+        "tips": [
+          "Embossed (raised) text is more readable than engraved (sunken) on FDM parts.",
+          "Bold fonts survive better than thin/serif fonts at small sizes.",
+          "Orient text-side up (not on build plate) for best surface resolution.",
+          "Stroke width under 0.8mm won't reliably print with 0.4mm nozzle."
+        ]
+      }
+    ],
+    "materialQuickRef": {
+      "PLA": {
+        "warp": "Low",
+        "strength": "Moderate",
+        "flexFatigue": "Poor",
+        "heatRes": "Low (55\u201360\u00b0C)",
+        "notes": "Best for prototypes, brackets, jigs. Not for high-heat or repeated flex."
+      },
+      "PETG": {
+        "warp": "Low-Med",
+        "strength": "Good",
+        "flexFatigue": "Good",
+        "heatRes": "Medium (70\u201380\u00b0C)",
+        "notes": "Best all-around for functional FDM parts. TruckHouse default for 3DP structural parts."
+      },
+      "ABS": {
+        "warp": "High",
+        "strength": "Good",
+        "flexFatigue": "Moderate",
+        "heatRes": "Medium (85\u201395\u00b0C)",
+        "notes": "Needs enclosure. Shrinks ~0.8% \u2014 add to press-fit calcs. Acetone-smoothable."
+      },
+      "ASA": {
+        "warp": "Med-High",
+        "strength": "Good",
+        "flexFatigue": "Moderate",
+        "heatRes": "High (90\u2013100\u00b0C)",
+        "notes": "ABS-like but UV stable \u2014 good for exterior/underhood parts. Needs enclosure."
+      },
+      "TPU": {
+        "warp": "Low",
+        "strength": "Elastic",
+        "flexFatigue": "Excellent",
+        "heatRes": "Low-Med (60\u201380\u00b0C)",
+        "notes": "For seals, gaskets, bump stops. Shore 95A typical. Slow print speed."
+      },
+      "Nylon": {
+        "warp": "High",
+        "strength": "Very Good",
+        "flexFatigue": "Excellent",
+        "heatRes": "High (110\u2013120\u00b0C)",
+        "notes": "Hygroscopic \u2014 dry before print. Best for gears, snap fits, high-cycle parts."
+      },
+      "CF-PETG": {
+        "warp": "Low",
+        "strength": "Very Good",
+        "flexFatigue": "Moderate",
+        "heatRes": "Medium (75\u201385\u00b0C)",
+        "notes": "Stiff and light. Abrasive \u2014 use hardened nozzle. Brittle vs. plain PETG."
+      },
+      "CF-Nylon": {
+        "warp": "Medium",
+        "strength": "Excellent",
+        "flexFatigue": "Good",
+        "heatRes": "High (115\u2013125\u00b0C)",
+        "notes": "Best structural FDM material. Hardened nozzle. Dry filament critical."
+      }
+    },
+    "shopTips": [
+      {
+        "cat": "Tolerances",
+        "tip": "Always print a fit test token (20mm cube with bore) before committing to a full part. Costs 10 minutes of filament, saves hours of iteration."
+      },
+      {
+        "cat": "Tolerances",
+        "tip": "FDM tolerance is printer-specific. Calibrate your horizontal expansion offset in the slicer for your machine+filament combo \u2014 it's the single biggest accuracy lever."
+      },
+      {
+        "cat": "Tolerances",
+        "tip": "Holes shrink more than external features. Add 0.2mm (vert) to 0.4mm (horiz) to nominal hole diameter, then ream if precision matters."
+      },
+      {
+        "cat": "Assembly",
+        "tip": "Sand mating surfaces with 220 grit for a cleaner fit \u2014 FDM surfaces have micro-ridges from layer lines that add effective interference."
+      },
+      {
+        "cat": "Assembly",
+        "tip": "Warm a press-fit bore with a heat gun or hot air briefly \u2014 PETG softens slightly at 60\u00b0C, making press fits dramatically easier."
+      },
+      {
+        "cat": "Assembly",
+        "tip": "CA glue + accelerator bonds FDM-to-FDM and FDM-to-metal well. Rough both surfaces first. Gap-filling CA for loose fits."
+      },
+      {
+        "cat": "Assembly",
+        "tip": "Epoxy (structural) works well for permanent bonds. 30-min epoxy gives working time; use fixturing. Scuff surfaces, IPA wipe first."
+      },
+      {
+        "cat": "Strength",
+        "tip": "Parts fail along layer lines under tensile load. If a bracket breaks, re-orient so layers run perpendicular to the primary load, not parallel."
+      },
+      {
+        "cat": "Strength",
+        "tip": "Increase perimeter count (walls) before increasing infill for structural parts \u2014 perimeters carry load, infill mostly fills volume."
+      },
+      {
+        "cat": "Strength",
+        "tip": "Heat-set inserts outperform tapped plastic for every threaded connection that will see real torque. Never strip a boss again."
+      },
+      {
+        "cat": "Strength",
+        "tip": "Annealing PLA at 70\u00b0C for 30 min increases heat resistance and interlayer strength significantly \u2014 parts may warp slightly so use sparingly."
+      },
+      {
+        "cat": "Print Quality",
+        "tip": "Dry your filament. PETG/Nylon/CF absorbed overnight humidity = bubbles, weak layers, stringing. Use a dehydrator or oven at 60\u201370\u00b0C for 4\u20138h."
+      },
+      {
+        "cat": "Print Quality",
+        "tip": "Elephant foot ruins bottom-face press fits. Add a 0.3\u20130.5mm 45\u00b0 chamfer to the bottom edge of any precision feature in CAD."
+      },
+      {
+        "cat": "Print Quality",
+        "tip": "First layer is always the most critical. Z offset tuning time is never wasted \u2014 everything else depends on it."
+      },
+      {
+        "cat": "Print Quality",
+        "tip": "Ironing (top surface pass) gives a near-injected finish on flat top faces. Set iron flow to 10\u201315%, slow speed. Game-changer for cosmetic parts."
+      },
+      {
+        "cat": "Design",
+        "tip": "Design for the removal of supports at the start, not as an afterthought. One orientation change often eliminates all support."
+      },
+      {
+        "cat": "Design",
+        "tip": "Split large assemblies into multiple printable sub-parts and bond together. Bonded seam is often stronger than a single large print with bad orientation."
+      },
+      {
+        "cat": "Design",
+        "tip": "Add assembly lead-ins (chamfers or tapers on insertion edges) to press-fit bores and snap fits \u2014 makes assembly dramatically easier."
+      },
+      {
+        "cat": "Design",
+        "tip": "For structural brackets: run a quick hand-force test on a prototype before finalizing. FDM is fast \u2014 iterate before installing on the truck."
+      }
+    ]
+  }
 }

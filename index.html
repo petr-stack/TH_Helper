@@ -9,7 +9,7 @@ if('serviceWorker' in navigator){
 </script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Shop Helper — v0.15.0</title>
+<title>Shop Helper — v0.19.0</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   /* ── Design tokens ─────────────────────────────────────────────── */
@@ -307,7 +307,96 @@ if('serviceWorker' in navigator){
     border-color:var(--line)!important;
     color:var(--muted)!important;
   }
-  .btn-ghost:hover{border-color:var(--accent)!important;color:var(--accent)!important}
+  /* ── FDM 3D Print tab ──────────────────────────────────────────────── */
+  .fdm-fit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+  @media(max-width:900px){.fdm-fit-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.fdm-fit-grid{grid-template-columns:1fr}}
+  .fdm-fit-card{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:10px 12px;cursor:pointer;transition:border-color .15s,background .15s;
+  }
+  .fdm-fit-card:hover,.fdm-fit-card.selected{
+    border-color:rgba(245,177,70,.5);
+    background:linear-gradient(180deg,rgba(245,177,70,.08),rgba(0,0,0,.04)),var(--card);
+  }
+  .fdm-fit-card .ffc-label{font-size:11px;font-family:Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#dbe3ec;margin-bottom:3px}
+  .fdm-fit-card .ffc-val{font-size:20px;font-weight:700;font-family:var(--mono);color:var(--accent)}
+  .fdm-fit-card .ffc-use{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+  .fdm-rule{border:1px solid var(--line);border-radius:10px;margin-bottom:6px;overflow:hidden}
+  .fdm-rule-hdr{
+    display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;
+    background:linear-gradient(180deg,rgba(255,255,255,.015),transparent),var(--surface);
+    transition:background .12s;
+  }
+  .fdm-rule-hdr:hover{background:linear-gradient(180deg,rgba(245,177,70,.06),transparent),var(--surface)}
+  .fdm-rule-icon{font-size:16px;color:var(--accent);min-width:20px;text-align:center}
+  .fdm-rule-title{font-family:Montserrat,sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;flex:1}
+  .fdm-rule-chevron{color:var(--muted);font-size:12px;transition:transform .15s}
+  .fdm-rule-body{display:none;padding:0 12px 12px;background:rgba(0,0,0,.12)}
+  .fdm-rule-body.open{display:block}
+  .fdm-rule-vals{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;margin-bottom:8px}
+  .fdm-rule-vals dt{font-size:11px;color:var(--muted)}
+  .fdm-rule-vals dd{font-size:11px;color:var(--accent);font-family:var(--mono);font-weight:600;margin:0}
+
+  .fdm-mat-table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
+  .fdm-mat-table th{text-align:left;padding:5px 8px;color:var(--muted);font-family:Montserrat,sans-serif;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--line);font-size:10px}
+  .fdm-mat-table td{padding:6px 8px;border-bottom:1px solid rgba(31,43,56,.5);vertical-align:top;line-height:1.4}
+  .fdm-mat-table tr:last-child td{border-bottom:none}
+  .fdm-mat-table tr:hover td{background:rgba(245,177,70,.04)}
+  .fdm-mat-name{font-weight:600;color:#dbe3ec;white-space:nowrap}
+  .badge{display:inline-block;padding:1px 6px;border-radius:999px;font-size:10px;border:1px solid}
+  .badge-ok{color:#34d399;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)}
+  .badge-warn{color:#f59e0b;border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.08)}
+  .badge-bad{color:#ef4444;border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.08)}
+
+  .fdm-tip-list{list-style:none;padding:0;margin:0}
+  .fdm-tip-list li{
+    padding:8px 10px;border-bottom:1px solid rgba(31,43,56,.6);font-size:12px;
+    display:flex;gap:8px;align-items:flex-start;line-height:1.5;
+  }
+  .fdm-tip-list li:last-child{border-bottom:none}
+  .fdm-tip-cat{
+    font-size:9px;font-family:Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;
+    padding:2px 6px;border-radius:999px;border:1px solid var(--line);color:var(--muted);
+    white-space:nowrap;align-self:flex-start;margin-top:1px;min-width:60px;text-align:center;
+  }
+  .fdm-tip-filter{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .fdm-tip-filter button{
+    padding:4px 10px;font-size:11px;border-radius:999px;
+    background:transparent;border-color:var(--line);color:var(--muted);
+    width:auto;
+  }
+  .fdm-tip-filter button.active{border-color:rgba(245,177,70,.5);color:#ffdfb0;background:rgba(245,177,70,.1)}
+
+  .fdm-calc-result{
+    background:linear-gradient(180deg,rgba(34,211,238,.06),rgba(245,177,70,.04));
+    border:1px solid #273448;border-radius:12px;padding:14px;margin-top:10px;
+    font-size:13px;line-height:1.7;
+  }
+  .fdm-big{font-size:26px;font-weight:700;font-family:var(--mono);color:var(--accent)}
+
+
+  .cnc-result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+  .cnc-stat{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.06)),var(--card);
+    border:1px solid var(--line);border-radius:10px;padding:10px 8px;text-align:center;
+  }
+  .cnc-stat-label{font-size:10px;color:var(--muted);font-family:Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+  .cnc-stat-value{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--accent);line-height:1}
+  .cnc-stat-sub{font-size:10px;color:var(--muted);margin-top:3px}
+
+
+  .ins-tab{
+    background:rgba(255,255,255,.03);border:1px solid var(--line);
+    border-radius:8px;color:var(--muted);cursor:pointer;
+    transition:border-color .15s,color .15s,background .15s;
+  }
+  .ins-tab:hover{border-color:var(--accent);color:var(--accent)}
+  .ins-tab-active{
+    background:linear-gradient(180deg,rgba(245,177,70,.18),rgba(245,177,70,.08));
+    border-color:rgba(245,177,70,.5)!important;color:#ffdfb0!important;
+  }
 
 </style>
 </head>
@@ -318,7 +407,7 @@ if('serviceWorker' in navigator){
   <div class="header-inner">
     <img id="thLogo" class="brand-logo" alt="TruckHouse">
     <span class="brand-name">Shop Helper</span>
-    <span class="tag">v0.15.0</span>
+    <span class="tag">v0.19.0</span>
     <span class="tag tag--amber">DB: drag &amp; drop</span>
     <span class="header-tagline">Clean holes, happy souls.</span>
   </div>
@@ -327,6 +416,15 @@ if('serviceWorker' in navigator){
   <nav class="tabbar" role="tablist">
     <button class="tab active" role="tab" data-tab="tools" aria-selected="true">
       <span class="tab-icon">⚙</span>Tools
+    </button>
+    <button class="tab" role="tab" data-tab="sheetmetal" aria-selected="false">
+      <span class="tab-icon">◧</span>Sheet Metal
+    </button>
+    <button class="tab" role="tab" data-tab="fdm" aria-selected="false">
+      <span class="tab-icon">⬡</span>3D Print Fits
+    </button>
+    <button class="tab" role="tab" data-tab="cnc" aria-selected="false">
+      <span class="tab-icon">⌁</span>CNC Router
     </button>
     <button class="tab" role="tab" data-tab="dytat" aria-selected="false">
       <span class="tab-icon">✓</span>DYTAT Checklist
@@ -408,6 +506,63 @@ if('serviceWorker' in navigator){
         <div id="fzOut" class="tips" style="margin-top:10px;display:none"></div>
       </section>
 
+      <!-- INSERTS (PEM + Heat-Set) -->
+      <section class="panel">
+        <h2 class="panel-title"><span class="panel-title-icon">⬢</span> Insert Hole Calculator</h2>
+
+        <!-- Sub-tabs -->
+        <div style="display:flex;gap:6px;margin-bottom:12px">
+          <button id="insTabPem"  class="ins-tab ins-tab-active" style="flex:1;font-size:11px;padding:6px 4px">PEM (Sheet Metal)</button>
+          <button id="insTabHs"   class="ins-tab" style="flex:1;font-size:11px;padding:6px 4px">Heat-Set (3DP)</button>
+        </div>
+
+        <!-- ── PEM PANEL ── -->
+        <div id="insPemPanel">
+          <div class="row">
+            <div>
+              <label>Type</label>
+              <select id="pemType">
+                <option value="nuts">Self-Clinching Nut (S/SS/SO)</option>
+                <option value="flushStuds">Flush Stud (FH/FHS/FHM)</option>
+              </select>
+            </div>
+            <div>
+              <label>Thread Size</label>
+              <select id="pemSize"></select>
+            </div>
+          </div>
+          <button id="pemCalc" style="margin-top:8px">Look up hole</button>
+          <div id="pemOut" class="tips" style="margin-top:10px;display:none"></div>
+          <div class="separator"></div>
+          <div class="small" style="color:var(--muted);white-space:pre-wrap" id="pemNotes"></div>
+        </div>
+
+        <!-- ── HEAT-SET PANEL ── -->
+        <div id="insHsPanel" style="display:none">
+          <div class="row">
+            <div>
+              <label>Thread Size</label>
+              <select id="hsInsSize"></select>
+            </div>
+            <div>
+              <label>Print Material</label>
+              <select id="hsInsMat">
+                <option value="PLA">PLA</option>
+                <option value="PETG" selected>PETG</option>
+                <option value="ABS">ABS</option>
+                <option value="ASA">ASA</option>
+                <option value="PA/Nylon">PA / Nylon</option>
+                <option value="PC">PC</option>
+              </select>
+            </div>
+          </div>
+          <button id="hsInsCalc" style="margin-top:8px">Look up hole</button>
+          <div id="hsInsOut" class="tips" style="margin-top:10px;display:none"></div>
+          <div class="separator"></div>
+          <div class="small" style="color:var(--muted);white-space:pre-wrap" id="hsInsNotes"></div>
+        </div>
+      </section>
+
       <!-- DATABASE -->
       <section class="panel">
         <h2 class="panel-title"><span class="panel-title-icon">⬣</span> Database</h2>
@@ -435,10 +590,281 @@ if('serviceWorker' in navigator){
 
 
 <!-- ══ DYTAT TAB ══════════════════════════════════════════════════════════ -->
+<!-- ══ FDM 3D PRINT FITS & DESIGN TAB ══════════════════════════════════ -->
+<div id="tab-fdm" class="tabpanel" role="tabpanel">
+<div class="wrap">
+
+  <!-- ROW 1: Fit Calculator + Hole Compensation -->
+  <div class="tool-grid" style="grid-template-columns:1.4fr 1fr;gap:16px;align-items:start">
+
+    <!-- FIT CALCULATOR -->
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">⬡</span> Fit Calculator</h2>
+      <div class="row">
+        <div>
+          <label>Nominal diameter / dimension</label>
+          <input id="fdmDia" type="number" step="0.1" min="0.5" placeholder="10.0" value="10.0">
+        </div>
+        <div>
+          <label>Units</label>
+          <select id="fdmUnits">
+            <option value="mm" selected>mm</option>
+            <option value="in">in</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <label>Fit type — click to select</label>
+        <div class="fdm-fit-grid" id="fdmFitGrid"><!-- populated by JS --></div>
+      </div>
+      <div id="fdmCalcResult" style="display:none" class="fdm-calc-result">
+        <div style="margin-bottom:6px;font-size:11px;color:var(--muted);text-transform:uppercase;font-family:Montserrat,sans-serif;letter-spacing:.06em" id="fdmResLabel"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;text-align:center">
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:2px">SHAFT / PIN</div>
+            <div class="fdm-big" id="fdmResShaft">—</div>
+            <div style="font-size:10px;color:var(--muted)" id="fdmResShaftSub"></div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:20px">⟷</div>
+          <div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:2px">BORE / HOLE</div>
+            <div class="fdm-big" id="fdmResBore">—</div>
+            <div style="font-size:10px;color:var(--muted)" id="fdmResboreSub"></div>
+          </div>
+        </div>
+        <div class="separator"></div>
+        <div style="font-size:11px;color:var(--muted)" id="fdmResUse"></div>
+        <div style="font-size:10px;color:#64748b;margin-top:4px;font-family:monospace" id="fdmResFormula"></div>
+        <div style="font-size:11px;color:#f59e0b;margin-top:6px" id="fdmResWarn"></div>
+      </div>
+    </section>
+
+    <!-- HOLE COMPENSATION -->
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">○</span> Hole Compensation</h2>
+      <div class="tips" style="font-size:12px;white-space:pre-wrap;margin-bottom:10px">FDM holes always print <strong style="color:var(--accent)">undersized</strong>. STL tessellation + bead width reduce every hole.
+
+Vertical hole (axis = Z):
+  Add <strong style="color:var(--accent)">+0.2 mm</strong> to nominal Ø in CAD
+
+Horizontal hole (axis = XY):
+  Add <strong style="color:var(--accent)">+0.3–0.5 mm</strong> to nominal Ø in CAD
+
+Best practice:
+  Model slightly oversize → ream to
+  final Ø with a drill bit.
+  Fastest path to a precise fit.</div>
+      <div class="separator"></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Elephant Foot — Bottom Edge</div>
+      <div class="tips" style="font-size:12px">First layer squish flares bottom edges outward 0.1–0.5 mm. Fix: add a <strong style="color:var(--accent)">0.3–0.5 mm × 45° chamfer</strong> to the bottom edge of any precision feature in CAD.</div>
+      <div class="separator"></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Minimum Modeled Thread</div>
+      <div class="tips" style="font-size:12px">Don't model threads smaller than <strong style="color:var(--accent)">M5 / #10</strong>. Smaller = stripped immediately. Use heat-set inserts → see Insert Hole Calculator tab.</div>
+    </section>
+
+  </div><!-- /row1 -->
+
+  <!-- ROW 2: Design Rules accordion (full width) -->
+  <div style="margin-top:16px">
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">◈</span> Design Rules — click to expand</h2>
+      <div id="fdmRulesAccordion" style="margin-top:6px"><!-- populated by JS --></div>
+    </section>
+  </div>
+
+  <!-- ROW 3: Material quick-ref + Tips library -->
+  <div class="tool-grid" style="grid-template-columns:1.2fr 1fr;gap:16px;margin-top:16px;align-items:start">
+
+    <!-- MATERIAL QUICK REF -->
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">◎</span> Material Quick Reference</h2>
+      <div id="fdmMatTable"><!-- populated by JS --></div>
+    </section>
+
+    <!-- SHOP TIPS -->
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">★</span> Shop Tips</h2>
+      <div class="fdm-tip-filter" id="fdmTipFilter"><!-- populated by JS --></div>
+      <ul class="fdm-tip-list" id="fdmTipList"><!-- populated by JS --></ul>
+    </section>
+
+  </div>
+
+</div><!-- /wrap -->
+</div><!-- /tab-fdm -->
+
+<!-- ══ CNC ROUTER TAB ════════════════════════════════════════════════ -->
+
+<div id="tab-cnc" class="tabpanel" role="tabpanel">
+<div class="wrap">
+
+  <div class="tool-grid" style="grid-template-columns:1fr 1fr 1fr;align-items:start">
+
+    <!-- INPUTS PANEL -->
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">⌁</span> CNC Router — Feeds &amp; Speeds</h2>
+
+      <div class="row">
+        <div>
+          <label>Material</label>
+          <select id="cncMat"></select>
+        </div>
+        <div>
+          <label>Bit Type</label>
+          <select id="cncBit"></select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Bit Diameter</label>
+          <input id="cncDia" type="number" step="0.0625" min="0.0625" max="2" placeholder="0.25" value="0.25">
+        </div>
+        <div>
+          <label>Units</label>
+          <select id="cncDiaUnits">
+            <option value="in">in</option>
+            <option value="mm">mm</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Spindle RPM</label>
+          <input id="cncRpm" type="number" step="500" min="1000" max="30000" placeholder="18000" value="18000">
+        </div>
+        <div>
+          <label>Chipload bias</label>
+          <select id="cncBias">
+            <option value="lo">Conservative (new bit / first cut)</option>
+            <option value="mid" selected>Mid (typical)</option>
+            <option value="hi">Aggressive (proven setup)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:8px">
+        <div>
+          <label>Cut type</label>
+          <select id="cncCutType">
+            <option value="rough" selected>Roughing</option>
+            <option value="finish">Finishing</option>
+          </select>
+        </div>
+        <div>
+          <label>Material thickness</label>
+          <input id="cncThk" type="number" step="0.01" min="0.01" placeholder="0.50" value="0.50">
+          <span class="small" style="color:var(--muted)">same units as dia</span>
+        </div>
+      </div>
+
+      <button id="cncCalc" style="margin-top:12px;width:100%">Calculate</button>
+    </section>
+
+    <!-- RESULTS PANEL -->
+    <section class="panel" id="cncResultPanel">
+      <h2 class="panel-title"><span class="panel-title-icon">◈</span> Results</h2>
+      <div id="cncOut" style="display:none">
+
+        <div class="cnc-result-grid">
+          <div class="cnc-stat">
+            <div class="cnc-stat-label">Chipload</div>
+            <div class="cnc-stat-value" id="cncResChipload">—</div>
+            <div class="cnc-stat-sub" id="cncResChiploadsub"></div>
+          </div>
+          <div class="cnc-stat">
+            <div class="cnc-stat-label">Feed Rate</div>
+            <div class="cnc-stat-value" id="cncResFeed">—</div>
+            <div class="cnc-stat-sub">in/min (IPM)</div>
+          </div>
+          <div class="cnc-stat">
+            <div class="cnc-stat-label">Plunge Rate</div>
+            <div class="cnc-stat-value" id="cncResPlunge">—</div>
+            <div class="cnc-stat-sub">in/min</div>
+          </div>
+          <div class="cnc-stat">
+            <div class="cnc-stat-label">Depth of Cut</div>
+            <div class="cnc-stat-value" id="cncResDoc">—</div>
+            <div class="cnc-stat-sub" id="cncResDocsub"></div>
+          </div>
+          <div class="cnc-stat">
+            <div class="cnc-stat-label">Stepover</div>
+            <div class="cnc-stat-value" id="cncResSo">—</div>
+            <div class="cnc-stat-sub" id="cncResSosub"></div>
+          </div>
+          <div class="cnc-stat">
+            <div class="cnc-stat-label">SFM</div>
+            <div class="cnc-stat-value" id="cncResSfm">—</div>
+            <div class="cnc-stat-sub" id="cncResSfmsub"></div>
+          </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div style="font-size:12px;color:var(--muted);margin-bottom:6px;font-family:Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase">Setup Summary</div>
+        <div id="cncResSummary" class="tips" style="font-size:12px"></div>
+
+      </div>
+      <div id="cncOutEmpty" class="small" style="color:var(--muted)">Select material, bit, diameter and RPM — then hit Calculate.</div>
+    </section>
+
+    <!-- NOTES PANEL -->
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">◎</span> Shop Notes</h2>
+      <div id="cncNotesMat" style="display:none">
+        <div style="font-size:11px;color:var(--accent);font-family:Montserrat,sans-serif;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px" id="cncNotesMatLabel"></div>
+        <div id="cncNotesMatBody" class="tips" style="font-size:12px;white-space:pre-wrap"></div>
+        <div class="separator"></div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Lube / Coolant</div>
+        <div id="cncNotesLube" class="tips" style="font-size:12px"></div>
+        <div class="separator"></div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Direction</div>
+        <div id="cncNotesClimb" class="tips" style="font-size:12px"></div>
+      </div>
+      <div id="cncNotesEmpty" class="small" style="color:var(--muted)">Calculate to load notes.</div>
+    </section>
+
+  </div><!-- /tool-grid row 1 -->
+
+  <!-- ROW 2: SFM range gauge + general tips -->
+  <div class="tool-grid" style="grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start">
+
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">◧</span> Bit Type Guide</h2>
+      <div id="cncBitGuide" class="small" style="color:var(--muted)">Select a material to see bit guidance.</div>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title"><span class="panel-title-icon">⬡</span> Router Rules of Thumb</h2>
+      <div class="tips" style="font-size:12px;white-space:pre-wrap">Chipload = feedrate ÷ (RPM × flutes)
+Feedrate = RPM × flutes × chipload
+SFM = (RPM × π × D_in) ÷ 12
+
+Chipload is the master variable — tune everything else to hit it.
+Too low chipload → rubbing → heat → dull bit → broken bit.
+Too high chipload → chatter → broken bit.
+
+Listen to the cut:
+  ✓ Clean chip ejection, smooth hum = dialed in
+  ✗ High-pitched screaming = too fast / dull
+  ✗ Chatter / vibration = too aggressive or loose setup
+  ✗ Burning smell = too slow or dull
+
+Ramp entry: always preferred over straight plunge.
+Climb vs conventional: climb for finish passes + aluminum.
+Hold-down: if it can move, it will move — at the worst moment.</div>
+    </section>
+
+  </div>
+
+</div><!-- /wrap -->
+</div><!-- /tab-cnc -->
+
+
+<!-- ══ DYTAT TAB ══════════════════════════════════════════════════════════ -->
 <div id="tab-dytat" class="tabpanel" role="tabpanel">
   <div class="wrap">
-
-    <!-- Progress + controls -->
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
       <div class="dytat-progress-wrap" style="flex:1;min-width:280px;margin:0">
         <div class="progress-bar-track"><div class="progress-bar-fill" id="dytatBar"></div></div>
@@ -683,6 +1109,123 @@ if('serviceWorker' in navigator){
   </div><!-- /wrap -->
 </div><!-- /tab-dytat -->
 
+<!-- ══ SHEET METAL TAB ═══════════════════════════════════════════════════ -->
+<div id="tab-sheetmetal" class="tabpanel" role="tabpanel">
+<div class="wrap">
+
+  <!-- ROW 1: Gauge Lookup + Bend Spec + Material Ref -->
+  <div class="tool-grid">
+
+    <!-- GAUGE LOOKUP -->
+    <section class="panel">
+      <h2>Gauge → Thickness</h2>
+      <div class="row">
+        <div>
+          <label>Material</label>
+          <select id="smMatSel">
+            <option value="mildSteel">Mild Steel (A36/1008)</option>
+            <option value="stainless">304 Stainless Steel</option>
+            <option value="aluminum5052">5052-H32 Aluminum</option>
+          </select>
+        </div>
+        <div>
+          <label>Gauge # or decimal (in)</label>
+          <input id="smGaugeIn" list="smGaugeList" placeholder="e.g. 14  or  0.075">
+          <datalist id="smGaugeList"></datalist>
+        </div>
+        <div style="align-self:flex-end"><button id="smGaugeLook">Look up</button></div>
+      </div>
+      <div id="smGaugeOut" class="tips" style="margin-top:10px;display:none"></div>
+      <div class="separator"></div>
+      <h2 style="margin-top:0;font-size:12px">Full Gauge Chart</h2>
+      <div id="smGaugeTable" style="overflow-x:auto;margin-top:4px"></div>
+    </section>
+
+    <!-- BEND SPEC LOOKUP -->
+    <section class="panel">
+      <h2>Bend Specs <span style="font-weight:400;color:var(--muted);font-size:11px">(SCS air-bend)</span></h2>
+      <p class="small" style="margin:0 0 10px;color:var(--muted)">Inside radius, K-factor &amp; min flange for <a href="https://sendcutsend.com/bending-calculator/" target="_blank" style="color:var(--accent-2)">SendCutSend</a> tooling. Always verify on their calculator before ordering.</p>
+      <div class="row">
+        <div>
+          <label>Material</label>
+          <select id="smBendMat">
+            <option value="mildSteel">Mild Steel</option>
+            <option value="stainless304">304 Stainless</option>
+            <option value="aluminum5052">5052-H32 Aluminum</option>
+          </select>
+        </div>
+        <div>
+          <label>Gauge # or thickness (in)</label>
+          <input id="smBendThick" list="smBendList" placeholder="e.g. 14  or  0.075">
+          <datalist id="smBendList"></datalist>
+        </div>
+        <div style="align-self:flex-end"><button id="smBendLook">Get specs</button></div>
+      </div>
+      <div id="smBendOut" class="tips" style="margin-top:10px;display:none"></div>
+
+      <div class="separator"></div>
+      <h2 style="margin-top:0;font-size:12px">Bend Deduction Quick Calc <span style="font-weight:400;color:var(--muted)">(90°)</span></h2>
+      <p class="small" style="margin:0 0 8px;color:var(--muted)">BD = 2×(R + T) – BA, where BA = (π/2)×(R + K×T)</p>
+      <div class="row">
+        <div><label>Inside Radius (in)</label><input id="smBdR" type="number" step="0.001" placeholder="0.060"></div>
+        <div><label>Thickness (in)</label><input id="smBdT" type="number" step="0.001" placeholder="0.060"></div>
+        <div><label>K-Factor</label><input id="smBdK" type="number" step="0.01" value="0.44"></div>
+      </div>
+      <button id="smBdCalc" style="margin-top:8px">Calculate</button>
+      <div id="smBdOut" class="tips" style="margin-top:10px;display:none"></div>
+    </section>
+
+    <!-- MATERIAL CARDS -->
+    <section class="panel">
+      <h2>Material Reference</h2>
+      <div class="row" style="margin-bottom:8px">
+        <div><label>Material</label><select id="smMatRef"><option value="">— select —</option></select></div>
+        <div style="align-self:flex-end"><button id="smMatRefGo">Show</button></div>
+      </div>
+      <div id="smMatRefOut" style="display:none">
+        <div id="smMatRefSummary" class="tips" style="margin-bottom:8px"></div>
+        <div id="smMatRefDetail" class="tips"></div>
+      </div>
+    </section>
+
+  </div><!-- /row 1 -->
+
+  <!-- ROW 2: Design Rules + Tips -->
+  <div class="tool-grid" style="margin-top:16px;grid-template-columns:1.4fr 1fr 0fr">
+
+    <!-- DESIGN RULES — spans 2 cols -->
+    <section class="panel" style="grid-column:span 2">
+      <h2>Design Rules Quick Reference</h2>
+      <div class="row">
+        <div>
+          <label>Category</label>
+          <select id="smRuleSel">
+            <option value="slotsAndTabs">Slots &amp; Tabs (laser fit-up)</option>
+            <option value="holeDesign">Hole Design</option>
+            <option value="bendReliefs">Bend Reliefs</option>
+            <option value="flangeMinimums">Min Flange Lengths (SCS)</option>
+          </select>
+        </div>
+        <div style="align-self:flex-end"><button id="smRuleGo">Show rules</button></div>
+      </div>
+      <div id="smRuleOut" style="margin-top:10px;display:none"></div>
+    </section>
+
+    <!-- FAB TIPS -->
+    <section class="panel">
+      <h2>Fab Tips</h2>
+      <select id="smTipSel" style="margin-bottom:8px"><option value="">— pick a topic —</option></select>
+      <div id="smTipOut" class="tips" style="display:none"></div>
+      <div class="separator"></div>
+      <button id="smTipAll">Show all tips</button>
+      <div id="smTipAllOut" style="margin-top:10px;display:none"></div>
+    </section>
+
+  </div><!-- /row 2 -->
+
+</div><!-- /wrap -->
+</div><!-- /tab-sheetmetal -->
+
 
 <!-- ══ SCRIPTS ═══════════════════════════════════════════════════════════ -->
 <script>
@@ -834,6 +1377,13 @@ function ingestDB(obj,src){
   try{localStorage.setItem(DB_CACHE_KEY,JSON.stringify(DB));}catch(e){console.warn('Cache write failed:',e);}
   setStatus(`<span class="ok">Loaded</span> ${DB.materials.length} materials, ${DB.fasteners.length} fasteners from ${src||'file'}. Cached for offline use.`);
   flashOK();
+  // Sheet metal tab refresh
+  if(typeof smBoot==='function') smBoot();
+  if(typeof fdmBoot==='function') fdmBoot();
+  // Insert calculator refresh
+  if(typeof insBoot==='function') insBoot();
+  // CNC router refresh
+  if(typeof cncBoot==='function') cncBoot();
 }
 document.getElementById('exportDb').onclick=()=>{const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shopdb.json';document.body.appendChild(a);a.click();a.remove();};
 document.getElementById('clearDb').onclick=()=>{localStorage.removeItem(DB_CACHE_KEY);DB={version:'',materials:[],fasteners:[],sheetMetalPilots:{},woodPilots:{}};rebuildLookups();populateMatList();populateFzList();setStatus('<span class="warn">Cleared.</span> Drop a DB to begin.');};
@@ -899,6 +1449,841 @@ document.getElementById('printDytat').onclick=()=>{
 // Boot checklist
 dytatLoad();
 dytatUpdate();
+
+/* ══════════════════════════════════════════════════════════════════════
+   SHEET METAL TAB — JS
+══════════════════════════════════════════════════════════════════════ */
+
+// ── Gauge chart table renderer ──────────────────────────────────────
+function smRenderGaugeTable(matKey){
+  const SM=DB.sheetMetal;
+  if(!SM){return'<span class="warn">Load a DB with sheetMetal data.</span>';}
+  const rows=SM.gaugeCharts[matKey];
+  if(!rows||!rows.length)return'<span class="warn">No data for that material.</span>';
+  let t=`<table style="width:100%;border-collapse:collapse;font-size:12px;font-family:var(--mono)">
+    <thead><tr>
+      <th style="text-align:left;padding:4px 8px;border-bottom:1px solid var(--line);color:var(--muted)">Gauge</th>
+      <th style="text-align:right;padding:4px 8px;border-bottom:1px solid var(--line);color:var(--muted)">Inches</th>
+      <th style="text-align:right;padding:4px 8px;border-bottom:1px solid var(--line);color:var(--muted)">mm</th>
+    </tr></thead><tbody>`;
+  rows.forEach(r=>{
+    t+=`<tr style="border-bottom:1px solid rgba(31,43,56,0.6)">
+      <td style="padding:4px 8px;color:var(--accent)">${r.gauge}ga</td>
+      <td style="padding:4px 8px;text-align:right">${r.in.toFixed(4)}"</td>
+      <td style="padding:4px 8px;text-align:right">${r.mm.toFixed(3)} mm</td>
+    </tr>`;
+  });
+  t+=`</tbody></table>`;
+  return t;
+}
+
+function smGaugeLookup(){
+  const matKey=document.getElementById('smMatSel').value;
+  const raw=(document.getElementById('smGaugeIn').value||'').trim();
+  const out=document.getElementById('smGaugeOut');
+  const SM=DB.sheetMetal;
+  if(!SM){out.textContent='Load shopdb.json first.';out.style.display='';return;}
+  const rows=SM.gaugeCharts[matKey];
+  if(!rows){out.textContent='No gauge chart for this material.';out.style.display='';return;}
+
+  // Try matching gauge number or decimal thickness
+  const num=parseFloat(raw);
+  let match=null;
+  if(!isNaN(num)){
+    if(num>=1&&num<=30&&Number.isInteger(num)){
+      match=rows.find(r=>r.gauge===num);
+    }
+    if(!match){
+      // decimal match — find closest
+      let best=null,bd=Infinity;
+      rows.forEach(r=>{const d=Math.abs(r.in-num);if(d<bd){bd=d;best=r;}});
+      if(best&&Math.abs(best.in-num)<0.005)match=best;
+    }
+  }
+  if(!match){out.textContent=`No match for "${raw}". Enter a gauge number (7–26) or decimal thickness.`;out.style.display='';return;}
+
+  const matNames={mildSteel:'Mild Steel',stainless:'304 Stainless',aluminum5052:'5052-H32 Aluminum'};
+  out.textContent=`${matNames[matKey]} — ${match.gauge}ga\n  ${match.in.toFixed(4)}" = ${match.mm.toFixed(3)} mm`;
+  out.style.display='';
+}
+
+// ── Populate gauge table on material change ──────────────────────────
+function smRefreshGaugeTable(){
+  const matKey=document.getElementById('smMatSel').value;
+  document.getElementById('smGaugeTable').innerHTML=smRenderGaugeTable(matKey);
+}
+
+// ── Bend spec lookup ─────────────────────────────────────────────────
+function smBendLookup(){
+  const matKey=document.getElementById('smBendMat').value;
+  const raw=(document.getElementById('smBendThick').value||'').trim();
+  const out=document.getElementById('smBendOut');
+  const SM=DB.sheetMetal;
+  if(!SM){out.textContent='Load shopdb.json first.';out.style.display='';return;}
+  const rows=SM.sendCutSendBendSpecs[matKey];
+  if(!rows){out.textContent='No bend data for this material.';out.style.display='';return;}
+
+  const num=parseFloat(raw);
+  let match=null;
+  if(!isNaN(num)){
+    if(num>=1&&num<=30&&Number.isInteger(num)){
+      match=rows.find(r=>r.gauge===num||r.gauge===String(num));
+    }
+    if(!match){
+      let best=null,bd=Infinity;
+      rows.forEach(r=>{const d=Math.abs(r.thickness-num);if(d<bd){bd=d;best=r;}});
+      if(best&&Math.abs(best.thickness-num)<0.010)match=best;
+    }
+  }
+  if(!match){out.textContent=`No match for "${raw}". Try a gauge number or thickness like 0.075.`;out.style.display='';return;}
+
+  const gLabel=typeof match.gauge==='number'?`${match.gauge}ga`:`${match.gauge}`;
+  const lines=[
+    `${gLabel}  —  ${match.thickness.toFixed(3)}"`,
+    `Inside bend radius : ${match.bendRadius.toFixed(3)}"`,
+    `K-factor           : ${match.kFactor}`,
+    `Bend deduction (90°): ${match.bendDeduction.toFixed(3)}"`,
+    `Min flange length  : ${match.minFlange}"`,
+    match.note?`Note: ${match.note}`:null,
+    `\nSCS calculator → sendcutsend.com/bending-calculator/`
+  ].filter(Boolean);
+  out.textContent=lines.join('\n');
+  out.style.display='';
+}
+
+// ── Bend deduction calc ──────────────────────────────────────────────
+function smBdCalc(){
+  const R=parseFloat(document.getElementById('smBdR').value);
+  const T=parseFloat(document.getElementById('smBdT').value);
+  const K=parseFloat(document.getElementById('smBdK').value);
+  const out=document.getElementById('smBdOut');
+  if(isNaN(R)||isNaN(T)||isNaN(K)||R<=0||T<=0||K<=0){
+    out.textContent='Enter valid radius, thickness, and K-factor.';out.style.display='';return;
+  }
+  const BA=(Math.PI/2)*(R+K*T);
+  const BD=2*(R+T)-BA;
+  const neutral=R+K*T;
+  out.textContent=[
+    `Bend allowance (BA) : ${BA.toFixed(4)}"`,
+    `Bend deduction (BD) : ${BD.toFixed(4)}"`,
+    `Neutral axis radius : ${neutral.toFixed(4)}"`,
+    ``,
+    `Flat length = (Leg1 from apex) + (Leg2 from apex) – BD`,
+  ].join('\n');
+  out.style.display='';
+}
+
+// ── Material reference card ──────────────────────────────────────────
+function smPopulateMatRef(){
+  const sel=document.getElementById('smMatRef');
+  sel.innerHTML='<option value="">— select —</option>';
+  const SM=DB.sheetMetal;
+  if(!SM||!SM.materials)return;
+  SM.materials.forEach(m=>{
+    const o=document.createElement('option');
+    o.value=m.id;o.textContent=m.name;
+    sel.appendChild(o);
+  });
+}
+
+function smShowMatRef(){
+  const id=document.getElementById('smMatRef').value;
+  const outWrap=document.getElementById('smMatRefOut');
+  const outSum=document.getElementById('smMatRefSummary');
+  const outDet=document.getElementById('smMatRefDetail');
+  outWrap.style.display='none';
+  const SM=DB.sheetMetal;
+  if(!SM||!id)return;
+  const m=SM.materials.find(x=>x.id===id);
+  if(!m)return;
+
+  // Summary pill row
+  const cantBend=m.scsBendable===false;
+  const bendBadge=cantBend?'<span style="color:var(--bad);font-weight:700">⚠ NOT BENDABLE (use 5052)</span>':'<span style="color:var(--ok)">✓ SCS Bendable</span>';
+  outSum.innerHTML=`<span class="pill" style="border-color:var(--accent)">${m.name}</span> `+
+    (m.tags||[]).map(t=>`<span class="pill">${t}</span>`).join(' ')+
+    `\n\n${m.summary}\n\n${bendBadge}  |  SCS range: ${m.scsThicknessRange}`;
+
+  // Detail blocks
+  const blocks=[];
+  if(m.commonGauges?.length) blocks.push(`Common gauges:\n  ${m.commonGauges.join('  |  ')}`);
+  if(m.bendingNotes?.length) blocks.push(`Bending:\n• ${m.bendingNotes.join('\n• ')}`);
+  if(m.fabricationTips?.length) blocks.push(`Fab tips:\n• ${m.fabricationTips.join('\n• ')}`);
+  if(m.weldingNotes?.length) blocks.push(`Welding:\n• ${m.weldingNotes.join('\n• ')}`);
+  if(m.finishOptions?.length) blocks.push(`Finish options: ${m.finishOptions.join(' · ')}`);
+  if(m.scsLink) blocks.push(`SCS material page → ${m.scsLink}`);
+  outDet.textContent=blocks.join('\n\n');
+  outWrap.style.display='';
+}
+
+// ── Design rules ─────────────────────────────────────────────────────
+function smShowRules(){
+  const catKey=document.getElementById('smRuleSel').value;
+  const out=document.getElementById('smRuleOut');
+  const SM=DB.sheetMetal;
+  if(!SM?.designRules){out.innerHTML='<span class="warn">Load DB first.</span>';out.style.display='';return;}
+  const cat=SM.designRules[catKey];
+  if(!cat){out.innerHTML='<span class="warn">Category not found.</span>';out.style.display='';return;}
+
+  let html=`<div style="margin-bottom:8px;font-weight:600;color:var(--accent);font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:.06em;text-transform:uppercase">${cat.title}</div>`;
+  if(cat.note) html+=`<div class="small" style="margin-bottom:8px;color:var(--muted)">${cat.note}</div>`;
+
+  html+=`<table style="width:100%;border-collapse:collapse;font-size:12px">
+    <thead><tr>
+      <th style="text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);color:var(--muted);width:35%">Rule</th>
+      <th style="text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);color:var(--muted);width:25%">Value</th>
+      <th style="text-align:left;padding:5px 8px;border-bottom:1px solid var(--line);color:var(--muted)">Note</th>
+    </tr></thead><tbody>`;
+
+  (cat.rules||[]).forEach(r=>{
+    // flangeMinimums has different shape
+    const label=r.label||r.gauge||'';
+    const val=r.value||r.minFlange||'';
+    const note=r.note||'';
+    html+=`<tr style="border-bottom:1px solid rgba(31,43,56,0.5)">
+      <td style="padding:5px 8px;color:var(--ink);font-weight:500">${label}</td>
+      <td style="padding:5px 8px;color:var(--accent);font-family:var(--mono)">${val}</td>
+      <td style="padding:5px 8px;color:var(--muted);font-size:11px">${note}</td>
+    </tr>`;
+  });
+  html+=`</tbody></table>`;
+  out.innerHTML=html;
+  out.style.display='';
+}
+
+// ── Tips browser ──────────────────────────────────────────────────────
+function smPopulateTips(){
+  const sel=document.getElementById('smTipSel');
+  // Keep placeholder, wipe the rest
+  while(sel.options.length>1)sel.remove(1);
+  const SM=DB.sheetMetal;
+  if(!SM?.fabricationTipsGeneral)return;
+  SM.fabricationTipsGeneral.forEach((t,i)=>{
+    const o=document.createElement('option');
+    o.value=i;o.textContent=t.category;sel.appendChild(o);
+  });
+}
+
+function smShowTip(){
+  const idx=document.getElementById('smTipSel').value;
+  const out=document.getElementById('smTipOut');
+  const SM=DB.sheetMetal;
+  if(idx===''||!SM){out.style.display='none';return;}
+  const t=SM.fabricationTipsGeneral[parseInt(idx)];
+  if(!t){out.style.display='none';return;}
+  out.textContent=`${t.category}\n\n${t.tip}`;
+  out.style.display='';
+}
+
+function smShowAllTips(){
+  const out=document.getElementById('smTipAllOut');
+  const SM=DB.sheetMetal;
+  if(!SM?.fabricationTipsGeneral){out.innerHTML='<span class="warn">Load DB first.</span>';out.style.display='';return;}
+  const toggled=out.style.display==='none'||out.style.display==='';
+  if(!toggled){out.style.display='none';document.getElementById('smTipAll').textContent='Show all tips';return;}
+  const chunks=SM.fabricationTipsGeneral.map(t=>
+    `<div style="margin-bottom:12px"><div style="color:var(--accent);font-weight:600;font-size:12px;margin-bottom:4px">${t.category}</div><div style="color:var(--ink);font-size:13px">${t.tip}</div></div>`
+  ).join('<div style="height:1px;background:var(--line);margin:10px 0"></div>');
+  out.innerHTML=chunks;
+  out.style.display='';
+  document.getElementById('smTipAll').textContent='Hide tips';
+}
+
+// ── Boot / wiring for sheet metal tab ───────────────────────────────
+function smBoot(){
+  const SM=DB.sheetMetal;
+  if(!SM)return;
+  smRefreshGaugeTable();
+  smPopulateMatRef();
+  smPopulateTips();
+}
+
+document.getElementById('smGaugeLook').onclick=smGaugeLookup;
+document.getElementById('smGaugeIn').addEventListener('keydown',e=>{if(e.key==='Enter')smGaugeLookup();});
+document.getElementById('smMatSel').addEventListener('change',smRefreshGaugeTable);
+document.getElementById('smBendLook').onclick=smBendLookup;
+document.getElementById('smBendThick').addEventListener('keydown',e=>{if(e.key==='Enter')smBendLookup();});
+document.getElementById('smBdCalc').onclick=smBdCalc;
+document.getElementById('smMatRefGo').onclick=smShowMatRef;
+document.getElementById('smRuleGo').onclick=smShowRules;
+document.getElementById('smTipSel').addEventListener('change',smShowTip);
+document.getElementById('smTipAll').onclick=smShowAllTips;
+
+// Re-run smBoot whenever DB is loaded
+const _origIngestDB=ingestDB;
+// Patch ingestDB to also run smBoot after load
+// (we call it directly after the existing boot too)
+const smOrigBoot=(function(){
+  // On page boot if DB already cached
+  const origFn=window.onload;
+  return function(){ smBoot(); };
+})();
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   INSERT CALCULATOR — PEM & Heat-Set
+══════════════════════════════════════════════════════════════════════ */
+
+// ── Sub-tab switching ─────────────────────────────────────────────────
+function insSetTab(which){
+  document.getElementById('insPemPanel').style.display = which==='pem' ? '' : 'none';
+  document.getElementById('insHsPanel').style.display  = which==='hs'  ? '' : 'none';
+  document.getElementById('insTabPem').classList.toggle('ins-tab-active', which==='pem');
+  document.getElementById('insTabHs').classList.toggle('ins-tab-active',  which==='hs');
+}
+document.getElementById('insTabPem').onclick = ()=>insSetTab('pem');
+document.getElementById('insTabHs').onclick  = ()=>insSetTab('hs');
+
+// ── Populate PEM size dropdown ────────────────────────────────────────
+function pemPopulateSizes(){
+  const PEM = DB.pemHardware;
+  const type = document.getElementById('pemType').value;
+  const sel  = document.getElementById('pemSize');
+  sel.innerHTML = '';
+  if(!PEM){ sel.innerHTML='<option>Load DB first</option>'; return; }
+  const rows = PEM[type] || [];
+  // dedupe sizes
+  const seen = new Set();
+  rows.forEach(r=>{
+    if(seen.has(r.size)) return; seen.add(r.size);
+    const o = document.createElement('option');
+    o.value = r.size; o.textContent = r.size;
+    sel.appendChild(o);
+  });
+  // Show general notes once
+  const notesEl = document.getElementById('pemNotes');
+  notesEl.textContent = (PEM.generalNotes||[]).map((n,i)=>`${i+1}. ${n}`).join('\n');
+}
+
+function pemCalc(){
+  const PEM  = DB.pemHardware;
+  const out  = document.getElementById('pemOut');
+  out.style.display='none';
+  if(!PEM){ out.textContent='Load shopdb.json first.'; out.style.display=''; return; }
+  const type = document.getElementById('pemType').value;
+  const size = document.getElementById('pemSize').value;
+  const rows = (PEM[type]||[]).filter(r=>r.size===size);
+  if(!rows.length){ out.textContent=`No data for ${size}.`; out.style.display=''; return; }
+  const r = rows[0];
+
+  const isMetric = !!r.holeMm;
+  const holePrimary   = isMetric ? `${r.holeMm.toFixed(1)} mm` : `${r.holeIn.toFixed(3)}"`;
+  const holeSecondary = isMetric
+    ? `(${(r.holeMm/25.4).toFixed(4)}")`
+    : `(${(r.holeIn*25.4).toFixed(2)} mm)`;
+  const minThk = isMetric
+    ? `${r.minThkMm.toFixed(1)} mm min sheet thickness`
+    : `${r.minThkIn.toFixed(3)}" min sheet thickness`;
+
+  const typeLabel = type==='nuts' ? 'Self-Clinching Nut' : 'Flush Stud';
+  const lines = [
+    `${typeLabel}  —  ${r.size}  [${r.series} series]`,
+    `Panel hole: ${holePrimary}  ${holeSecondary}`,
+    minThk,
+    r.note ? `Note: ${r.note}` : null,
+  ].filter(Boolean);
+  out.textContent = lines.join('\n');
+  out.style.display='';
+}
+
+// ── Populate Heat-Set size dropdown ──────────────────────────────────
+function hsInsPopulateSizes(){
+  const HS  = DB.heatSetInserts;
+  const sel = document.getElementById('hsInsSize');
+  sel.innerHTML='';
+  if(!HS){ sel.innerHTML='<option>Load DB first</option>'; return; }
+  (HS.inserts||[]).forEach(r=>{
+    const o=document.createElement('option');
+    o.value=r.size; o.textContent=r.size;
+    sel.appendChild(o);
+  });
+  // General notes
+  const notesEl = document.getElementById('hsInsNotes');
+  notesEl.textContent = (HS.generalNotes||[]).map((n,i)=>`${i+1}. ${n}`).join('\n');
+}
+
+function hsInsCalc(){
+  const HS  = DB.heatSetInserts;
+  const out = document.getElementById('hsInsOut');
+  out.style.display='none';
+  if(!HS){ out.textContent='Load shopdb.json first.'; out.style.display=''; return; }
+  const size = document.getElementById('hsInsSize').value;
+  const mat  = document.getElementById('hsInsMat').value;
+  const row  = (HS.inserts||[]).find(r=>r.size===size);
+  if(!row){ out.textContent=`No data for ${size}.`; out.style.display=''; return; }
+
+  const hPrint = row.holeForPrintMm;
+  const hDrill = row.holeForDrillMm;
+  const outer  = row.outerMm;
+  const matNote = (HS.materialNotes||{})[mat] || '';
+
+  const nearDrill = nearestUsDrill(hPrint/25.4);
+
+  const lines = [
+    `Heat-Set Insert  —  ${size}`,
+    `Insert OD       : ${outer.toFixed(1)} mm`,
+    ``,
+    `── Printed hole ────────────────`,
+    `  Recommended   : ${hPrint.toFixed(1)} mm  (${(hPrint/25.4).toFixed(4)}")` +
+      (nearDrill ? `  ≈ drill ${nearDrill.label}` : ''),
+    ``,
+    `── Drilled/reamed hole ─────────`,
+    `  Recommended   : ${hDrill.toFixed(1)} mm  (${(hDrill/25.4).toFixed(4)}")` +
+      (nearDrill ? `  ≈ drill ${nearDrill.label}` : ''),
+    ``,
+    `── Material: ${mat} ─────────────`,
+    matNote,
+    row.note ? `\nNote: ${row.note}` : null,
+  ].filter(v=>v!==null);
+  out.textContent = lines.join('\n');
+  out.style.display='';
+}
+
+// ── Wire up ───────────────────────────────────────────────────────────
+document.getElementById('pemType').addEventListener('change', pemPopulateSizes);
+document.getElementById('pemCalc').onclick = pemCalc;
+document.getElementById('hsInsCalc').onclick = hsInsCalc;
+
+// ── Boot ──────────────────────────────────────────────────────────────
+function insBoot(){
+  pemPopulateSizes();
+  hsInsPopulateSizes();
+}
+
+
+
+/* ══════════════════════════════════════════════════════════════════════
+   FDM 3D PRINT FITS & DESIGN
+══════════════════════════════════════════════════════════════════════ */
+
+let fdmSelectedFit = null;
+
+// ── Fit Calculator ───────────────────────────────────────────────────
+function fdmBuildFitCards(){
+  const grid = document.getElementById('fdmFitGrid');
+  grid.innerHTML = '';
+  const FDM = DB.fdm3dp;
+  if(!FDM){ grid.innerHTML='<div class="small" style="color:var(--muted)">Load DB first.</div>'; return; }
+  const ft = FDM.fitTable;
+  const order = ['loose','sliding','close','transition','press','hardPress','snapFit','bearingBore'];
+  order.forEach(key=>{
+    const f = ft[key]; if(!f) return;
+    const card = document.createElement('div');
+    card.className = 'fdm-fit-card';
+    card.dataset.fitKey = key;
+    // Compute current clearance for whatever nominal is in the input
+    const rawDia = parseFloat(document.getElementById('fdmDia').value) || 10;
+    const units  = document.getElementById('fdmUnits').value;
+    const diaMm  = units === 'in' ? rawDia * 25.4 : rawDia;
+    const cl     = f.baseMm + diaMm * (f.scalePct / 100);
+    const sign   = cl >= 0 ? '+' : '';
+    const clDisp = units === 'in' ? `${sign}${(cl/25.4).toFixed(4)}"` : `${sign}${cl.toFixed(3)} mm`;
+    card.innerHTML = `
+      <div class="ffc-label">${f.label}</div>
+      <div class="ffc-val">${clDisp} / side</div>
+      <div class="ffc-use">${f.use}</div>`;
+    card.addEventListener('click', ()=>{ fdmSelectFit(key, card); });
+    grid.appendChild(card);
+  });
+  // Re-apply selected highlight if a fit was already chosen
+  if(fdmSelectedFit){
+    const sel = document.querySelector(`.fdm-fit-card[data-fit-key="${fdmSelectedFit}"]`);
+    if(sel) sel.classList.add('selected');
+  }
+}
+
+function fdmSelectFit(key, cardEl){
+  fdmSelectedFit = key;
+  document.querySelectorAll('.fdm-fit-card').forEach(c=>c.classList.remove('selected'));
+  cardEl.classList.add('selected');
+  fdmComputeFit();
+}
+
+function fdmComputeFit(){
+  const FDM = DB.fdm3dp; if(!FDM || !fdmSelectedFit) return;
+  const rawDia = parseFloat(document.getElementById('fdmDia').value);
+  const units  = document.getElementById('fdmUnits').value;
+  const res    = document.getElementById('fdmCalcResult');
+  if(isNaN(rawDia) || rawDia<=0){ res.style.display='none'; return; }
+
+  const dia = units==='in' ? rawDia*25.4 : rawDia; // work in mm internally
+  const f   = FDM.fitTable[fdmSelectedFit];
+
+  // Scaled formula: clearance/side = baseMm + nominal × scalePct/100
+  // Press fits stay flat — interference already fights the ±0.2mm machine floor
+  const cl = f.baseMm + dia * (f.scalePct / 100);
+
+  const shaftMm = dia;
+  const boreMm  = dia + 2 * cl;
+
+  const fmt = (v) => units==='in'
+    ? `${(v/25.4).toFixed(4)}"` : `${v.toFixed(2)} mm`;
+
+  // Formula display — always show in user's chosen units for readability
+  const clDisplay   = units==='in' ? cl/25.4 : cl;
+  const diaDisplay  = rawDia;
+  const baseDisplay = units==='in' ? f.baseMm/25.4 : f.baseMm;
+  const clUnit      = units==='in' ? 'in' : 'mm';
+  const formulaStr  = f.scalePct > 0
+    ? `formula: ${baseDisplay>=0?'+':''}${baseDisplay.toFixed(4)} + ${f.scalePct.toFixed(2)}%×${diaDisplay} ${units} = ${clDisplay>=0?'+':''}${clDisplay.toFixed(4)} ${clUnit}/side`
+    : `formula: ${baseDisplay.toFixed(4)} ${clUnit} flat (press fits don't scale with size)`;
+
+  const diaStr = `${cl>=0?'+':''}${units==='in' ? (2*cl/25.4).toFixed(4)+'"' : (2*cl).toFixed(3)+' mm'} diametral`;
+
+  document.getElementById('fdmResLabel').textContent       = `${f.label}  •  Ø${rawDia} ${units} nominal`;
+  document.getElementById('fdmResShaft').textContent       = fmt(shaftMm);
+  document.getElementById('fdmResShaftSub').textContent    = 'model at nominal';
+  document.getElementById('fdmResBore').textContent        = fmt(boreMm);
+  document.getElementById('fdmResboreSub').textContent     = diaStr;
+  document.getElementById('fdmResUse').textContent         = f.use;
+  document.getElementById('fdmResFormula').textContent     = formulaStr;
+
+  const warn = document.getElementById('fdmResWarn');
+  if(fdmSelectedFit==='hardPress'){
+    warn.textContent = '⚠ Hard press fits risk cracking FDM parts. Pilot test on scrap before full part.';
+  } else if(fdmSelectedFit==='bearingBore'){
+    warn.textContent = '⚠ Bearing bores: print undersize, ream to exact spec. Verify with calipers.';
+  } else if(fdmSelectedFit==='press'){
+    warn.textContent = '⚠ Test press fit on a small token first — every printer and filament varies.';
+  } else {
+    warn.textContent = '';
+  }
+
+  res.style.display = '';
+}
+
+// Re-calc when inputs change
+document.getElementById('fdmDia').addEventListener('input', ()=>{ fdmBuildFitCards(); fdmComputeFit(); });
+document.getElementById('fdmUnits').addEventListener('change', ()=>{ fdmBuildFitCards(); fdmComputeFit(); });
+
+// ── Design Rules Accordion ───────────────────────────────────────────
+function fdmBuildRules(){
+  const acc = document.getElementById('fdmRulesAccordion');
+  acc.innerHTML = '';
+  const FDM = DB.fdm3dp; if(!FDM) return;
+  (FDM.designRules||[]).forEach(rule=>{
+    const div = document.createElement('div');
+    div.className = 'fdm-rule';
+
+    const valsHtml = Object.entries(rule.values||{}).map(([k,v])=>
+      `<dt>${k}</dt><dd>${v}</dd>`).join('');
+
+    const tipsHtml = (rule.tips||[]).map((t,i)=>
+      `<div style="font-size:12px;padding:3px 0;display:flex;gap:8px">
+        <span style="color:var(--accent);min-width:14px">${i+1}.</span>
+        <span style="color:#dbe3ec">${t}</span>
+       </div>`).join('');
+
+    div.innerHTML = `
+      <div class="fdm-rule-hdr" onclick="fdmToggleRule(this)">
+        <span class="fdm-rule-icon">${rule.icon}</span>
+        <span class="fdm-rule-title">${rule.title}</span>
+        <span class="fdm-rule-chevron">▶</span>
+      </div>
+      <div class="fdm-rule-body">
+        <dl class="fdm-rule-vals" style="margin-top:10px">${valsHtml}</dl>
+        <div class="separator"></div>
+        ${tipsHtml}
+      </div>`;
+    acc.appendChild(div);
+  });
+}
+
+function fdmToggleRule(hdr){
+  const body    = hdr.nextElementSibling;
+  const chevron = hdr.querySelector('.fdm-rule-chevron');
+  const isOpen  = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.style.transform = isOpen ? '' : 'rotate(90deg)';
+}
+
+// ── Material Quick Reference Table ───────────────────────────────────
+function fdmBuildMatTable(){
+  const el = document.getElementById('fdmMatTable');
+  const FDM = DB.fdm3dp; if(!FDM){ el.innerHTML=''; return; }
+  const mats = FDM.materialQuickRef;
+
+  const warpBadge = v => {
+    if(v.includes('Low'))  return `<span class="badge badge-ok">${v}</span>`;
+    if(v.includes('High')) return `<span class="badge badge-bad">${v}</span>`;
+    return `<span class="badge badge-warn">${v}</span>`;
+  };
+  const fatigueBadge = v => {
+    if(v==='Excellent'||v==='Very Good') return `<span class="badge badge-ok">${v}</span>`;
+    if(v==='Poor')                        return `<span class="badge badge-bad">${v}</span>`;
+    return `<span class="badge badge-warn">${v}</span>`;
+  };
+
+  const rows = Object.entries(mats).map(([mat,m])=>`
+    <tr>
+      <td><span class="fdm-mat-name">${mat}</span></td>
+      <td>${warpBadge(m.warp)}</td>
+      <td>${fatigueBadge(m.flexFatigue)}</td>
+      <td style="color:var(--muted)">${m.heatRes}</td>
+      <td style="color:var(--muted)">${m.notes}</td>
+    </tr>`).join('');
+
+  el.innerHTML = `<table class="fdm-mat-table">
+    <thead><tr>
+      <th>Material</th><th>Warp</th><th>Flex/Fatigue</th><th>Heat Res</th><th>Notes</th>
+    </tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+// ── Shop Tips Library ────────────────────────────────────────────────
+let fdmActiveCat = 'All';
+
+function fdmBuildTips(filterCat){
+  const FDM = DB.fdm3dp; if(!FDM) return;
+  const tips   = FDM.shopTips||[];
+  const listEl = document.getElementById('fdmTipList');
+
+  const filtered = filterCat==='All' ? tips : tips.filter(t=>t.cat===filterCat);
+  listEl.innerHTML = filtered.map(t=>`
+    <li>
+      <span class="fdm-tip-cat">${t.cat}</span>
+      <span>${t.tip}</span>
+    </li>`).join('');
+}
+
+function fdmBuildTipFilters(){
+  const FDM = DB.fdm3dp; if(!FDM) return;
+  const cats = ['All', ...new Set((FDM.shopTips||[]).map(t=>t.cat))];
+  const el   = document.getElementById('fdmTipFilter');
+  el.innerHTML = cats.map(c=>`
+    <button class="${c===fdmActiveCat?'active':''}" onclick="fdmFilterTips('${c}')">${c}</button>`
+  ).join('');
+}
+
+function fdmFilterTips(cat){
+  fdmActiveCat = cat;
+  fdmBuildTipFilters();
+  fdmBuildTips(cat);
+}
+
+// ── Boot ─────────────────────────────────────────────────────────────
+function fdmBoot(){
+  const FDM = DB.fdm3dp;
+  if(!FDM){
+    document.getElementById('fdmFitGrid').innerHTML = '<div class="small" style="color:var(--muted)">Load shopdb.json to begin.</div>';
+    return;
+  }
+  fdmBuildFitCards();
+  fdmBuildRules();
+  fdmBuildMatTable();
+  fdmBuildTipFilters();
+  fdmBuildTips('All');
+  // Auto-select "sliding" as a sensible default so the calculator is live immediately
+  const defaultCard = document.querySelector('.fdm-fit-card[data-fit-key="sliding"]');
+  if(defaultCard) fdmSelectFit('sliding', defaultCard);
+}
+
+setTimeout(fdmBoot, 250);
+
+/* ══════════════════════════════════════════════════════════════════════
+   CNC ROUTER — FEEDS & SPEEDS
+══════════════════════════════════════════════════════════════════════ */
+
+// sfmCategory in materials → cncRouter category key mapping
+const CNC_CAT_MAP = {
+  aluminum:   'aluminum',
+  steel:      'steel',
+  stainless:  'steel',      // rare on router — use steel params as conservative baseline
+  composite:  'composite',
+  wood:       'wood',
+  wood_dense: 'wood_dense',
+  plastic:    'plastic',
+  foam:       'foam_core',
+};
+
+function cncGetCats(){
+  const CNC = DB.cncRouter;
+  if(!CNC) return {};
+  return CNC.categories || {};
+}
+
+// Populate material dropdown from DB materials + cncRouter categories
+function cncPopulateMat(){
+  const sel = document.getElementById('cncMat');
+  sel.innerHTML = '';
+  const cats = cncGetCats();
+  if(!Object.keys(cats).length){
+    sel.innerHTML='<option value="">Load DB first</option>';
+    document.getElementById('cncBitGuide').textContent='Load shopdb.json to begin.';
+    return;
+  }
+  // Build options in a sensible order
+  const order = ['aluminum','composite','wood','wood_dense','plastic','foam_core','steel'];
+  order.forEach(key=>{
+    const cat = cats[key];
+    if(!cat) return;
+    const o = document.createElement('option');
+    o.value = key;
+    o.textContent = cat.label;
+    sel.appendChild(o);
+  });
+  cncPopulateBit();
+  cncUpdateBitGuide();
+}
+
+// Populate bit dropdown for selected material
+function cncPopulateBit(){
+  const sel  = document.getElementById('cncBit');
+  const matK = document.getElementById('cncMat').value;
+  sel.innerHTML = '';
+  const cats = cncGetCats();
+  const cat  = cats[matK];
+  if(!cat){ return; }
+  (cat.bitTypes||[]).forEach(bt=>{
+    const o = document.createElement('option');
+    o.value = bt.id;
+    o.textContent = bt.label + (bt.recommended ? ' ★' : '');
+    sel.appendChild(o);
+  });
+}
+
+// Update the bit guide panel when material changes
+function cncUpdateBitGuide(){
+  const matK = document.getElementById('cncMat').value;
+  const cats = cncGetCats();
+  const cat  = cats[matK];
+  const el   = document.getElementById('cncBitGuide');
+  if(!cat){ el.textContent='Select a material.'; el.style.color=''; return; }
+
+  const lines = (cat.bitTypes||[]).map(bt=>{
+    const cl = cat.chiploads[bt.id];
+    const rec = bt.recommended ? ' ★ Recommended' : '';
+    return `${bt.label}${rec}\n  Flutes: ${bt.flutes}  |  Chipload: ${cl.lo}–${cl.hi} ${cl.unit}`;
+  });
+  el.style.color = 'var(--ink)';
+  el.style.whiteSpace = 'pre-wrap';
+  el.style.fontSize = '12px';
+  el.textContent = lines.join('\n\n');
+}
+
+// Main calculator
+function cncCalc(){
+  const matK    = document.getElementById('cncMat').value;
+  const bitId   = document.getElementById('cncBit').value;
+  const diaRaw  = parseFloat(document.getElementById('cncDia').value);
+  const diaUnit = document.getElementById('cncDiaUnits').value;
+  const rpm     = parseFloat(document.getElementById('cncRpm').value);
+  const bias    = document.getElementById('cncBias').value;
+  const cutType = document.getElementById('cncCutType').value;
+  const thkRaw  = parseFloat(document.getElementById('cncThk').value);
+
+  const outEl   = document.getElementById('cncOut');
+  const emptyEl = document.getElementById('cncOutEmpty');
+
+  const cats = cncGetCats();
+  const cat  = cats[matK];
+
+  if(!cat || isNaN(diaRaw) || isNaN(rpm) || diaRaw<=0 || rpm<=0){
+    outEl.style.display='none'; emptyEl.style.display='';
+    emptyEl.textContent='Check inputs — something is missing or zero.';
+    return;
+  }
+
+  const bitDef = (cat.bitTypes||[]).find(b=>b.id===bitId);
+  if(!bitDef){ outEl.style.display='none'; emptyEl.style.display=''; return; }
+
+  const diaIn = diaUnit==='mm' ? diaRaw/25.4 : diaRaw;
+  const thkIn = diaUnit==='mm' ? thkRaw/25.4 : thkRaw;
+  const flutes = bitDef.flutes;
+
+  const cl = cat.chiploads[bitId];
+  // Pick chipload based on bias
+  let chipload;
+  if(bias==='lo')  chipload = cl.lo;
+  else if(bias==='hi') chipload = cl.hi;
+  else chipload = (cl.lo + cl.hi) / 2;
+
+  // Feedrate (IPM) = RPM × flutes × chipload
+  const feedIPM = rpm * flutes * chipload;
+
+  // Plunge
+  const plungeIPM = feedIPM * cat.plungeRatePct;
+
+  // DOC
+  const docPct = cat.doc.pct;
+  const docIn  = diaIn * docPct;
+
+  // Number of passes
+  const passes = thkIn > 0 ? Math.ceil(thkIn / docIn) : '—';
+
+  // Stepover
+  const soPct  = cutType==='finish' ? cat.stepover.finishPct : cat.stepover.roughPct;
+  const soIn   = diaIn * soPct;
+
+  // Actual SFM achieved
+  const sfm = Math.round((rpm * Math.PI * diaIn) / 12);
+  const [sfmLo, sfmHi] = cat.sfmRange;
+  const sfmOk = sfm >= sfmLo && sfm <= sfmHi;
+  const sfmWarn = sfm < sfmLo*0.8 || sfm > sfmHi*1.2;
+
+  // Format helpers
+  const fmtIn = (v,dp=3) => v.toFixed(dp)+'"';
+  const fmtMm = (v) => (v*25.4).toFixed(2)+' mm';
+  const dual  = (v) => `${fmtIn(v)} / ${fmtMm(v)}`;
+
+  // Fill stat cards
+  document.getElementById('cncResChipload').textContent = chipload.toFixed(4)+'"';
+  document.getElementById('cncResChiploadsub').textContent = `${cl.lo}–${cl.hi} in/tooth range`;
+  document.getElementById('cncResFeed').textContent = Math.round(feedIPM);
+  document.getElementById('cncResPlunge').textContent = Math.round(plungeIPM);
+  document.getElementById('cncResDoc').textContent = fmtIn(docIn,3);
+  document.getElementById('cncResDocsub').textContent = `${Math.round(docPct*100)}% dia · ${passes} pass${passes!==1?'es':''} thru`;
+  document.getElementById('cncResSo').textContent = fmtIn(soIn,3);
+  document.getElementById('cncResSosub').textContent = `${Math.round(soPct*100)}% dia · ${fmtMm(soIn)}`;
+
+  const sfmColor = sfmWarn ? 'var(--bad)' : sfmOk ? 'var(--ok)' : 'var(--warn)';
+  document.getElementById('cncResSfm').textContent = sfm;
+  document.getElementById('cncResSfm').style.color = sfmColor;
+  document.getElementById('cncResSfmsub').textContent = `target ${sfmLo}–${sfmHi} SFM`;
+
+  // Summary block
+  const summaryLines = [
+    `Bit: ${bitDef.label} (${flutes}fl)  |  ${diaUnit==='mm' ? diaRaw.toFixed(2)+' mm' : diaRaw+'"'} dia`,
+    `RPM: ${rpm.toLocaleString()}  |  Feed: ${Math.round(feedIPM)} IPM  |  Plunge: ${Math.round(plungeIPM)} IPM`,
+    `DOC: ${dual(docIn)}  |  Stepover: ${dual(soIn)}`,
+    `SFM: ${sfm}  (target ${sfmLo}–${sfmHi})${sfmWarn?' ⚠ OUT OF RANGE':sfmOk?' ✓':' ≈ borderline'}`,
+    `Bias: ${bias}  |  Cut: ${cutType}`,
+  ];
+  document.getElementById('cncResSummary').textContent = summaryLines.join('\n');
+
+  // Notes panel
+  const notesEl    = document.getElementById('cncNotesMat');
+  const notesEmpty  = document.getElementById('cncNotesEmpty');
+  const notesLabel  = document.getElementById('cncNotesMatLabel');
+  const notesBody   = document.getElementById('cncNotesMatBody');
+  const notesLube   = document.getElementById('cncNotesLube');
+  const notesClimb  = document.getElementById('cncNotesClimb');
+
+  notesLabel.textContent = cat.label;
+  notesBody.textContent  = (cat.notes||[]).map((n,i)=>`${i+1}. ${n}`).join('\n');
+  notesLube.textContent  = cat.lube;
+  notesClimb.textContent = cat.climbFirst
+    ? 'Climb cut recommended — reduces cutting force and improves finish.'
+    : 'Conventional cut for roughing; climb cut for finish pass.';
+  notesEl.style.display  = '';
+  notesEmpty.style.display = 'none';
+
+  outEl.style.display  = '';
+  emptyEl.style.display = 'none';
+}
+
+// Wire up
+document.getElementById('cncMat').addEventListener('change', ()=>{ cncPopulateBit(); cncUpdateBitGuide(); });
+document.getElementById('cncCalc').onclick = cncCalc;
+document.getElementById('cncDia').addEventListener('keydown', e=>{ if(e.key==='Enter') cncCalc(); });
+
+function cncBoot(){
+  cncPopulateMat();
+}
+
+setTimeout(cncBoot, 200);
+
 </script>
 </body>
 </html>
