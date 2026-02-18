@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="manifest" href="./manifest.json">
+<script>
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('./sw.js').catch(console.warn);
+}
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Shop Helper — v0.15.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ── Design tokens ─────────────────────────────────────────────── */
+  :root{
+    --bg:#0b1117;
+    --surface:#0f1620;
+    --card:#111b26;
+    --ink:#e7ecf2;
+    --muted:#94a3b8;
+    --line:#1f2b38;
+    --accent:#f5b146;
+    --accent-2:#22d3ee;
+    --accent-3:#34d399;
+    --accent-4:#f87171;
+    --radius:14px;
+    --shadow:0 12px 30px rgba(0,0,0,.35);
+    --ok:#34d399; --warn:#f59e0b; --bad:#ef4444;
+    --mono:'DM Mono',monospace;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    font-family:Inter,system-ui,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(800px 500px at 80% -10%, rgba(34,211,238,.07), transparent 60%),
+      radial-gradient(1000px 600px at -10% 20%, rgba(245,177,70,.07), transparent 60%),
+      linear-gradient(180deg,#0a0f15,#0b1117 40%,#0b1117);
+    min-height:100vh;
+  }
+
+  /* ── Sticky header ──────────────────────────────────────────────── */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),var(--bg);
+    backdrop-filter:saturate(120%) blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    max-width:1280px;margin:0 auto;
+    display:flex;align-items:center;gap:12px;
+    padding:10px 20px;
+  }
+  .brand-logo{height:26px;display:block;object-fit:contain;filter:invert(1) brightness(1.6)}
+  .brand-name{
+    font-family:Montserrat,sans-serif;font-weight:800;
+    font-size:17px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .tag{
+    border:1px solid var(--line);border-radius:999px;
+    padding:3px 10px;font-size:11px;color:var(--muted);
+  }
+  .tag--amber{border-color:rgba(245,177,70,.4);color:#ffd9a2}
+  .header-tagline{margin-left:auto;font-size:11.5px;color:var(--muted);font-style:italic}
+
+  /* ── Tab bar ────────────────────────────────────────────────────── */
+  .tabbar{
+    max-width:1280px;margin:0 auto;
+    display:flex;align-items:end;gap:2px;
+    padding:0 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .tab{
+    padding:9px 18px 10px;
+    font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--muted);cursor:pointer;border:none;background:none;
+    border-bottom:2px solid transparent;
+    transition:color .15s,border-color .15s;
+    white-space:nowrap;
+  }
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+  .tab-icon{margin-right:6px;font-size:13px}
+
+  /* ── Page wrapper ───────────────────────────────────────────────── */
+  .wrap{max-width:1280px;margin:0 auto;padding:24px 20px 56px}
+
+  /* ── Tab panels ─────────────────────────────────────────────────── */
+  .tabpanel{display:none}
+  .tabpanel.active{display:block}
+
+  /* ── Main tool grid (Materials + Fasteners + DB) ────────────────── */
+  .tool-grid{display:grid;grid-template-columns:1fr 1fr 0.75fr;gap:16px}
+  @media(max-width:1100px){.tool-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:720px){.tool-grid{grid-template-columns:1fr}}
+
+  /* ── Panels ─────────────────────────────────────────────────────── */
+  .panel{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:16px;
+  }
+  .panel-title{
+    margin:0 0 12px;
+    font-family:Montserrat,sans-serif;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;font-size:13px;color:#dbe3ec;
+    display:flex;align-items:center;gap:8px;
+  }
+  .panel-title-icon{font-size:15px;opacity:.8}
+
+  /* ── Cards (nested) ─────────────────────────────────────────────── */
+  .card{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.04)),var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px;
+  }
+  .card h3{margin:0 0 8px;font-size:11.5px;font-family:Montserrat,sans-serif;
+    letter-spacing:.06em;text-transform:uppercase;color:#dbe3ec}
+
+  /* ── Form elements ──────────────────────────────────────────────── */
+  label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:5px;letter-spacing:.02em}
+  input,select,textarea,button{
+    width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--line);
+    background:#0b141d;color:var(--ink);outline:none;font-size:14px;
+    transition:border-color .15s,box-shadow .15s,transform .05s;
+    font-family:inherit;
+  }
+  input:focus,select:focus{border-color:#26384d;box-shadow:0 0 0 3px rgba(34,211,238,.12)}
+  .row{display:flex;gap:10px;flex-wrap:wrap}
+  .row>div{flex:1;min-width:200px}
+  button{
+    width:auto;
+    background:linear-gradient(180deg,rgba(245,177,70,.22),rgba(245,177,70,.12));
+    border:1px solid rgba(245,177,70,.45);
+    color:#ffdfb0;font-weight:600;letter-spacing:.02em;cursor:pointer;
+  }
+  button:hover{border-color:#ffc978;background:linear-gradient(180deg,rgba(245,177,70,.32),rgba(245,177,70,.18))}
+  button:active{transform:translateY(1px)}
+
+  /* ── Output box ─────────────────────────────────────────────────── */
+  .tips{
+    background:linear-gradient(180deg,rgba(34,211,238,.05),rgba(245,177,70,.05));
+    border:1px dashed #273448;border-radius:12px;padding:10px 12px;
+    white-space:pre-wrap;color:#dbe3ec;font-size:13px;line-height:1.6;
+    font-family:var(--mono);
+  }
+
+  .pill{display:inline-block;border:1px solid #2a3b4f;border-radius:999px;padding:2px 9px;font-size:11.5px;margin-right:5px}
+  .small{font-size:12px;color:var(--muted)}
+  .separator{height:1px;background:linear-gradient(90deg,transparent,#1b2735 20%,#1b2735 80%,transparent);margin:12px 0}
+  .ok{color:var(--ok)} .warn{color:var(--warn)} .bad{color:var(--bad)}
+
+  /* ── Dropzone ───────────────────────────────────────────────────── */
+  .dropzone{
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    padding:20px;border:1px dashed #2a3b4f;border-radius:12px;cursor:pointer;
+    background:linear-gradient(180deg,rgba(34,211,238,.04),rgba(245,177,70,.04));
+    color:#dbe3ec;min-height:96px;
+    transition:border-color .15s,background .15s,box-shadow .2s;
+  }
+  .dropzone.drag{border-color:#ffd9a2;background:linear-gradient(180deg,rgba(245,177,70,.10),rgba(34,211,238,.06))}
+  .dropzone.ok-flash{box-shadow:0 0 0 3px rgba(52,211,153,.25)}
+
+  /* ════════════════════════════════════════════════════════════════
+     DYTAT CHECKLIST TAB
+  ════════════════════════════════════════════════════════════════ */
+
+  /* Progress bar */
+  .dytat-progress-wrap{
+    background:var(--surface);border:1px solid var(--line);border-radius:12px;
+    padding:14px 18px;margin-bottom:18px;
+    display:flex;align-items:center;gap:16px;
+  }
+  .progress-bar-track{
+    flex:1;height:8px;background:var(--line);border-radius:999px;overflow:hidden;
+  }
+  .progress-bar-fill{
+    height:100%;border-radius:999px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    transition:width .35s cubic-bezier(.4,0,.2,1);
+    width:0%;
+  }
+  .progress-label{font-size:12px;color:var(--muted);white-space:nowrap;font-family:var(--mono)}
+  .progress-label strong{color:var(--accent)}
+
+  .dytat-callout{
+    background:rgba(245,177,70,.07);border:1px solid rgba(245,177,70,.25);
+    border-left:3px solid var(--accent);border-radius:10px;
+    padding:10px 14px;margin-bottom:18px;
+    font-size:12.5px;color:#ffd9a2;font-weight:500;
+  }
+
+  /* Category grid */
+  .dytat-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .dytat-grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .dytat-grid-wide{
+    display:grid;
+    grid-template-columns:1.15fr 1fr 1fr;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  @media(max-width:900px){
+    .dytat-grid,.dytat-grid-2,.dytat-grid-wide{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:600px){
+    .dytat-grid,.dytat-grid-2,.dytat-grid-wide{grid-template-columns:1fr}
+  }
+
+  /* Category card */
+  .cat-card{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),var(--surface);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px;position:relative;overflow:hidden;
+  }
+  .cat-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:var(--cat-color,var(--accent));
+  }
+  .cat-title{
+    font-family:Montserrat,sans-serif;font-weight:700;font-size:12.5px;
+    letter-spacing:.06em;text-transform:uppercase;
+    color:#dbe3ec;margin:0 0 10px;
+    display:flex;align-items:center;gap:8px;
+  }
+  .cat-num{margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--cat-color,var(--accent));opacity:.7}
+
+  /* Sub-labels within a card */
+  .sub-lbl{
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:#3a4f65;font-family:var(--mono);font-weight:500;
+    margin:8px 0 5px;
+  }
+  .cat-divider{height:1px;background:var(--line);margin:8px 0}
+
+  /* Checklist items */
+  .checklist{list-style:none;display:flex;flex-direction:column;gap:4px;margin:0;padding:0}
+  .check-item{display:flex;align-items:flex-start;gap:9px;padding:3px 0}
+  .check-item label{
+    display:flex;align-items:flex-start;gap:9px;
+    cursor:pointer;font-size:12px;color:var(--ink);font-weight:400;
+    line-height:1.5;margin:0;letter-spacing:0;
+    flex:1;
+  }
+  .check-item input[type=checkbox]{
+    width:14px;height:14px;min-width:14px;
+    border-radius:3px;border:1.5px solid #3a4f65;
+    background:transparent;cursor:pointer;
+    padding:0;margin-top:1px;flex-shrink:0;
+    accent-color:var(--accent);
+    transition:border-color .15s;
+  }
+  .check-item input[type=checkbox]:checked + span{
+    color:var(--muted);text-decoration:line-through;text-decoration-color:rgba(148,163,184,.4);
+  }
+  .check-item input[type=checkbox]:checked{border-color:var(--accent)}
+  .check-item span strong{color:#ffd9a2;font-weight:600}
+  .check-item span .note{
+    color:var(--muted);font-size:10.5px;display:block;margin-top:1px;font-style:italic;
+  }
+  .check-item.done label{opacity:.55}
+
+  /* Bottom banner (5-col strip) */
+  .dytat-banner{
+    background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),var(--surface);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:14px 18px;
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+    margin-bottom:14px;position:relative;overflow:hidden;
+  }
+  .dytat-banner::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2),var(--accent-3),var(--accent-4),var(--accent));
+  }
+  @media(max-width:900px){.dytat-banner{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:600px){.dytat-banner{grid-template-columns:1fr 1fr}}
+  .banner-col{padding:0 14px;border-right:1px solid var(--line)}
+  .banner-col:first-child{padding-left:0}
+  .banner-col:last-child{border-right:none}
+  .banner-lbl{
+    font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);font-family:var(--mono);font-weight:500;margin-bottom:8px;
+  }
+  .banner-col .checklist{gap:3px}
+  .banner-col .check-item label{font-size:11px}
+
+  /* Reset + export strip */
+  .dytat-controls{
+    display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap;
+  }
+  .dytat-controls button{padding:8px 16px;font-size:12px}
+  .btn-ghost{
+    background:transparent!important;
+    border-color:var(--line)!important;
+    color:var(--muted)!important;
+  }
+  .btn-ghost:hover{border-color:var(--accent)!important;color:var(--accent)!important}
+
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ════════════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <img id="thLogo" class="brand-logo" alt="TruckHouse">
+    <span class="brand-name">Shop Helper</span>
+    <span class="tag">v0.15.0</span>
+    <span class="tag tag--amber">DB: drag &amp; drop</span>
+    <span class="header-tagline">Clean holes, happy souls.</span>
+  </div>
+
+  <!-- Tab bar -->
+  <nav class="tabbar" role="tablist">
+    <button class="tab active" role="tab" data-tab="tools" aria-selected="true">
+      <span class="tab-icon">⚙</span>Tools
+    </button>
+    <button class="tab" role="tab" data-tab="dytat" aria-selected="false">
+      <span class="tab-icon">✓</span>DYTAT Checklist
+    </button>
+  </nav>
+</header>
+
+<!-- ══ TOOLS TAB ═════════════════════════════════════════════════════════ -->
+<div id="tab-tools" class="tabpanel active" role="tabpanel">
+  <div class="wrap">
+    <div class="tool-grid">
+
+      <!-- MATERIALS -->
+      <section class="panel">
+        <h2 class="panel-title"><span class="panel-title-icon">◈</span> Material Playbook</h2>
+        <div class="row">
+          <div>
+            <label>Material</label>
+            <input id="matInput" list="matList" placeholder="e.g., 6061, 300 stainless, richlite">
+            <datalist id="matList"></datalist>
+          </div>
+          <div style="align-self:flex-end">
+            <button id="matGo">Show</button>
+          </div>
+        </div>
+        <div id="matSummary" class="tips" style="margin-top:10px;display:none"></div>
+        <div id="matDetails" class="tips" style="margin-top:10px;display:none"></div>
+
+        <div class="card">
+          <h3>Hole Saw Helper</h3>
+          <div class="row">
+            <div><label>Diameter</label><input id="hsDia" type="number" step="0.01" placeholder="2.50"></div>
+            <div><label>Units</label>
+              <select id="hsUnits">
+                <option value="in">in</option>
+                <option value="mm">mm</option>
+              </select>
+            </div>
+          </div>
+          <button id="hsCalc" style="margin-top:8px">Calc RPM</button>
+          <div id="hsOut" class="tips" style="margin-top:10px;display:none"></div>
+        </div>
+      </section>
+
+      <!-- FASTENERS -->
+      <section class="panel">
+        <h2 class="panel-title"><span class="panel-title-icon">⬡</span> Fastener Calculator</h2>
+        <div class="row">
+          <div>
+            <label>Kind</label>
+            <select id="kind">
+              <option value="machine">Machine (tap &amp; clearance)</option>
+              <option value="sheetmetal">Sheet metal (pilot)</option>
+              <option value="wood">Wood screw (pilot)</option>
+            </select>
+          </div>
+          <div>
+            <label>Size</label>
+            <input id="fz" list="fzList" placeholder="#8-32, 1/4-20, M6x1.0">
+            <datalist id="fzList"></datalist>
+          </div>
+        </div>
+        <div class="row" style="margin-top:8px">
+          <div>
+            <label>Clearance fit</label>
+            <select id="fit">
+              <option value="close">Close</option>
+              <option value="standard" selected>Standard</option>
+              <option value="loose">Loose</option>
+            </select>
+          </div>
+          <div style="align-self:flex-end;padding-bottom:2px">
+            <label class="small" style="display:flex;align-items:center;gap:6px;cursor:pointer">
+              <input type="checkbox" id="sti" style="width:14px;height:14px;accent-color:var(--accent)"> STI / Helicoil
+            </label>
+          </div>
+        </div>
+        <button id="calc" style="margin-top:10px">Calculate</button>
+        <div id="fzOut" class="tips" style="margin-top:10px;display:none"></div>
+      </section>
+
+      <!-- DATABASE -->
+      <section class="panel">
+        <h2 class="panel-title"><span class="panel-title-icon">⬣</span> Database</h2>
+        <div id="drop" class="dropzone" role="button" tabindex="0"
+             aria-label="Drop shopdb.json here or click to choose">
+          <div>
+            <div style="font-weight:600;letter-spacing:.02em">Drop <code>shopdb.json</code> here</div>
+            <div class="small" style="margin-top:4px">…or click to choose a file</div>
+          </div>
+        </div>
+        <input id="file" type="file" accept=".json,application/json" style="display:none">
+
+        <div class="row" style="margin-top:10px">
+          <button id="exportDb">Export DB</button>
+          <button id="clearDb" class="btn-ghost" style="
+            background:transparent;border-color:var(--line);color:var(--muted)">Clear cache</button>
+        </div>
+        <div class="separator"></div>
+        <div id="dbStatus" class="small"></div>
+      </section>
+
+    </div><!-- /tool-grid -->
+  </div><!-- /wrap -->
+</div><!-- /tab-tools -->
+
+
+<!-- ══ DYTAT TAB ══════════════════════════════════════════════════════════ -->
+<div id="tab-dytat" class="tabpanel" role="tabpanel">
+  <div class="wrap">
+
+    <!-- Progress + controls -->
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+      <div class="dytat-progress-wrap" style="flex:1;min-width:280px;margin:0">
+        <div class="progress-bar-track"><div class="progress-bar-fill" id="dytatBar"></div></div>
+        <div class="progress-label"><strong id="dytatDone">0</strong> / <span id="dytatTotal">0</span> checked</div>
+      </div>
+      <div class="dytat-controls" style="margin:0">
+        <button id="resetDytat" class="btn-ghost" style="
+          background:transparent!important;border-color:var(--line)!important;color:var(--muted)!important">
+          Reset all
+        </button>
+        <button id="printDytat">Print / Save PDF</button>
+      </div>
+    </div>
+
+    <div class="dytat-callout">
+      ☑ &nbsp;Check each box as you confirm it. Write <strong>N/A</strong> with a reason — not just a blank.
+      A blank means you forgot. <strong>N/A means you thought about it.</strong>
+    </div>
+
+    <!-- ROW 1: Structure · Materials · Load -->
+    <div class="dytat-grid">
+
+      <!-- 01 Structure -->
+      <div class="cat-card" style="--cat-color:#f5b146">
+        <p class="cat-title">⬡ Structure &amp; Geometry <span class="cat-num">01</span></p>
+        <ul class="checklist" data-cat="01">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Load path traced</strong> end-to-end to ground?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Clearances verified</strong> at all limits of motion &amp; deflection?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Tolerance stack-up</strong> analyzed — fits at worst case?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Datum scheme</strong> defined — stable and reproducible references?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Assembly sequence</strong> logical — physically possible in order?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Symmetry exploited</strong> or asymmetry clearly called out?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Weight &amp; CG shift</strong> assessed for vehicle dynamics?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Stiffness</strong> — deflection under load acceptable, not just strength?</span></label></li>
+        </ul>
+      </div>
+
+      <!-- 02 Materials -->
+      <div class="cat-card" style="--cat-color:#22d3ee">
+        <p class="cat-title">◈ Materials &amp; Selection <span class="cat-num">02</span></p>
+        <p class="sub-lbl">Selection</p>
+        <ul class="checklist" data-cat="02a">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Material justified</strong> — why this alloy/grade/resin specifically?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Availability &amp; lead time</strong> acceptable? Any sole-source risk?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Cost</strong> checked against budget? Cheaper option considered?</span></label></li>
+        </ul>
+        <div class="cat-divider"></div>
+        <p class="sub-lbl">Compatibility</p>
+        <ul class="checklist" data-cat="02b">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Galvanic pairs</strong> — no bare aluminum-to-steel contact?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Thermal expansion mismatch</strong> at bonded/bolted joints?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Adhesive compatibility</strong> — cure temp, prep, open time?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Corrosion protection plan</strong> — spec, prep, coverage?</span></label></li>
+        </ul>
+      </div>
+
+      <!-- 03 Load -->
+      <div class="cat-card" style="--cat-color:#f87171">
+        <p class="cat-title">↯ Load &amp; Environment <span class="cat-num">03</span></p>
+        <p class="sub-lbl">Loads</p>
+        <ul class="checklist" data-cat="03a">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Static load</strong> defined with magnitude and direction?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Dynamic factor</strong> applied — vibration, shock, road impact?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Fatigue</strong> — cycles at fraction of rated load considered?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Safety factor</strong> defined on yield and ultimate?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Worst-case</strong> — rock hit, pothole, water crossing defined?</span></label></li>
+        </ul>
+        <div class="cat-divider"></div>
+        <p class="sub-lbl">Environment</p>
+        <ul class="checklist" data-cat="03b">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Temp range</strong> — operating &amp; storage defined?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Water exposure</strong> — splash, submersion, drainage path?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>UV, dust, abrasion</strong> — protection planned?</span></label></li>
+        </ul>
+      </div>
+
+    </div><!-- /row 1 -->
+
+    <!-- ROW 2: DFM · Joining · QC -->
+    <div class="dytat-grid">
+
+      <!-- 04 Manufacturability -->
+      <div class="cat-card" style="--cat-color:#34d399">
+        <p class="cat-title">⚙ Manufacturability <span class="cat-num">04</span></p>
+        <p class="sub-lbl">Design for Manufacture</p>
+        <ul class="checklist" data-cat="04a">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Tool access</strong> — wrench, drill, weld gun reach every joint?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Part count minimized</strong> — any parts can be combined?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Standard hardware</strong> used — no exotic specials?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Self-locating features</strong> — tabs, slots, datums prevent errors?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Poka-yoke</strong> — impossible or obvious to assemble wrong?</span></label></li>
+        </ul>
+        <div class="cat-divider"></div>
+        <p class="sub-lbl">Process</p>
+        <ul class="checklist" data-cat="04b">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Jig / fixture</strong> requirements identified and planned?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Weld distortion plan</strong> — sequence, pre-camber, fixturing?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Surface finish / cosmetic spec</strong> called out clearly?</span></label></li>
+        </ul>
+      </div>
+
+      <!-- 05 Joining -->
+      <div class="cat-card" style="--cat-color:#fcd34d">
+        <p class="cat-title">⬣ Joining &amp; Fastening <span class="cat-num">05</span></p>
+        <p class="sub-lbl">Fasteners</p>
+        <ul class="checklist" data-cat="05a">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Type, size, grade</strong> specified for every fastener?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Thread engagement</strong> adequate — ≥1.0× dia in steel, ≥1.5× in Al?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Torque spec</strong> called out — not just "snug"?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Thread-lock / locking feature</strong> for vibration environment?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Helicoil / STI insert</strong> needed in aluminum or composite?</span></label></li>
+        </ul>
+        <div class="cat-divider"></div>
+        <p class="sub-lbl">Adhesive &amp; Weld</p>
+        <ul class="checklist" data-cat="05b">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Bond area adequate</strong> for shear and peel loads?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Surface prep defined</strong> — grit, IPA wipe, primer, open time?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Weld spec</strong> — fillet size, process, filler, inspection class?</span></label></li>
+        </ul>
+      </div>
+
+      <!-- 06 QC -->
+      <div class="cat-card" style="--cat-color:#94a3b8">
+        <p class="cat-title">◎ Inspection &amp; QC <span class="cat-num">06</span></p>
+        <ul class="checklist" data-cat="06">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Critical dimensions</strong> identified and marked on drawing?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Measurement method</strong> — CMM, calipers, gauge, go/no-go?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>First article plan</strong> — who checks what, before production?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Visual acceptance criteria</strong> — what does "good" look like?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>In-process checks</strong> — stops a bad part from continuing downstream?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Functional test</strong> — does it do its job before install?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Non-conformance path</strong> — what happens when something fails?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Records</strong> — what gets documented and where?</span></label></li>
+        </ul>
+      </div>
+
+    </div><!-- /row 2 -->
+
+    <!-- ROW 3: System Integration · Safety · Serviceability -->
+    <div class="dytat-grid-wide">
+
+      <!-- 07 Integration (wider) -->
+      <div class="cat-card" style="--cat-color:#22d3ee">
+        <p class="cat-title">⟁ System Integration <span class="cat-num">07</span></p>
+        <p class="sub-lbl">Interfaces</p>
+        <ul class="checklist" data-cat="07a">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Electrical routing</strong> — harness conflicts, chafe, connector access?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Plumbing routing</strong> — abrasion, kink, freeze, drain path?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>HVAC / thermal</strong> — airflow blocked? Heat soak to adjacent parts?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Vendor / OEM dims</strong> confirmed from actual drawings — not memory?</span></label></li>
+        </ul>
+        <div class="cat-divider"></div>
+        <p class="sub-lbl">BOM &amp; Change Impact</p>
+        <ul class="checklist" data-cat="07b">
+          <li class="check-item"><label><input type="checkbox"><span><strong>New parts</strong> — BOM updated, supplier ID'd, lead time checked?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Superseded parts</strong> — existing inventory disposition plan?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Affects existing builds?</strong> — retrofit needed? Customer notification?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>ECO triggered?</strong> — change documented before first production use?</span></label></li>
+        </ul>
+      </div>
+
+      <!-- 08 Safety -->
+      <div class="cat-card" style="--cat-color:#f87171">
+        <p class="cat-title">△ Safety <span class="cat-num">08</span></p>
+        <ul class="checklist" data-cat="08">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Sharp edges / pinch points</strong> addressed?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Fail mode</strong> — safe-fail or sudden-fail?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Regulatory</strong> — DOT, FMVSS, or TH policy applies?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Overload path</strong> — where does force go if over-rated?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Warnings / labels</strong> needed on the part or in the WI?</span></label></li>
+        </ul>
+      </div>
+
+      <!-- 09 Serviceability -->
+      <div class="cat-card" style="--cat-color:#34d399">
+        <p class="cat-title">↺ Serviceability <span class="cat-num">09</span></p>
+        <ul class="checklist" data-cat="09">
+          <li class="check-item"><label><input type="checkbox"><span><strong>Field-repairable</strong> with common tools, no special equipment?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Wear items</strong> — accessible, replaceable without major disassembly?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Work instruction</strong> — needed and written before ship?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Torque specs &amp; procedures</strong> captured where a tech needs them?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span><strong>Spare parts</strong> — critical consumables in stock or on the list?</span></label></li>
+        </ul>
+      </div>
+
+    </div><!-- /row 3 -->
+
+    <!-- BOTTOM BANNER -->
+    <div class="dytat-banner">
+      <div class="banner-col">
+        <div class="banner-lbl">💲 Cost &amp; Schedule</div>
+        <ul class="checklist" data-cat="B1">
+          <li class="check-item"><label><input type="checkbox"><span>Unit cost target checked?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Tolerances only as tight as needed?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Long-lead items identified early?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Tooling cost in budget?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Make vs. buy decided?</span></label></li>
+        </ul>
+      </div>
+      <div class="banner-col">
+        <div class="banner-lbl">📐 Drawing Gate</div>
+        <ul class="checklist" data-cat="B2">
+          <li class="check-item"><label><input type="checkbox"><span>Title block complete — PN, rev, material?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>GD&amp;T correct and complete?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>All notes unambiguous — no TBDs?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Supplier could quote from this alone?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Peer review completed &amp; signed?</span></label></li>
+        </ul>
+      </div>
+      <div class="banner-col">
+        <div class="banner-lbl">⬡ Composite &amp; Bond</div>
+        <ul class="checklist" data-cat="B3">
+          <li class="check-item"><label><input type="checkbox"><span>Carbon dust / conductivity addressed?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Hardpoints / inserts for fasteners?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Backer, tape, vacuum on drill plan?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>No oily coolants before bonded surfaces?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Cure temp &amp; time spec'd, achievable?</span></label></li>
+        </ul>
+      </div>
+      <div class="banner-col">
+        <div class="banner-lbl">📋 Documentation</div>
+        <ul class="checklist" data-cat="B4">
+          <li class="check-item"><label><input type="checkbox"><span>Design Intent Brief (Tier 1) filed?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Tier 2 DCR required? Started?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>CAD in correct folder, named correctly?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>BOM updated and matched to CAD?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Work instruction written or linked?</span></label></li>
+        </ul>
+      </div>
+      <div class="banner-col">
+        <div class="banner-lbl">🚀 Before You Release</div>
+        <ul class="checklist" data-cat="B5">
+          <li class="check-item"><label><input type="checkbox"><span>No open TBDs on released drawings?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>Dry-fit or prototype verified fit?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>At least one other engineer reviewed it?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>ECO initiated if change to existing?</span></label></li>
+          <li class="check-item"><label><input type="checkbox"><span>You'd be comfortable if a customer asked why?</span></label></li>
+        </ul>
+      </div>
+    </div><!-- /banner -->
+
+  </div><!-- /wrap -->
+</div><!-- /tab-dytat -->
+
+
+<!-- ══ SCRIPTS ═══════════════════════════════════════════════════════════ -->
+<script>
+/* ── Brand ─────────────────────────────────────────────────────────── */
+const LOGO_URL='./th-logo.png';
+const logo=document.getElementById('thLogo');
+logo.src=LOGO_URL;
+logo.onerror=()=>{console.warn('Logo not found:',LOGO_URL)};
+
+/* ── Tab switching ──────────────────────────────────────────────────── */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
+    document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    tab.setAttribute('aria-selected','true');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+  });
+});
+
+/* ── DB ─────────────────────────────────────────────────────────────── */
+const DB_CACHE_KEY='TH_DB_CACHE_V1';
+let DB={version:'',materials:[],fasteners:[],sheetMetalPilots:{},woodPilots:{}};
+
+const LETTER_DRILLS={A:.234,B:.238,C:.242,D:.246,E:.250,F:.257,G:.261,H:.266,I:.272,J:.277,K:.281,L:.290,M:.295,N:.302,O:.316,P:.323,Q:.332,R:.339,S:.348,T:.358,U:.368,V:.377,W:.386,X:.397,Y:.404,Z:.413};
+const NUMBER_DRILLS={80:.0135,79:.0145,78:.016,77:.018,76:.020,75:.021,74:.0225,73:.024,72:.025,71:.026,70:.028,69:.0292,68:.031,67:.032,66:.033,65:.035,64:.036,63:.037,62:.038,61:.039,60:.040,59:.041,58:.042,57:.043,56:.0465,55:.052,54:.055,53:.0595,52:.0635,51:.067,50:.070,49:.073,48:.076,47:.0785,46:.081,45:.082,44:.086,43:.089,42:.0935,41:.096,40:.098,39:.0995,38:.1015,37:.104,36:.1065,35:.110,34:.111,33:.113,32:.116,31:.120,30:.1285,29:.136,28:.1405,27:.144,26:.147,25:.1495,24:.152,23:.154,22:.157,21:.159,20:.161,19:.166,18:.1695,17:.173,16:.177,15:.180,14:.182,13:.185,12:.189,11:.191,10:.1935,9:.196,8:.199,7:.201,6:.204,5:.2055,4:.209,3:.213,2:.221,1:.228};
+
+function parseFraction(s){const m=String(s).trim().match(/^(\d+)\s*\/\s*(\d+)$/);if(!m)return NaN;const num=+m[1],den=+m[2];return den?num/den:NaN;}
+function parseTokenToInches(tok){if(!tok)return null;const s=String(tok).trim();const mm=s.match(/^(\d+(?:\.\d+)?)\s*mm$/i);if(mm)return parseFloat(mm[1])/25.4;if(/^\d+(\.\d+)?$/.test(s))return parseFloat(s);const fr=parseFraction(s);if(!isNaN(fr))return fr;if(/^[A-Z]$/i.test(s))return LETTER_DRILLS[s.toUpperCase()]||null;const nd=s.match(/^#\s*(\d{1,2})$/);if(nd)return NUMBER_DRILLS[+nd[1]]||null;return null;}
+function mmToInches(mm){return parseFloat(mm)/25.4;}
+const DRILL_CATALOG=(()=>{const arr=[];for(const[n,v]of Object.entries(NUMBER_DRILLS))arr.push({label:'#'+n,inch:+v});for(const[ch,v]of Object.entries(LETTER_DRILLS))arr.push({label:ch,inch:+v});for(let i=1;i<=64;i++)arr.push({label:`${i}/64`,inch:i/64});arr.sort((a,b)=>a.inch-b.inch);return arr;})();
+function nearestUsDrill(inches){let best=null,d=Infinity;for(const it of DRILL_CATALOG){const diff=Math.abs(it.inch-inches);if(diff<d){best=it;d=diff;}}return d<=0.002?{...best,diff:d}:null;}
+function fmtMetricDrill(mmVal){const mm=parseFloat(mmVal);if(!(mm>0))return`${mmVal} mm`;const inches=mmToInches(mm);const near=nearestUsDrill(inches);const inTxt=inches.toFixed(4)+' in';return near?`${mm.toFixed(2)} mm (${inTxt} ≈ ${near.label})`:`${mm.toFixed(2)} mm (${inTxt})`;}
+function fmtClear(units,val){if(val==null||isNaN(val))return'—';return units==='mm'?fmtMetricDrill(val):`${(+val).toFixed(3)} in`;}
+
+let MAT_BY_CANON=new Map(),ALIAS=new Map(),FZ_BY_SIZE=new Map();
+function rebuildLookups(){
+  MAT_BY_CANON.clear();ALIAS.clear();FZ_BY_SIZE.clear();
+  (DB.materials||[]).forEach(m=>{const k=(m.name||'').toLowerCase();if(!k)return;MAT_BY_CANON.set(k,m);(m.aliases||[]).forEach(a=>ALIAS.set(String(a).toLowerCase(),k));});
+  (DB.fasteners||[]).forEach(f=>{if(f.size)FZ_BY_SIZE.set(f.size,String(f.size));});
+}
+function populateMatList(){const dl=document.getElementById('matList');dl.innerHTML='';const seen=new Set();(DB.materials||[]).forEach(m=>{const key=(m.name||'').toLowerCase();if(!key||seen.has(key))return;seen.add(key);const o=document.createElement('option');o.value=m.name;dl.appendChild(o);});(DB.materials||[]).forEach(m=>(m.aliases||[]).forEach(a=>{const o=document.createElement('option');o.value=a;dl.appendChild(o);}));}
+function populateFzList(){const dl=document.getElementById('fzList');dl.innerHTML='';const sizes=(DB.fasteners||[]).map(f=>f.size).filter(Boolean);sizes.sort((a,b)=>a.replace('M','~').localeCompare(b.replace('M','~'))).forEach(s=>{const o=document.createElement('option');o.value=s;dl.appendChild(o);});}
+function canonMaterial(name){if(!name)return null;const s=name.toLowerCase().trim();if(MAT_BY_CANON.has(s))return s;if(ALIAS.has(s))return ALIAS.get(s);if(s.includes('6061'))return'6061 aluminum';if(s.includes('7075'))return'7075 aluminum';if(s.includes('stainless'))return'300 stainless';if(s.includes('chromoly')||s.includes('4130'))return'4130 chromoly';return null;}
+
+function showEl(id,show){const el=document.getElementById(id);if(el)el.style.display=show?'':'none';}
+
+function showMaterial(){
+  const raw=(document.getElementById('matInput').value||'').trim();
+  const outS=document.getElementById('matSummary'),outD=document.getElementById('matDetails');
+  outS.textContent='';outD.textContent='';showEl('matSummary',false);showEl('matDetails',false);
+  if(!(DB.materials||[]).length){outS.textContent='No DB loaded yet. Drop shopdb.json in the Database panel.';showEl('matSummary',true);return;}
+  const key=canonMaterial(raw);
+  if(!key){outS.textContent=`Not found: "${raw}". Try a listed material or alias.`;showEl('matSummary',true);return;}
+  const m=MAT_BY_CANON.get(key);
+  if(!m){outS.textContent=`"${raw}" resolved to "${key}" but no record found.`;showEl('matSummary',true);return;}
+  outS.innerHTML=`<span class="pill">${m.name}</span>${(m.tags||[]).map(t=>`<span class="pill">${t}</span>`).join(' ')}`+(m.summary?`\n\n${m.summary}`:'');
+  showEl('matSummary',true);
+  const blocks=[];
+  if(m.drilling?.length)blocks.push('Drilling — Do this:\n• '+m.drilling.join('\n• '));
+  if(m.tapping?.length) blocks.push('Tapping — If applicable:\n• '+m.tapping.join('\n• '));
+  if(m.holesaw?.length) blocks.push('Hole Sawing — Tips:\n• '+m.holesaw.join('\n• '));
+  if(m.notes?.length)   blocks.push('Street Knowledge:\n• '+m.notes.join('\n• '));
+  if(m.tapType||m.lube||m.fit||m.tapPercent)blocks.push(`Fastener context: tap ${m.tapPercent||'—'} • ${m.tapType||'—'} • lube: ${m.lube||'—'} • fit: ${m.fit||'—'}`);
+  if(blocks.length){outD.textContent=blocks.join('\n\n');showEl('matDetails',true);}
+}
+
+const SFM={aluminum:[200,300],steel:[60,100],stainless:[30,50],composite:[40,80],plastic:[40,80],wood:[150,300],wood_dense:[120,220],foam:[10,30]};
+function holesawCalc(){
+  const raw=(document.getElementById('matInput').value||'').trim();
+  const d=parseFloat(document.getElementById('hsDia').value);
+  const units=document.getElementById('hsUnits').value;
+  const out=document.getElementById('hsOut');
+  out.textContent='';showEl('hsOut',false);
+  const key=canonMaterial(raw);const m=key&&MAT_BY_CANON.get(key);
+  if(!m){out.textContent='Pick a material first.';showEl('hsOut',true);return;}
+  if(!(d>0)){out.textContent='Enter a diameter.';showEl('hsOut',true);return;}
+  const cat=m.sfmCategory||'steel';const[lo,hi]=SFM[cat]||[60,100];
+  const dIn=(units==='mm')?d/25.4:d;
+  const rpmLo=Math.max(60,Math.round((lo*3.82)/dIn));
+  const rpmHi=Math.max(rpmLo+1,Math.round((hi*3.82)/dIn));
+  out.textContent=`Category: ${cat}\nDiameter: ${dIn.toFixed(3)} in\nSFM: ${lo}–${hi}\nRPM: ${rpmLo} – ${rpmHi}`;
+  showEl('hsOut',true);
+}
+
+function computeClearance(fz,fit){
+  const sys=fz.system;
+  const close=(fz.clearClose!=null&&fz.clearClose!=='')?+fz.clearClose:null;
+  const std=(fz.clearStandard!=null&&fz.clearStandard!=='')?+fz.clearStandard:null;
+  const loose=(fz.clearLoose!=null&&fz.clearLoose!=='')?+fz.clearLoose:null;
+  if(close||std||loose){const table={close,standard:std,loose};const best=table[fit]??table.standard??table.close??table.loose;return{close,standard:std,loose,preferred:best,units:(sys==='metric'?'mm':'in')};}
+  if(sys==='metric'){const maj=parseFloat((fz.size.match(/^M(\d+(?:\.\d+)?)/)||[])[1]||NaN);if(!isNaN(maj)){const closeV=+(maj+(maj<=8?0.4:0.5)).toFixed(1);const stdV=+(maj+1.0).toFixed(1);const looseV=+(stdV+0.5).toFixed(1);const pref=({close:closeV,standard:stdV,loose:looseV})[fit];return{close:closeV,standard:stdV,loose:looseV,preferred:pref,units:'mm'};}}
+  else{let maj=null;const hash=fz.size.match(/^#(\d+)-/);if(hash){maj=0.060+0.013*parseInt(hash[1],10);}const frac=fz.size.match(/^(\d+\/\d+|\d*\.?\d+)-/);if(!maj&&frac){maj=frac[1].includes('/')?parseFraction(frac[1]):parseFloat(frac[1]);}if(!maj)maj=0.190;let addC=0,addF=0.01;if(maj<=0.190){addC=0;addF=0.010}else if(maj<=0.25){addC=0.005;addF=0.010}else if(maj<=0.375){addC=0.010;addF=0.011}else if(maj<=0.5){addC=0.012;addF=0.016}else{addC=0.015;addF=0.020}const closeV=+(maj+addC).toFixed(3);const stdV=+(maj+addC+addF).toFixed(3);const looseV=+(stdV+0.010).toFixed(3);const pref=({close:closeV,standard:stdV,loose:looseV})[fit];return{close:closeV,standard:stdV,loose:looseV,preferred:pref,units:'in'};}
+  return{close:null,standard:null,loose:null,preferred:null,units:(sys==='metric'?'mm':'in')};
+}
+
+function calcFastener(){
+  const kind=document.getElementById('kind').value;
+  const size=(document.getElementById('fz').value||'').trim();
+  const fit=document.getElementById('fit').value;
+  const sti=document.getElementById('sti').checked;
+  const out=document.getElementById('fzOut');
+  out.textContent='';showEl('fzOut',false);
+  if(!(DB.fasteners||[]).length){out.textContent='No DB loaded yet. Drop shopdb.json in the Database panel.';showEl('fzOut',true);return;}
+  if(!size){out.textContent='Enter a size.';showEl('fzOut',true);return;}
+  if(kind!=='machine'){
+    if(kind==='sheetmetal'){const m=size.match(/#\s*(\d+)/);if(!m)return(out.textContent='Use #6, #8, #10, #12.',showEl('fzOut',true));const v=(DB.sheetMetalPilots||{})['#'+m[1]];out.textContent=v?`#${m[1]} sheet metal pilot: ${v}`:'Not in pilot table.';}
+    else{const m=size.match(/#\s*(\d+)/);if(!m)return(out.textContent='Use #6, #8, #10, #12.',showEl('fzOut',true));const row=(DB.woodPilots||{})['#'+m[1]];out.textContent=row?`#${m[1]} wood pilots\nSoftwood: ${row.softwood}\nHardwood: ${row.hardwood}`:'Not in wood pilot table.';}
+    showEl('fzOut',true);return;
+  }
+  const f=(DB.fasteners||[]).find(x=>String(x.size)===size);
+  if(!f){out.textContent=`Size not found: "${size}"`;showEl('fzOut',true);return;}
+  let tap75=f.tap75,tap50=f.tap50;
+  if(!tap75||!tap50){const inch=f.system==='inch';if(inch&&f.tpi){const majorGuess=size.startsWith('#')?(0.060+0.013*parseInt(size.match(/^#(\d+)/)[1],10)):(size.match(/^(\d+\/\d+|\d*\.?\d+)-/)?(s=>s.includes('/')?parseFraction(s):parseFloat(s))(RegExp.$1):NaN);const pitch=1/parseInt(f.tpi,10);tap75=tap75||(majorGuess-pitch).toFixed(4);tap50=tap50||(majorGuess-0.5*pitch).toFixed(4);}else if(!inch&&f.pitch){const major=parseFloat(size.match(/^M(\d+(?:\.\d+)?)/)[1]);tap75=tap75||(major-f.pitch).toFixed(2);tap50=tap50||(major-0.5*f.pitch).toFixed(2);}}
+  let stiTap=f.stiTap||null;if(!stiTap&&f.stiTapToken){const inch=f.system==='inch';const valIn=parseTokenToInches(f.stiTapToken);stiTap=valIn?(inch?valIn.toFixed(4):(valIn*25.4).toFixed(2)):f.stiTapToken;}
+  const clr=computeClearance(f,fit);
+  const tap75Txt=f.system==='metric'&&tap75?fmtMetricDrill(tap75):(tap75?`${tap75} ${f.system==='metric'?'mm':'in'}`:'—');
+  const tap50Txt=f.system==='metric'&&tap50?fmtMetricDrill(tap50):(tap50?`${tap50} ${f.system==='metric'?'mm':'in'}`:'—');
+  const stiTxt=f.system==='metric'&&stiTap?fmtMetricDrill(stiTap):(stiTap?`${stiTap} ${f.system==='metric'?'mm':'in'}`:'—');
+  const lines=[
+    `Size: ${f.size} (${f.system})`,
+    f.tpi?`Pitch: ${f.tpi} TPI`:(f.pitch?`Pitch: ${f.pitch} mm`:''),
+    sti?`STI tap drill: ${stiTxt}`:`Tap drill — 75%: ${tap75Txt}\nTap drill — 50%: ${tap50Txt}`,
+    '',
+    `Preferred clearance (${fit}): ${fmtClear(clr.units,clr.preferred)}`,
+    `Menu — close: ${fmtClear(clr.units,clr.close)},  standard: ${fmtClear(clr.units,clr.standard)},  loose: ${fmtClear(clr.units,clr.loose)}`
+  ].filter(Boolean);
+  out.textContent=lines.join('\n');showEl('fzOut',true);
+}
+
+/* ── DB file handling ───────────────────────────────────────────────── */
+const drop=document.getElementById('drop'),file=document.getElementById('file');
+function setStatus(html){document.getElementById('dbStatus').innerHTML=html;}
+function flashOK(){drop.classList.add('ok-flash');setTimeout(()=>drop.classList.remove('ok-flash'),700);}
+function handleFiles(files){
+  if(!files||!files.length){setStatus('<span class="warn">No file provided.</span>');return;}
+  const f=files[0];
+  if(!/\.json$/i.test(f.name)){setStatus(`<span class="bad">Not a .json file:</span> ${f.name}`);return;}
+  setStatus(`Reading <em>${f.name}</em>…`);
+  const reader=new FileReader();
+  reader.onerror=()=>setStatus('<span class="bad">Read error.</span>');
+  reader.onload=()=>{try{ingestDB(JSON.parse(reader.result),f.name);}catch(e){setStatus(`<span class="bad">Parse error:</span> ${e.message}`);}};
+  reader.readAsText(f);
+}
+function validateDB(obj){if(!obj||typeof obj!=='object')return'Not an object';if(!Array.isArray(obj.materials))return'Missing "materials" array';if(!Array.isArray(obj.fasteners))return'Missing "fasteners" array';return null;}
+function ingestDB(obj,src){
+  const err=validateDB(obj);if(err){setStatus(`<span class="bad">Load failed:</span> ${err}`);return;}
+  DB=obj;rebuildLookups();populateMatList();populateFzList();
+  try{localStorage.setItem(DB_CACHE_KEY,JSON.stringify(DB));}catch(e){console.warn('Cache write failed:',e);}
+  setStatus(`<span class="ok">Loaded</span> ${DB.materials.length} materials, ${DB.fasteners.length} fasteners from ${src||'file'}. Cached for offline use.`);
+  flashOK();
+}
+document.getElementById('exportDb').onclick=()=>{const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='shopdb.json';document.body.appendChild(a);a.click();a.remove();};
+document.getElementById('clearDb').onclick=()=>{localStorage.removeItem(DB_CACHE_KEY);DB={version:'',materials:[],fasteners:[],sheetMetalPilots:{},woodPilots:{}};rebuildLookups();populateMatList();populateFzList();setStatus('<span class="warn">Cleared.</span> Drop a DB to begin.');};
+drop.addEventListener('click',()=>file.click());
+drop.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();file.click();}});
+file.addEventListener('change',e=>handleFiles(e.target.files));
+drop.addEventListener('dragover',e=>{e.preventDefault();e.dataTransfer.dropEffect='copy';drop.classList.add('drag');});
+drop.addEventListener('dragleave',()=>drop.classList.remove('drag'));
+drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('drag');handleFiles(e.dataTransfer.files);});
+
+/* Boot */
+(function(){try{const cached=localStorage.getItem(DB_CACHE_KEY);if(cached){ingestDB(JSON.parse(cached),'cache');}else{setStatus('<span class="warn">No database loaded.</span> Drop <code>shopdb.json</code> above to start.');}}catch(e){setStatus(`<span class="bad">Cache error:</span> ${e.message}`);}})();
+
+/* ── Wiring ─────────────────────────────────────────────────────────── */
+document.getElementById('matGo').onclick=showMaterial;
+document.getElementById('matInput').addEventListener('keydown',e=>{if(e.key==='Enter')showMaterial();});
+document.getElementById('hsCalc').onclick=holesawCalc;
+document.getElementById('calc').onclick=calcFastener;
+document.getElementById('fz').addEventListener('keydown',e=>{if(e.key==='Enter')calcFastener();});
+
+/* ── DYTAT checklist logic ──────────────────────────────────────────── */
+const DYTAT_KEY='TH_DYTAT_V1';
+
+function dytatUpdate(){
+  const allBoxes=document.querySelectorAll('#tab-dytat input[type=checkbox]');
+  const total=allBoxes.length;
+  const done=[...allBoxes].filter(b=>b.checked).length;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('dytatBar').style.width=pct+'%';
+  document.getElementById('dytatDone').textContent=done;
+  document.getElementById('dytatTotal').textContent=total;
+  // Persist
+  const state={};allBoxes.forEach((b,i)=>{state[i]=b.checked;});
+  try{localStorage.setItem(DYTAT_KEY,JSON.stringify(state));}catch(e){}
+}
+
+function dytatLoad(){
+  try{
+    const saved=localStorage.getItem(DYTAT_KEY);
+    if(!saved)return;
+    const state=JSON.parse(saved);
+    const allBoxes=document.querySelectorAll('#tab-dytat input[type=checkbox]');
+    allBoxes.forEach((b,i)=>{if(state[i])b.checked=true;});
+  }catch(e){}
+}
+
+// Wire up all checkboxes
+document.querySelectorAll('#tab-dytat input[type=checkbox]').forEach(cb=>{
+  cb.addEventListener('change',dytatUpdate);
+});
+
+document.getElementById('resetDytat').onclick=()=>{
+  if(!confirm('Reset all checklist items?'))return;
+  document.querySelectorAll('#tab-dytat input[type=checkbox]').forEach(cb=>cb.checked=false);
+  try{localStorage.removeItem(DYTAT_KEY);}catch(e){}
+  dytatUpdate();
+};
+
+document.getElementById('printDytat').onclick=()=>{
+  window.print();
+};
+
+// Boot checklist
+dytatLoad();
+dytatUpdate();
+</script>
+</body>
+</html>
